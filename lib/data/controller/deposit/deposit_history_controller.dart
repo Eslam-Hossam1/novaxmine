@@ -10,7 +10,7 @@ import '../../../core/utils/url_container.dart';
 import '../../model/deposit/deposit_history_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../repo/deposit/deposit_repo.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class DepositController extends GetxController {
   final DepositRepo depositRepo;
@@ -42,11 +42,11 @@ class DepositController extends GetxController {
     depositList.clear();
 
     final ResponseModel response =
-    await depositRepo.getDepositHistory(page: page);
+        await depositRepo.getDepositHistory(page: page);
 
     if (response.statusCode == 200) {
       final DepositHistoryResponseModel model =
-      DepositHistoryResponseModel.fromJson(
+          DepositHistoryResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
@@ -89,7 +89,7 @@ class DepositController extends GetxController {
 
     if (response.statusCode == 200) {
       final DepositHistoryResponseModel model =
-      DepositHistoryResponseModel.fromJson(
+          DepositHistoryResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
@@ -135,7 +135,7 @@ class DepositController extends GetxController {
 
     if (response.statusCode == 200) {
       final DepositHistoryResponseModel model =
-      DepositHistoryResponseModel.fromJson(
+          DepositHistoryResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
@@ -214,8 +214,8 @@ class DepositController extends GetxController {
       return status == '2'
           ? pending
           : status == '3'
-          ? rejected
-          : initiated;
+              ? rejected
+              : initiated;
     }
   }
 
@@ -232,8 +232,8 @@ class DepositController extends GetxController {
       return status == '2'
           ? MyColor.pendingColor
           : status == '3'
-          ? MyColor.redCancelTextColor
-          : MyColor.colorGrey;
+              ? MyColor.redCancelTextColor
+              : MyColor.colorGrey;
     }
   }
 

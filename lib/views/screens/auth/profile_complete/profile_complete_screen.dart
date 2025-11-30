@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:mine_lab/core/route/route.dart';
@@ -8,6 +7,7 @@ import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/data/controller/auth/profile_complete/profile_complete_controller.dart';
 import 'package:mine_lab/data/repo/auth/profile_complete/profile_complete_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/card/custom_card.dart';
 import 'package:mine_lab/views/components/will_pop_widget.dart';
@@ -25,7 +25,8 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileCompleteRepo(apiClient: Get.find()));
-    final controller = Get.put(ProfileCompleteController(profileRepo: Get.find()));
+    final controller =
+        Get.put(ProfileCompleteController(profileRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.initialData();

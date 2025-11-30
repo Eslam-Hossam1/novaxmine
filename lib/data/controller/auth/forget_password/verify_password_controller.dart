@@ -4,7 +4,7 @@ import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/data/model/auth/verification/email_verification_model.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class VerifyPasswordController extends GetxController {
   final LoginRepo loginRepo;
@@ -29,7 +29,7 @@ class VerifyPasswordController extends GetxController {
     final String value = email;
     const String type = 'email';
 
-    await loginRepo.forgetPassword(context,type, value);
+    await loginRepo.forgetPassword(context, type, value);
 
     isResendLoading = false;
     update();
@@ -44,7 +44,7 @@ class VerifyPasswordController extends GetxController {
     update();
 
     final EmailVerificationModel model =
-    await loginRepo.verifyForgetPassCode(value);
+        await loginRepo.verifyForgetPassCode(value);
 
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;

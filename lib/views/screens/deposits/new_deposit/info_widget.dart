@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../data/controller/deposit/add_new_deposit_controller.dart';
 import '../../../components/row_widget/custom_row.dart';
 
@@ -56,7 +56,8 @@ class InfoWidget extends StatelessWidget {
                     : const SizedBox.shrink(),
                 showRate
                     ? CustomRow(
-                        firstText: 'in ${controller.paymentMethod?.currency}'.tr,
+                        firstText:
+                            'in ${controller.paymentMethod?.currency}'.tr,
                         lastText: controller.inLocal,
                         showDivider: false,
                       )

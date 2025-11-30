@@ -5,12 +5,12 @@ import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/transaction/transaction_controller.dart';
 import 'package:mine_lab/data/repo/transaction/transaction_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/card/custom_card.dart';
 import 'package:mine_lab/views/components/general_components/no_data_found.dart';
 import 'package:mine_lab/views/screens/transaction/widget/bottom_sheet.dart';
@@ -34,7 +34,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
   }
 
   void scrollListener() {
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       if (Get.find<TransactionController>().hasNext()) {
         fetchData();
       }
@@ -46,7 +47,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
     MyUtils.makePortraitOnly();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(TransactionRepo(apiClient: Get.find()));
-    final controller = Get.put(TransactionController(transactionRepo: Get.find()));
+    final controller =
+        Get.put(TransactionController(transactionRepo: Get.find()));
 
     super.initState();
 
@@ -73,10 +75,12 @@ class _TransactionScreenState extends State<TransactionScreen> {
         appBar: AppBar(
           backgroundColor: MyColor.primaryColor,
           elevation: 0,
-          title: Text(MyStrings!.transaction, style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+          title: Text(MyStrings!.transaction,
+              style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: const Icon(Icons.arrow_back, color: MyColor.colorWhite, size: 20),
+            icon: const Icon(Icons.arrow_back,
+                color: MyColor.colorWhite, size: 20),
           ),
           actions: [
             Padding(
@@ -89,8 +93,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   height: 30,
                   width: 30,
                   alignment: Alignment.center,
-                  decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                  child: controller.isSearch ? const Icon(Icons.clear, color: MyColor.primaryColor, size: 15) : Image.asset(MyImages.filter, color: MyColor.primaryColor, height: 15, width: 15),
+                  decoration: const BoxDecoration(
+                      color: MyColor.colorWhite, shape: BoxShape.circle),
+                  child: controller.isSearch
+                      ? const Icon(Icons.clear,
+                          color: MyColor.primaryColor, size: 15)
+                      : Image.asset(MyImages.filter,
+                          color: MyColor.primaryColor, height: 15, width: 15),
                 ),
               ),
             )
@@ -99,7 +108,10 @@ class _TransactionScreenState extends State<TransactionScreen> {
         body: controller.isLoading
             ? const CustomLoader()
             : Padding(
-                padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space15, right: Dimensions.space15),
+                padding: const EdgeInsets.only(
+                    top: Dimensions.space20,
+                    left: Dimensions.space15,
+                    right: Dimensions.space15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -115,18 +127,27 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(MyStrings.walletType, style: interRegularSmall.copyWith(color: MyColor.colorGrey)),
-                                      const SizedBox(height: Dimensions.space10),
+                                      Text(MyStrings.walletType,
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorGrey)),
+                                      const SizedBox(
+                                          height: Dimensions.space10),
                                       SizedBox(
                                         height: 40,
                                         child: FilterRowWidget(
                                             bgColor: MyColor.transparentColor,
                                             fromTrx: true,
-                                            text: controller.selectedWalletType.isEmpty ? MyStrings.walletType : controller.selectedWalletType,
+                                            text: controller
+                                                    .selectedWalletType.isEmpty
+                                                ? MyStrings.walletType
+                                                : controller.selectedWalletType,
                                             press: () {
-                                              showTrxBottomSheet(controller.walletTypeList, 3, context: context);
+                                              showTrxBottomSheet(
+                                                  controller.walletTypeList, 3,
+                                                  context: context);
                                             }),
                                       ),
                                     ],
@@ -136,18 +157,34 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                 Expanded(
                                   flex: 3,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(MyStrings.currency, style: interRegularSmall.copyWith(color: MyColor.colorGrey)),
-                                      const SizedBox(height: Dimensions.space10),
+                                      Text(MyStrings.currency,
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorGrey)),
+                                      const SizedBox(
+                                          height: Dimensions.space10),
                                       SizedBox(
                                         height: 40,
                                         child: FilterRowWidget(
                                             bgColor: MyColor.transparentColor,
                                             fromTrx: true,
-                                            text: MyConverter.replaceUnderscoreWithSpace(controller.selectedCurrency.isEmpty ? MyStrings.any : controller.selectedCurrency),
+                                            text: MyConverter
+                                                .replaceUnderscoreWithSpace(
+                                                    controller.selectedCurrency
+                                                            .isEmpty
+                                                        ? MyStrings.any
+                                                        : controller
+                                                            .selectedCurrency),
                                             press: () {
-                                              showTrxBottomSheet(controller.currencyList.map((e) => e.currency.toString()).toList(), 4, context: context);
+                                              showTrxBottomSheet(
+                                                  controller.currencyList
+                                                      .map((e) =>
+                                                          e.currency.toString())
+                                                      .toList(),
+                                                  4,
+                                                  context: context);
                                             }),
                                       ),
                                     ],
@@ -162,18 +199,29 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(MyStrings.type, style: interRegularSmall.copyWith(color: MyColor.colorGrey)),
-                                      const SizedBox(height: Dimensions.space10),
+                                      Text(MyStrings.type,
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorGrey)),
+                                      const SizedBox(
+                                          height: Dimensions.space10),
                                       SizedBox(
                                         height: 40,
                                         child: FilterRowWidget(
                                             bgColor: MyColor.transparentColor,
                                             fromTrx: true,
-                                            text: controller.selectedTrxType.isEmpty ? MyStrings.trxType : controller.selectedTrxType,
+                                            text: controller
+                                                    .selectedTrxType.isEmpty
+                                                ? MyStrings.trxType
+                                                : controller.selectedTrxType,
                                             press: () {
-                                              showTrxBottomSheet(controller.transactionTypeList, 1, context: context);
+                                              showTrxBottomSheet(
+                                                  controller
+                                                      .transactionTypeList,
+                                                  1,
+                                                  context: context);
                                             }),
                                       ),
                                     ],
@@ -183,18 +231,34 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                 Expanded(
                                   flex: 3,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(MyStrings.remark, style: interRegularSmall.copyWith(color: MyColor.colorGrey)),
-                                      const SizedBox(height: Dimensions.space10),
+                                      Text(MyStrings.remark,
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorGrey)),
+                                      const SizedBox(
+                                          height: Dimensions.space10),
                                       SizedBox(
                                         height: 40,
                                         child: FilterRowWidget(
                                             bgColor: MyColor.transparentColor,
                                             fromTrx: true,
-                                            text: MyConverter.replaceUnderscoreWithSpace(controller.selectedRemark.isEmpty ? MyStrings.any : controller.selectedRemark),
+                                            text: MyConverter
+                                                .replaceUnderscoreWithSpace(
+                                                    controller.selectedRemark
+                                                            .isEmpty
+                                                        ? MyStrings.any
+                                                        : controller
+                                                            .selectedRemark),
                                             press: () {
-                                              showTrxBottomSheet(controller.remarksList.map((e) => e.remark.toString()).toList(), 2, context: context);
+                                              showTrxBottomSheet(
+                                                  controller.remarksList
+                                                      .map((e) =>
+                                                          e.remark.toString())
+                                                      .toList(),
+                                                  2,
+                                                  context: context);
                                             }),
                                       ),
                                     ],
@@ -209,27 +273,52 @@ class _TransactionScreenState extends State<TransactionScreen> {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(MyStrings.transactionNo, style: interRegularSmall.copyWith(color: MyColor.colorGrey, fontWeight: FontWeight.w500)),
+                                      Text(MyStrings.transactionNo,
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorGrey,
+                                              fontWeight: FontWeight.w500)),
                                       const SizedBox(height: Dimensions.space5),
                                       SizedBox(
                                         height: 45,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         child: TextFormField(
                                           cursorColor: MyColor.primaryColor,
-                                          style: interRegularSmall.copyWith(color: MyColor.colorBlack),
+                                          style: interRegularSmall.copyWith(
+                                              color: MyColor.colorBlack),
                                           keyboardType: TextInputType.text,
                                           controller: controller.trxController,
                                           decoration: InputDecoration(
-                                              hintText: MyStrings.enterTransactionNo,
-                                              contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                                              hintStyle: interRegularSmall.copyWith(color: MyColor.hintTextColor),
+                                              hintText: MyStrings
+                                                  .enterTransactionNo,
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 15),
+                                              hintStyle:
+                                                  interRegularSmall.copyWith(
+                                                      color: MyColor
+                                                          .hintTextColor),
                                               filled: true,
-                                              fillColor: MyColor.transparentColor,
-                                              border: const OutlineInputBorder(borderSide: BorderSide(color: MyColor.colorGrey, width: 0.5)),
-                                              enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColor.colorGrey, width: 0.5)),
-                                              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColor.primaryColor, width: 0.5))),
+                                              fillColor:
+                                                  MyColor.transparentColor,
+                                              border: const OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: MyColor.colorGrey,
+                                                      width: 0.5)),
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              MyColor.colorGrey,
+                                                          width: 0.5)),
+                                              focusedBorder: const OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: MyColor.primaryColor,
+                                                      width: 0.5))),
                                         ),
                                       ),
                                     ],
@@ -248,7 +337,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                       borderRadius: BorderRadius.circular(4),
                                       color: MyColor.primaryColor,
                                     ),
-                                    child: const Icon(Icons.search_outlined, color: MyColor.colorWhite, size: 18),
+                                    child: const Icon(Icons.search_outlined,
+                                        color: MyColor.colorWhite, size: 18),
                                   ),
                                 )
                               ],
@@ -260,7 +350,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     ),
                     const SizedBox(height: Dimensions.space10),
                     Expanded(
-                        child: controller.transactionList.isEmpty && controller.filterLoading == false
+                        child: controller.transactionList.isEmpty &&
+                                controller.filterLoading == false
                             ? const Center(
                                 child: NoDataFound(),
                               )
@@ -270,25 +361,53 @@ class _TransactionScreenState extends State<TransactionScreen> {
                                     height: MediaQuery.of(context).size.height,
                                     child: ListView.separated(
                                       controller: scrollController,
-                                      physics: const AlwaysScrollableScrollPhysics(),
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
-                                      itemCount: controller.transactionList.length + 1,
-                                      separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                                      itemCount:
+                                          controller.transactionList.length + 1,
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                              height: Dimensions.space10),
                                       itemBuilder: (context, index) {
-                                        if (controller.transactionList.length == index) {
-                                          return controller.hasNext() ? Container(height: 40, width: MediaQuery.of(context).size.width, margin: const EdgeInsets.all(5), child: const CustomLoader()) : const SizedBox();
+                                        if (controller.transactionList.length ==
+                                            index) {
+                                          return controller.hasNext()
+                                              ? Container(
+                                                  height: 40,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  margin:
+                                                      const EdgeInsets.all(5),
+                                                  child: const CustomLoader())
+                                              : const SizedBox();
                                         }
                                         return GestureDetector(
                                           onTap: () {},
                                           child: CustomTransactionCard(
                                               index: index,
-                                              detailsText: controller.transactionList[index].details ?? "",
-                                              trxData: controller.transactionList[index].trx ?? "",
-                                              dateData: DateConverter.isoStringToLocalDateOnly(controller.transactionList[index].createdAt ?? ""),
-                                              amountData: "${controller.transactionList[index].trxType} ${MyConverter.twoDecimalPlaceFixedWithoutRounding(controller.transactionList[index].amount.toString())} ${controller.transactionList[index].currency ?? ''}",
-                                              postBalanceData: "${MyConverter.twoDecimalPlaceFixedWithoutRounding(controller.transactionList[index].postBalance.toString())} ${controller.transactionList[index].currency ?? ''}"),
+                                              detailsText: controller
+                                                      .transactionList[index]
+                                                      .details ??
+                                                  "",
+                                              trxData: controller
+                                                      .transactionList[index]
+                                                      .trx ??
+                                                  "",
+                                              dateData: DateConverter
+                                                  .isoStringToLocalDateOnly(
+                                                      controller
+                                                              .transactionList[
+                                                                  index]
+                                                              .createdAt ??
+                                                          ""),
+                                              amountData:
+                                                  "${controller.transactionList[index].trxType} ${MyConverter.twoDecimalPlaceFixedWithoutRounding(controller.transactionList[index].amount.toString())} ${controller.transactionList[index].currency ?? ''}",
+                                              postBalanceData:
+                                                  "${MyConverter.twoDecimalPlaceFixedWithoutRounding(controller.transactionList[index].postBalance.toString())} ${controller.transactionList[index].currency ?? ''}"),
                                         );
                                       },
                                     ),

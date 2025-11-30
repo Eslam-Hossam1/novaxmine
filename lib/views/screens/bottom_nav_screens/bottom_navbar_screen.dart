@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/home/home_screen.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/menu/menu_screen.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/mine/mining_track/mining_tracks_screen.dart';
@@ -19,8 +19,12 @@ class BottomNavBarScreen extends StatefulWidget {
 }
 
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
-
-  List<String> iconList = [MyImages.home, MyImages.wallet, MyImages.miningTracks, MyImages.category];
+  List<String> iconList = [
+    MyImages.home,
+    MyImages.wallet,
+    MyImages.miningTracks,
+    MyImages.category
+  ];
 
   late List<Widget> _widgets;
   late GlobalKey<ScaffoldState> _dashBoardScaffoldKey;
@@ -48,7 +52,12 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   Widget build(BuildContext context) {
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
 
-    final textList = [MyStrings!.home, MyStrings.coinWallets, MyStrings.miningTracks, MyStrings.menu];
+    final textList = [
+      MyStrings!.home,
+      MyStrings.coinWallets,
+      MyStrings.miningTracks,
+      MyStrings.menu
+    ];
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
@@ -81,8 +90,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                     color: isActive ? MyColor.primaryColor : MyColor.colorGrey,
                   ),
                   const SizedBox(height: Dimensions.space5),
-
-                  Text(textList[index], style: interRegularExtraSmall.copyWith(color: isActive ? MyColor.primaryColor : MyColor.colorGrey))
+                  Text(textList[index],
+                      style: interRegularExtraSmall.copyWith(
+                          color: isActive
+                              ? MyColor.primaryColor
+                              : MyColor.colorGrey))
                 ],
               );
             },

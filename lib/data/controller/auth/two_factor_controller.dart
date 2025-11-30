@@ -6,7 +6,7 @@ import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/two_factor/two_factor_data_model.dart';
 import 'package:mine_lab/data/repo/auth/two_factor_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class TwoFactorController extends GetxController {
   final TwoFactorRepo repo;
@@ -19,14 +19,11 @@ class TwoFactorController extends GetxController {
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
 
-    final otpEmptyMsg =
-        l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
+    final otpEmptyMsg = l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
     final requestSuccess =
         l10n?.requestSuccess ?? 'Request completed successfully';
-    final requestFail =
-        l10n?.requestFail ?? 'Request failed';
-    final somethingWrong =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final requestFail = l10n?.requestFail ?? 'Request failed';
+    final somethingWrong = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     if (currentText.isEmpty) {
       CustomSnackBar.error(errorList: [otpEmptyMsg]);
@@ -40,7 +37,7 @@ class TwoFactorController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final AuthorizationResponseModel model =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -72,14 +69,11 @@ class TwoFactorController extends GetxController {
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
 
-    final otpEmptyMsg =
-        l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
+    final otpEmptyMsg = l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
     final requestSuccess =
         l10n?.requestSuccess ?? 'Request completed successfully';
-    final requestFail =
-        l10n?.requestFail ?? 'Request failed';
-    final somethingWrong =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final requestFail = l10n?.requestFail ?? 'Request failed';
+    final somethingWrong = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     if (code.isEmpty) {
       CustomSnackBar.error(errorList: [otpEmptyMsg]);
@@ -93,7 +87,7 @@ class TwoFactorController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final AuthorizationResponseModel model =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -124,14 +118,11 @@ class TwoFactorController extends GetxController {
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
 
-    final otpEmptyMsg =
-        l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
+    final otpEmptyMsg = l10n?.otpFieldEmptyMsg ?? 'OTP field cannot be empty';
     final requestSuccess =
         l10n?.requestSuccess ?? 'Request completed successfully';
-    final requestFail =
-        l10n?.requestFail ?? 'Request failed';
-    final somethingWrong =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final requestFail = l10n?.requestFail ?? 'Request failed';
+    final somethingWrong = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     if (code.isEmpty) {
       CustomSnackBar.error(errorList: [otpEmptyMsg]);
@@ -145,7 +136,7 @@ class TwoFactorController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final AuthorizationResponseModel model =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -179,10 +170,8 @@ class TwoFactorController extends GetxController {
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
 
-    final requestFail =
-        l10n?.requestFail ?? 'Request failed';
-    final somethingWrong =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final requestFail = l10n?.requestFail ?? 'Request failed';
+    final somethingWrong = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     isLoading = true;
     update();
@@ -191,7 +180,7 @@ class TwoFactorController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final TwoFactorCodeModel model =
-      twoFactorCodeModelFromJson(responseModel.responseJson);
+          twoFactorCodeModelFromJson(responseModel.responseJson);
 
       if (model.status?.toLowerCase() == 'success') {
         twoFactorCodeModel = model;

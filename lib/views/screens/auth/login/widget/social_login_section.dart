@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:mine_lab/core/utils/dimensions.dart';
@@ -48,13 +48,15 @@ class _SocialLoginSectionState extends State<SocialLoginSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 20,
               children: [
-                if (controller.checkSocialAuthActiveOrNot(provider: 'google')) ...[
+                if (controller.checkSocialAuthActiveOrNot(
+                    provider: 'google')) ...[
                   InkWell(
                     onTap: () {
                       controller.signInWithGoogle();
                     },
                     customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.defaultRadius),
                     ),
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -62,33 +64,36 @@ class _SocialLoginSectionState extends State<SocialLoginSection> {
                         vertical: Dimensions.space10,
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.defaultRadius),
                         border: Border.all(color: MyColor.colorGrey2),
                       ),
                       child: controller.isGoogleSignInLoading
                           ? SizedBox(
-                        height: 22,
-                        width: 22,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                          color: MyColor.primaryColor,
-                        ),
-                      )
+                              height: 22,
+                              width: 22,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                                color: MyColor.primaryColor,
+                              ),
+                            )
                           : Image.asset(
-                        MyImages.google,
-                        height: 22,
-                        width: 22,
-                      ),
+                              MyImages.google,
+                              height: 22,
+                              width: 22,
+                            ),
                     ),
                   ),
                 ],
-                if (controller.checkSocialAuthActiveOrNot(provider: 'linkedin')) ...[
+                if (controller.checkSocialAuthActiveOrNot(
+                    provider: 'linkedin')) ...[
                   InkWell(
                     onTap: () {
                       controller.signInWithLinkedin(context);
                     },
                     customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.defaultRadius),
                     ),
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -96,23 +101,24 @@ class _SocialLoginSectionState extends State<SocialLoginSection> {
                         vertical: Dimensions.space10,
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.defaultRadius),
                         border: Border.all(color: MyColor.colorGrey2),
                       ),
                       child: controller.isLinkedinLoading
                           ? SizedBox(
-                        height: 22,
-                        width: 22,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                          color: MyColor.primaryColor,
-                        ),
-                      )
+                              height: 22,
+                              width: 22,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                                color: MyColor.primaryColor,
+                              ),
+                            )
                           : Image.asset(
-                        MyImages.linkedin,
-                        height: 22,
-                        width: 22,
-                      ),
+                              MyImages.linkedin,
+                              height: 22,
+                              width: 22,
+                            ),
                     ),
                   ),
                 ],

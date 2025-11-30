@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 import 'package:mine_lab/core/utils/styles.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/divider/custom_divider.dart';
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/utils/util.dart';
 import '../../../components/column_widget/card_column.dart';
 
@@ -13,7 +13,14 @@ class CustomDepositsCard extends StatelessWidget {
   final Color statusBgColor;
   final VoidCallback onPressed;
 
-  const CustomDepositsCard({super.key, required this.trxValue, required this.date, required this.status, required this.statusBgColor, required this.amount, required this.onPressed});
+  const CustomDepositsCard(
+      {super.key,
+      required this.trxValue,
+      required this.date,
+      required this.status,
+      required this.statusBgColor,
+      required this.amount,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +29,12 @@ class CustomDepositsCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-          decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.defaultRadius), boxShadow: MyUtils.getCardShadow()),
+          padding: const EdgeInsets.symmetric(
+              vertical: Dimensions.space15, horizontal: Dimensions.space15),
+          decoration: BoxDecoration(
+              color: MyColor.colorWhite,
+              borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+              boxShadow: MyUtils.getCardShadow()),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,6 +81,15 @@ class StatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(padding: const EdgeInsets.symmetric(vertical: Dimensions.space3, horizontal: Dimensions.space8), alignment: Alignment.center, decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: color.withValues(alpha: .1), border: Border.all(color: color, width: .5)), child: Text(status.tr, style: interRegularSmall.copyWith(color: color)));
+    return Container(
+        padding: const EdgeInsets.symmetric(
+            vertical: Dimensions.space3, horizontal: Dimensions.space8),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(3),
+            color: color.withValues(alpha: .1),
+            border: Border.all(color: color, width: .5)),
+        child:
+            Text(status.tr, style: interRegularSmall.copyWith(color: color)));
   }
 }

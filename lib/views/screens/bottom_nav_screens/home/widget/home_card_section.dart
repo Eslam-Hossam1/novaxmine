@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/controller/bottom_nav/home/home_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/home/widget/miner_item_card.dart';
 
 class HomeCardSection extends StatefulWidget {
@@ -15,7 +15,6 @@ class HomeCardSection extends StatefulWidget {
 }
 
 class _HomeCardSectionState extends State<HomeCardSection> {
-
   @override
   Widget build(BuildContext context) {
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;

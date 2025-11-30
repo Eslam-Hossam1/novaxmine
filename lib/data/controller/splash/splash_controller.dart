@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/messages.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/controller/localization/localization_controller.dart';
 import 'package:mine_lab/data/model/general_setting/general_settings_response_model.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
@@ -23,19 +23,19 @@ class SplashController extends GetxController {
   Future<void> gotoNext(BuildContext context) async {
     await loadLanguage(context);
 
-    bool isRemember =
-        repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.rememberMeKey) ?? false;
+    bool isRemember = repo.apiClient.sharedPreferences
+            .getBool(SharedPreferenceHelper.rememberMeKey) ??
+        false;
 
     ResponseModel response = await repo.getGeneralSetting();
 
     if (response.statusCode == 200) {
-
       final context = Get.context;
       final MyStrings = context != null ? AppLocalizations.of(context)! : null;
       try {
-
         GeneralSettingResponseModel model =
-        GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
+            GeneralSettingResponseModel.fromJson(
+                jsonDecode(response.responseJson));
         if (model.status?.toLowerCase() == "success") {
           repo.apiClient.storeGeneralSetting(model);
           checkAndGo(isRemember);
@@ -82,8 +82,7 @@ class SplashController extends GetxController {
     final locale = localizationController.locale;
     final String languageCode = locale.languageCode;
 
-
-    ResponseModel response = await repo.getLanguage(context,languageCode);
+    ResponseModel response = await repo.getLanguage(context, languageCode);
 
     if (response.statusCode == 200) {
       try {
@@ -151,7 +150,8 @@ class SplashController extends GetxController {
 
         if (jsonMap.isEmpty) {
           final context = Get.context;
-          final MyStrings = context != null ? AppLocalizations.of(context)! : null;
+          final MyStrings =
+              context != null ? AppLocalizations.of(context)! : null;
           // لو مفيش أي حاجة اتحملت، نرجع برسالة خطأ بدل ما يحصل كراش صامت
           CustomSnackBar.error(errorList: [MyStrings!.somethingWentWrong]);
           return;

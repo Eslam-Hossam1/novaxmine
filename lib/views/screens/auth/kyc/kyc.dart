@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/controller/kyc_controller/kyc_controller.dart';
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart' as kyc;
 import 'package:mine_lab/data/repo/kyc/kyc_repo.dart';
@@ -43,7 +43,6 @@ class _KycScreenState extends State<KycScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return GetBuilder<KycController>(
       builder: (controller) => GestureDetector(
@@ -60,117 +59,184 @@ class _KycScreenState extends State<KycScreen> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: controller.isLoading
-                  ? const Padding(padding: EdgeInsets.all(Dimensions.space15), child: CustomLoader())
+                  ? const Padding(
+                      padding: EdgeInsets.all(Dimensions.space15),
+                      child: CustomLoader())
                   : controller.isAlreadyVerified
                       ? const AlreadyVerifiedWidget()
                       : controller.isAlreadyPending
                           ? const AlreadyVerifiedWidget(isPending: true)
                           : controller.isNoDataFound
-                              ?  NoDataOrInternetScreen()
+                              ? NoDataOrInternetScreen()
                               : Center(
                                   child: SingleChildScrollView(
-                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    padding: const EdgeInsets.all(
+                                        Dimensions.space10),
                                     child: Container(
                                       decoration: const BoxDecoration(
                                         color: MyColor.colorWhite,
                                       ),
-                                      padding: const EdgeInsets.all(Dimensions.space15),
+                                      padding: const EdgeInsets.all(
+                                          Dimensions.space15),
                                       child: Form(
                                         key: formKey,
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             ListView.builder(
                                                 shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
                                                 scrollDirection: Axis.vertical,
-                                                itemCount: controller.formList.length,
+                                                itemCount:
+                                                    controller.formList.length,
                                                 itemBuilder: (ctx, index) {
-                                                  kyc.GlobalFormModel? model = controller.formList[index];
+                                                  kyc.GlobalFormModel? model =
+                                                      controller
+                                                          .formList[index];
                                                   return Padding(
-                                                    padding: const EdgeInsets.all(3),
+                                                    padding:
+                                                        const EdgeInsets.all(3),
                                                     child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisSize: MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
                                                       children: [
-                                                        model.type == 'text' || model.type == 'number' || model.type == 'email' || model.type == 'url'
+                                                        model.type == 'text' ||
+                                                                model.type ==
+                                                                    'number' ||
+                                                                model.type ==
+                                                                    'email' ||
+                                                                model.type ==
+                                                                    'url'
                                                             ? Column(
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   CustomTextField(
-                                                                      instructions: model.instruction,
-                                                                      isRequired: model.isRequired == 'optional' ? false : true,
-                                                                      hintText: (model.name ?? '').toString().capitalizeFirst,
-                                                                      needOutlineBorder: true,
-                                                                      labelText: model.name ?? '',
-                                                                      textInputType: model.type == 'number'
-                                                                          ? TextInputType.number
+                                                                      instructions: model
+                                                                          .instruction,
+                                                                      isRequired: model.isRequired ==
+                                                                              'optional'
+                                                                          ? false
+                                                                          : true,
+                                                                      hintText: (model.name ??
+                                                                              '')
+                                                                          .toString()
+                                                                          .capitalizeFirst,
+                                                                      needOutlineBorder:
+                                                                          true,
+                                                                      labelText:
+                                                                          model.name ??
+                                                                              '',
+                                                                      textInputType: model.type ==
+                                                                              'number'
+                                                                          ? TextInputType
+                                                                              .number
                                                                           : model.type == 'email'
                                                                               ? TextInputType.emailAddress
                                                                               : model.type == 'url'
                                                                                   ? TextInputType.url
                                                                                   : TextInputType.text,
                                                                       validator: (value) {
-                                                                        if (model.isRequired != 'optional' && value.toString().isEmpty) {
+                                                                        if (model.isRequired !=
+                                                                                'optional' &&
+                                                                            value.toString().isEmpty) {
                                                                           return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired}';
                                                                         } else {
                                                                           return null;
                                                                         }
                                                                       },
                                                                       onChanged: (value) {
-                                                                        controller.changeSelectedValue(value, index);
+                                                                        controller.changeSelectedValue(
+                                                                            value,
+                                                                            index);
                                                                       }),
-                                                                  const SizedBox(height: Dimensions.space10),
+                                                                  const SizedBox(
+                                                                      height: Dimensions
+                                                                          .space10),
                                                                 ],
                                                               )
-                                                            : model.type == 'textarea'
+                                                            : model.type ==
+                                                                    'textarea'
                                                                 ? Column(
-                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
                                                                     children: [
                                                                       CustomTextField(
-                                                                          instructions: model.instruction,
-                                                                          isRequired: model.isRequired == 'optional' ? false : true,
-                                                                          needOutlineBorder: true,
-                                                                          maxLines: 5,
-                                                                          labelText: model.name ?? '',
-                                                                          hintText: (model.name ?? '').capitalizeFirst,
-                                                                          inputAction: TextInputAction.newline,
-                                                                          textInputType: TextInputType.multiline,
-                                                                          validator: (value) {
-                                                                            if (model.isRequired != 'optional' && value.toString().isEmpty) {
+                                                                          instructions: model
+                                                                              .instruction,
+                                                                          isRequired: model.isRequired == 'optional'
+                                                                              ? false
+                                                                              : true,
+                                                                          needOutlineBorder:
+                                                                              true,
+                                                                          maxLines:
+                                                                              5,
+                                                                          labelText: model.name ??
+                                                                              '',
+                                                                          hintText: (model.name ?? '')
+                                                                              .capitalizeFirst,
+                                                                          inputAction: TextInputAction
+                                                                              .newline,
+                                                                          textInputType: TextInputType
+                                                                              .multiline,
+                                                                          validator:
+                                                                              (value) {
+                                                                            if (model.isRequired != 'optional' &&
+                                                                                value.toString().isEmpty) {
                                                                               return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired}';
                                                                             } else {
                                                                               return null;
                                                                             }
                                                                           },
-                                                                          onChanged: (value) {
-                                                                            controller.changeSelectedValue(value, index);
+                                                                          onChanged:
+                                                                              (value) {
+                                                                            controller.changeSelectedValue(value,
+                                                                                index);
                                                                           }),
-                                                                      const SizedBox(height: Dimensions.space10),
+                                                                      const SizedBox(
+                                                                          height:
+                                                                              Dimensions.space10),
                                                                     ],
                                                                   )
-                                                                : model.type == 'select'
+                                                                : model.type ==
+                                                                        'select'
                                                                     ? Column(
-                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           LabelTextInstruction(
-                                                                            text: model.name ?? '',
-                                                                            isRequired: model.isRequired == 'optional' ? false : true,
-                                                                            instructions: model.instruction,
+                                                                            text:
+                                                                                model.name ?? '',
+                                                                            isRequired: model.isRequired == 'optional'
+                                                                                ? false
+                                                                                : true,
+                                                                            instructions:
+                                                                                model.instruction,
                                                                           ),
-                                                                          const SizedBox(height: Dimensions.textToTextSpace),
+                                                                          const SizedBox(
+                                                                              height: Dimensions.textToTextSpace),
                                                                           CustomDropDownWithTextField(
                                                                               list: model.options ?? [],
                                                                               onChanged: (value) {
                                                                                 controller.changeSelectedValue(value, index);
                                                                               },
                                                                               selectedValue: model.selectedValue),
-                                                                          const SizedBox(height: Dimensions.space10)
+                                                                          const SizedBox(
+                                                                              height: Dimensions.space10)
                                                                         ],
                                                                       )
-                                                                    : model.type == 'radio'
+                                                                    : model.type ==
+                                                                            'radio'
                                                                         ? Column(
-                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
                                                                             children: [
                                                                               LabelTextInstruction(
                                                                                 text: model.name ?? '',
@@ -187,7 +253,8 @@ class _KycScreenState extends State<KycScreen> {
                                                                               ),
                                                                             ],
                                                                           )
-                                                                        : model.type == 'checkbox'
+                                                                        : model.type ==
+                                                                                'checkbox'
                                                                             ? Column(
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
@@ -323,9 +390,11 @@ class _KycScreenState extends State<KycScreen> {
                                             // const SizedBox(height: Dimensions.space25),
                                             Center(
                                               child: RoundedButton(
-                                                isLoading: controller.submitLoading,
+                                                isLoading:
+                                                    controller.submitLoading,
                                                 press: () {
-                                                  if (formKey.currentState!.validate()) {
+                                                  if (formKey.currentState!
+                                                      .validate()) {
                                                     controller.submitKycData();
                                                   } else {}
                                                 },

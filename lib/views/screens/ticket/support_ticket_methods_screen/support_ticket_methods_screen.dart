@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/util.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/components/image/my_image_widget.dart';
@@ -8,7 +9,6 @@ import 'package:mine_lab/views/components/image/my_image_widget.dart';
 import '../../../../core/route/route.dart';
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../data/controller/support/support_ticket_methods_list.dart';
 import '../../../../data/repo/support/support_repo.dart';
 import '../../../../data/services/api_service.dart';
@@ -17,7 +17,8 @@ class SupportTicketMethodsList extends StatefulWidget {
   const SupportTicketMethodsList({super.key});
 
   @override
-  State<SupportTicketMethodsList> createState() => _SupportTicketMethodsListState();
+  State<SupportTicketMethodsList> createState() =>
+      _SupportTicketMethodsListState();
 }
 
 class _SupportTicketMethodsListState extends State<SupportTicketMethodsList> {
@@ -42,7 +43,8 @@ class _SupportTicketMethodsListState extends State<SupportTicketMethodsList> {
     return GetBuilder<SupportTicketMethodsController>(builder: (controller) {
       return Scaffold(
         backgroundColor: MyColor.screenBgColor,
-        appBar: CustomAppBar(title: MyStrings!.contactUs, bgColor: MyColor.primaryColor),
+        appBar: CustomAppBar(
+            title: MyStrings!.contactUs, bgColor: MyColor.primaryColor),
         body: RefreshIndicator(
           color: MyColor.primaryColor,
           onRefresh: () async {
@@ -75,7 +77,8 @@ class _SupportTicketMethodsListState extends State<SupportTicketMethodsList> {
                                 borderRadius: BorderRadius.circular(0),
                                 child: MyImageWidget(
                                   radius: 0,
-                                  imageUrl: "${controller.methodFilePath}/${item.image ?? ''}",
+                                  imageUrl:
+                                      "${controller.methodFilePath}/${item.image ?? ''}",
                                   width: double.infinity,
                                   height: 150,
                                   boxFit: BoxFit.fitWidth,

@@ -3,11 +3,11 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/privacy/privacy_controller.dart';
 import 'package:mine_lab/data/repo/privacy_repo/privacy_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/buttons/category_button.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
@@ -39,7 +39,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
 
     return Scaffold(
         backgroundColor: MyColor.screenBgColor,
-        appBar:  CustomAppBar(
+        appBar: CustomAppBar(
           title: MyStrings!.privacyPolicy,
           bgColor: MyColor.primaryColor,
           isShowActionBtn: true,
@@ -52,13 +52,15 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: const Center(
-                      child: SizedBox(height: 35, width: 35, child: CustomLoader()),
+                      child: SizedBox(
+                          height: 35, width: 35, child: CustomLoader()),
                     ))
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: Dimensions.space10, top: Dimensions.space15),
+                        padding: const EdgeInsets.only(
+                            left: Dimensions.space10, top: Dimensions.space15),
                         child: SizedBox(
                           height: 30,
                           child: SingleChildScrollView(
@@ -70,11 +72,18 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                                 (index) => Row(
                                   children: [
                                     CategoryButton(
-                                        color: controller.selectedIndex == index ? MyColor.primaryColor : MyColor.colorWhite,
+                                        color: controller.selectedIndex == index
+                                            ? MyColor.primaryColor
+                                            : MyColor.colorWhite,
                                         horizontalPadding: 8,
                                         verticalPadding: 7,
-                                        textColor: controller.selectedIndex == index ? MyColor.colorWhite : MyColor.colorBlack,
-                                        text: controller.list[index].dataValues?.title ?? '',
+                                        textColor:
+                                            controller.selectedIndex == index
+                                                ? MyColor.colorWhite
+                                                : MyColor.colorBlack,
+                                        text: controller.list[index].dataValues
+                                                ?.title ??
+                                            '',
                                         press: () {
                                           controller.changeIndex(index);
                                         }),
@@ -87,7 +96,18 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                         ),
                       ),
                       const SizedBox(height: Dimensions.space15),
-                      Expanded(child: SingleChildScrollView(child: Container(padding: const EdgeInsets.all(20), width: double.infinity, color: Colors.transparent, child: HtmlWidget(controller.selectedHtml, textStyle: interRegularDefault.copyWith(color: Colors.black), onLoadingBuilder: (context, element, loadingProgress) => const CustomLoader()))))
+                      Expanded(
+                          child: SingleChildScrollView(
+                              child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  color: Colors.transparent,
+                                  child: HtmlWidget(controller.selectedHtml,
+                                      textStyle: interRegularDefault.copyWith(
+                                          color: Colors.black),
+                                      onLoadingBuilder:
+                                          (context, element, loadingProgress) =>
+                                              const CustomLoader()))))
                     ],
                   ),
           ),

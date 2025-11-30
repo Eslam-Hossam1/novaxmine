@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/plan/purchased_plan/plan_payment_method_controller.dart';
 import 'package:mine_lab/data/model/plan/plan_payment_method/plan_payment_method_response_model.dart';
 import 'package:mine_lab/data/repo/plan/purchased_plan/purchased_plan_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/card/custom_card.dart';
 import 'package:mine_lab/views/components/text-field/outlined_text_field.dart';
@@ -21,10 +21,15 @@ class PlanPaymentMethodScreen extends StatefulWidget {
   final String title;
   final String amount;
   final String orderId;
-  const PlanPaymentMethodScreen({super.key, required this.title, required this.amount, required this.orderId});
+  const PlanPaymentMethodScreen(
+      {super.key,
+      required this.title,
+      required this.amount,
+      required this.orderId});
 
   @override
-  State<PlanPaymentMethodScreen> createState() => _PlanPaymentMethodScreenState();
+  State<PlanPaymentMethodScreen> createState() =>
+      _PlanPaymentMethodScreenState();
 }
 
 class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
@@ -32,7 +37,8 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(PurchasedPlanRepo(apiClient: Get.find()));
-    final controller = Get.put(PlanPaymentMethodController(purchasedPlanRepo: Get.find(), amount: widget.amount));
+    final controller = Get.put(PlanPaymentMethodController(
+        purchasedPlanRepo: Get.find(), amount: widget.amount));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.beforeInitLoadData();
@@ -46,13 +52,13 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return GetBuilder<PlanPaymentMethodController>(
       builder: (controller) => Scaffold(
         backgroundColor: MyColor.screenBgColor,
         appBar: AppBar(
-            title: Text(MyStrings!.paymentMethod, style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+            title: Text(MyStrings!.paymentMethod,
+                style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
             backgroundColor: MyColor.primaryColor,
             elevation: 0,
             leading: IconButton(
@@ -70,12 +76,15 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
                       height: 120,
                       width: MediaQuery.of(context).size.width,
                       color: MyColor.primaryColor,
-                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Dimensions.space15),
                     ),
                     Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.space15,
+                            vertical: Dimensions.space20),
                         child: CustomCard(
                           verticalPadding: Dimensions.space20,
                           horizontalPadding: Dimensions.space15,
@@ -89,11 +98,12 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
                                   readOnly: true,
                                   labelText: MyStrings.planTitle,
                                   needOutlineBorder: true,
-                                  controller: TextEditingController(text: widget.title),
+                                  controller:
+                                      TextEditingController(text: widget.title),
                                   onChanged: (value) {},
                                 ),
                                 const SizedBox(height: Dimensions.space15),
-                                 LabelText(text: MyStrings.selectGateway),
+                                LabelText(text: MyStrings.selectGateway),
                                 const SizedBox(height: 8),
                                 Container(
                                   width: MediaQuery.of(context).size.width,
@@ -101,23 +111,33 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
                                     left: Dimensions.space15,
                                     right: Dimensions.space15,
                                   ),
-                                  decoration: BoxDecoration(color: MyColor.transparentColor, borderRadius: BorderRadius.circular(Dimensions.defaultRadius), border: Border.all(color: MyColor.primaryColor, width: 0.5)),
+                                  decoration: BoxDecoration(
+                                      color: MyColor.transparentColor,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.defaultRadius),
+                                      border: Border.all(
+                                          color: MyColor.primaryColor,
+                                          width: 0.5)),
                                   child: DropdownButton<Methods>(
                                     dropdownColor: MyColor.colorWhite,
                                     value: controller.paymentMethod,
                                     elevation: 8,
-                                    icon: const Icon(Icons.keyboard_arrow_down, color: MyColor.primaryColor),
+                                    icon: const Icon(Icons.keyboard_arrow_down,
+                                        color: MyColor.primaryColor),
                                     iconDisabledColor: Colors.red,
                                     iconEnabledColor: MyColor.primaryColor,
                                     isExpanded: true,
-                                    underline: Container(height: 0, color: MyColor.primaryColor),
+                                    underline: Container(
+                                        height: 0, color: MyColor.primaryColor),
                                     onChanged: (Methods? newValue) {
                                       controller.setPaymentMethod(newValue);
                                     },
-                                    items: controller.paymentMethodList.map((Methods method) {
+                                    items: controller.paymentMethodList
+                                        .map((Methods method) {
                                       return DropdownMenuItem<Methods>(
                                         value: method,
-                                        child: Text(method.name.toString(), style: interRegularDefault),
+                                        child: Text(method.name.toString(),
+                                            style: interRegularDefault),
                                       );
                                     }).toList(),
                                   ),
@@ -129,17 +149,21 @@ class _PlanPaymentMethodScreenState extends State<PlanPaymentMethodScreen> {
                                   labelText: MyStrings.amount,
                                   needOutlineBorder: true,
                                   controller: TextEditingController(
-                                    text: "${MyConverter.twoDecimalPlaceFixedWithoutRounding(widget.amount)} ${controller.currency}",
+                                    text:
+                                        "${MyConverter.twoDecimalPlaceFixedWithoutRounding(widget.amount)} ${controller.currency}",
                                   ),
                                   onChanged: (value) {},
                                 ),
-                                controller.mainAmount > 0 ? const InfoWidget() : const SizedBox(),
+                                controller.mainAmount > 0
+                                    ? const InfoWidget()
+                                    : const SizedBox(),
                                 const SizedBox(height: Dimensions.space35),
                                 RoundedButton(
                                   isLoading: controller.isSubmitLoading,
                                   press: () {
                                     controller.submitPayment(
-                                        amount: MyConverter.twoDecimalPlaceFixedWithoutRounding(
+                                        amount: MyConverter
+                                            .twoDecimalPlaceFixedWithoutRounding(
                                           widget.amount,
                                         ),
                                         orderId: widget.orderId);

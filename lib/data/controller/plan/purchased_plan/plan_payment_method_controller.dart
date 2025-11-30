@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/plan/plan_payment_insert_response_model.dart
 import 'package:mine_lab/data/model/plan/plan_payment_method/plan_payment_method_response_model.dart';
 import 'package:mine_lab/data/repo/plan/purchased_plan/purchased_plan_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class PlanPaymentMethodController extends GetxController {
   final PurchasedPlanRepo purchasedPlanRepo;
@@ -40,7 +40,7 @@ class PlanPaymentMethodController extends GetxController {
 
   Methods? paymentMethod;
   PlanPaymentMethodResponseModel planPaymentMethodResponseModel =
-  PlanPaymentMethodResponseModel();
+      PlanPaymentMethodResponseModel();
   List<Methods> paymentMethodList = [];
 
   double rate = 1;
@@ -51,7 +51,7 @@ class PlanPaymentMethodController extends GetxController {
     mainAmount = amount.isEmpty ? 0 : double.tryParse(amount) ?? 0;
 
     depositLimit =
-    '${MyConverter.twoDecimalPlaceFixedWithoutRounding(paymentMethod?.minAmount?.toString() ?? '0')} - '
+        '${MyConverter.twoDecimalPlaceFixedWithoutRounding(paymentMethod?.minAmount?.toString() ?? '0')} - '
         '${MyConverter.twoDecimalPlaceFixedWithoutRounding(paymentMethod?.maxAmount?.toString() ?? '0')} '
         '$currency';
 
@@ -74,11 +74,11 @@ class PlanPaymentMethodController extends GetxController {
     final double totalCharge = percentCharge + tempCharge;
 
     charge =
-    '${MyConverter.twoDecimalPlaceFixedWithoutRounding('$totalCharge')} $currency';
+        '${MyConverter.twoDecimalPlaceFixedWithoutRounding('$totalCharge')} $currency';
 
     final double totalPayable = totalCharge + amount;
     payableText =
-    '${MyConverter.twoDecimalPlaceFixedWithoutRounding('$totalPayable', precision: 8)} $currency';
+        '${MyConverter.twoDecimalPlaceFixedWithoutRounding('$totalPayable', precision: 8)} $currency';
 
     rate = double.tryParse(paymentMethod?.rate ?? '0') ?? 0;
     conversionRate = '1 $currency = $rate ${paymentMethod?.currency ?? ''}';
@@ -109,7 +109,7 @@ class PlanPaymentMethodController extends GetxController {
     update();
 
     planPaymentMethodResponseModel =
-    await purchasedPlanRepo.getPlanPaymentMethod();
+        await purchasedPlanRepo.getPlanPaymentMethod();
 
     paymentMethodList.clear();
     paymentMethodList.add(Methods(name: selectOneText, id: -1));
@@ -167,7 +167,7 @@ class PlanPaymentMethodController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final PlanPaymentInsertResponseModel insertResponseModel =
-      PlanPaymentInsertResponseModel.fromJson(
+          PlanPaymentInsertResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -176,7 +176,7 @@ class PlanPaymentMethodController extends GetxController {
       } else {
         CustomSnackBar.showCustomSnackBar(
           errorList:
-          insertResponseModel.message?.error ?? <String>[tryAgainText],
+              insertResponseModel.message?.error ?? <String>[tryAgainText],
           msg: const [],
           isError: true,
         );

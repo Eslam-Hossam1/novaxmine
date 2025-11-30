@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
@@ -18,26 +18,36 @@ class WithdrawRepo {
 
   Future<dynamic> getAllWithdrawMethod() async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.withdrawMethodUrl}';
-    ResponseModel responseModel = await apiClient.request(url, request.Method.getMethod, null, passHeader: true);
+    ResponseModel responseModel = await apiClient
+        .request(url, request.Method.getMethod, null, passHeader: true);
     return responseModel;
   }
 
   Future<dynamic> getWithdrawConfirmScreenData(String trxId) async {
-    String url = '${UrlContainer.baseUrl}${UrlContainer.withdrawConfirmScreenUrl}$trxId';
-    ResponseModel responseModel = await apiClient.request(url, request.Method.getMethod, null, passHeader: true);
+    String url =
+        '${UrlContainer.baseUrl}${UrlContainer.withdrawConfirmScreenUrl}$trxId';
+    ResponseModel responseModel = await apiClient
+        .request(url, request.Method.getMethod, null, passHeader: true);
     return responseModel;
   }
 
-  Future<dynamic> addWithdrawRequest(BuildContext context,int methodCode, double amount, String? authMode) async {
+  Future<dynamic> addWithdrawRequest(BuildContext context, int methodCode,
+      double amount, String? authMode) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.addWithdrawRequestUrl}';
-    Map<String, dynamic> params = {'method_id': methodCode.toString(), 'amount': amount.toString()};
+    Map<String, dynamic> params = {
+      'method_id': methodCode.toString(),
+      'amount': amount.toString()
+    };
 
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-    if (authMode != null && authMode.isNotEmpty && authMode.toLowerCase() != MyStrings!.selectOne.toLowerCase()) {
+    if (authMode != null &&
+        authMode.isNotEmpty &&
+        authMode.toLowerCase() != MyStrings!.selectOne.toLowerCase()) {
       params['auth_mode'] = authMode.toLowerCase();
     }
 
-    ResponseModel responseModel = await apiClient.request(url, request.Method.postMethod, params, passHeader: true);
+    ResponseModel responseModel = await apiClient
+        .request(url, request.Method.postMethod, params, passHeader: true);
 
     return responseModel;
   }
@@ -45,8 +55,10 @@ class WithdrawRepo {
   List<Map<String, String>> fieldList = [];
   List<ModelDynamicValue> filesList = [];
 
-  Future<dynamic> confirmWithdrawRequest(String trx, List<GlobalFormModel> list, String twoFactorCode) async {
-    String url = '${UrlContainer.baseUrl}${UrlContainer.withdrawRequestConfirm}';
+  Future<dynamic> confirmWithdrawRequest(
+      String trx, List<GlobalFormModel> list, String twoFactorCode) async {
+    String url =
+        '${UrlContainer.baseUrl}${UrlContainer.withdrawRequestConfirm}';
 
     apiClient.initToken();
     await modelToMap(list);
@@ -60,10 +72,13 @@ class WithdrawRepo {
       finalMap.addAll(element);
     }
 
-    request.headers.addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
+    request.headers
+        .addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
 
     for (var file in filesList) {
-      request.files.add(http.MultipartFile(file.key ?? '', file.value.readAsBytes().asStream(), file.value.lengthSync(), filename: file.value.path.split('/').last));
+      request.files.add(http.MultipartFile(file.key ?? '',
+          file.value.readAsBytes().asStream(), file.value.lengthSync(),
+          filename: file.value.path.split('/').last));
     }
 
     if (twoFactorCode.isNotEmpty) {
@@ -77,14 +92,18 @@ class WithdrawRepo {
     printX(url);
     printX(finalMap);
     printX(jsonResponse);
-    AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+    AuthorizationResponseModel model =
+        AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
     return model;
   }
 
-  Future<dynamic> getAllWithdrawHistory(int page, {String searchText = ""}) async {
-    String url = "${UrlContainer.baseUrl}${UrlContainer.withdrawHistoryUrl}?page=$page&search=$searchText";
-    ResponseModel responseModel = await apiClient.request(url, request.Method.getMethod, null, passHeader: true);
+  Future<dynamic> getAllWithdrawHistory(int page,
+      {String searchText = ""}) async {
+    String url =
+        "${UrlContainer.baseUrl}${UrlContainer.withdrawHistoryUrl}?page=$page&search=$searchText";
+    ResponseModel responseModel = await apiClient
+        .request(url, request.Method.getMethod, null, passHeader: true);
 
     return responseModel;
   }

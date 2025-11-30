@@ -8,16 +8,17 @@ import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/views/components/buttons/custom_round_border_shape.dart';
 import 'package:mine_lab/views/components/image/custom_svg_picture.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class NoDataOrInternetScreen extends StatefulWidget {
-  final String message;     // رسالة العنوان (لو فاضية هنستخدم الترجمة الافتراضية)
+  final String message; // رسالة العنوان (لو فاضية هنستخدم الترجمة الافتراضية)
   final double paddingTop;
   final double imageHeight;
   final bool fromReview;
   final bool isNoInternet;
   final Function(bool)? onChanged;
-  final String message2;    // الرسالة التانية (لو فاضية هنستخدم الترجمة الافتراضية)
+  final String
+      message2; // الرسالة التانية (لو فاضية هنستخدم الترجمة الافتراضية)
   final String image;
 
   const NoDataOrInternetScreen({
@@ -43,7 +44,7 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
 
     // نص العنوان
     final String titleText = widget.isNoInternet
-        ? l10n.noInternet        // مفتاح من localization
+        ? l10n.noInternet // مفتاح من localization
         : (widget.message.isNotEmpty ? widget.message : l10n.noData);
 
     // النص التحت العنوان (لو مفيش إنترنت غالباً مش محتاجين message2)
@@ -66,28 +67,27 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
               children: [
                 SizedBox(
                   height:
-                  MediaQuery.of(context).size.height * widget.imageHeight,
+                      MediaQuery.of(context).size.height * widget.imageHeight,
                   width: widget.isNoInternet
                       ? MediaQuery.of(context).size.width * .6
                       : MediaQuery.of(context).size.width * .4,
                   child: widget.isNoInternet
                       ? Lottie.asset(
-                    MyImages.noInternet,
-                    height: MediaQuery.of(context).size.height *
-                        widget.imageHeight,
-                    width: MediaQuery.of(context).size.width * .6,
-                  )
+                          MyImages.noInternet,
+                          height: MediaQuery.of(context).size.height *
+                              widget.imageHeight,
+                          width: MediaQuery.of(context).size.width * .6,
+                        )
                       : CustomSvgPicture(
-                    image: widget.image,
-                    height: 100,
-                    width: 100,
-                    color: MyColor.colorGrey,
-                  ),
+                          image: widget.image,
+                          height: 100,
+                          width: 100,
+                          color: MyColor.colorGrey,
+                        ),
                 ),
                 Center(
                   child: Padding(
-                    padding:
-                    const EdgeInsets.only(top: 6, left: 30, right: 30),
+                    padding: const EdgeInsets.only(top: 6, left: 30, right: 30),
                     child: Column(
                       children: [
                         Text(
@@ -111,16 +111,15 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                        if (widget.isNoInternet)
-                          const SizedBox(height: 15),
+                        if (widget.isNoInternet) const SizedBox(height: 15),
                         // زرار retry لو مفيش إنترنت
                         if (widget.isNoInternet)
                           InkWell(
                             onTap: () async {
-                              final conn = await Connectivity()
-                                  .checkConnectivity();
+                              final conn =
+                                  await Connectivity().checkConnectivity();
                               final hasConnection =
-                              (!conn.contains(ConnectivityResult.none));
+                                  (!conn.contains(ConnectivityResult.none));
                               if (hasConnection) {
                                 widget.onChanged?.call(true);
                               }

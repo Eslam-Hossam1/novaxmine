@@ -4,12 +4,12 @@ import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/forget_password/forget_password_controller.dart';
 import 'package:mine_lab/data/controller/auth/forget_password/reset_password_controller.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/auth_components/auth_layout.dart';
 import 'package:mine_lab/views/components/will_pop_widget.dart';
@@ -49,7 +49,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           backgroundColor: MyColor.screenBgColor,
-          appBar: CustomAppBar(title: MyStrings!.resetPassword, isShowBackBtn: true, bgColor: MyColor.primaryColor),
+          appBar: CustomAppBar(
+              title: MyStrings!.resetPassword,
+              isShowBackBtn: true,
+              bgColor: MyColor.primaryColor),
           body: GetBuilder<ResetPasswordController>(
             builder: (controller) => AuthLayout(
               bottomSpace: Dimensions.space50 * 1.80,
@@ -58,7 +61,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(MyStrings.resetPassword, textAlign: TextAlign.center, style: interRegularExtraLarge.copyWith(fontWeight: FontWeight.w600)),
+                    Text(MyStrings.resetPassword,
+                        textAlign: TextAlign.center,
+                        style: interRegularExtraLarge.copyWith(
+                            fontWeight: FontWeight.w600)),
                     const SizedBox(height: Dimensions.space30),
                     const ResetPasswordForm(),
                   ],

@@ -7,7 +7,7 @@ import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 
 import '../../../core/route/route.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import '../../model/deposit/deposit_insert_response_model.dart';
 import '../../model/deposit/deposit_method_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -42,7 +42,8 @@ class AddNewDepositController extends GetxController {
     String amt = amountController.text.toString();
     mainAmount = amt.isEmpty ? 0 : double.tryParse(amt) ?? 0;
     paymentMethod = method;
-    depositLimit = '${MyConverter.formatNumber(method?.minAmount?.toString() ?? '-1')} - ${MyConverter.formatNumber(method?.maxAmount?.toString() ?? '-1')} $currency';
+    depositLimit =
+        '${MyConverter.formatNumber(method?.minAmount?.toString() ?? '-1')} - ${MyConverter.formatNumber(method?.maxAmount?.toString() ?? '-1')} $currency';
     if (mainAmount > 0) {
       changeInfoWidgetValue(mainAmount);
     }
@@ -55,16 +56,20 @@ class AddNewDepositController extends GetxController {
     isLoading = true;
     currency = depositRepo.apiClient.getCurrencyOrUsername();
     methodList.clear();
-    paymentMethod = AppPaymentGateway(id: '-1', name: l10n!.selectOne, currency: currency);
+    paymentMethod =
+        AppPaymentGateway(id: '-1', name: l10n!.selectOne, currency: currency);
     update();
     try {
       ResponseModel responseModel = await depositRepo.getDepositMethods();
 
       if (responseModel.statusCode == 200) {
-        DepositMethodResponseModel methodsModel = DepositMethodResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+        DepositMethodResponseModel methodsModel =
+            DepositMethodResponseModel.fromJson(
+                jsonDecode(responseModel.responseJson));
 
         if (methodsModel.message != null && methodsModel.message != null) {
-          List<AppPaymentGateway>? tempList = methodsModel.data?.gatewayCurrency;
+          List<AppPaymentGateway>? tempList =
+              methodsModel.data?.gatewayCurrency;
           if (tempList != null && tempList.isNotEmpty) {
             imagePath = methodsModel.data?.gatewayImage ?? '';
             methodList.addAll(tempList);
@@ -103,15 +108,22 @@ class AddNewDepositController extends GetxController {
     submitLoading = true;
     update();
 
-    ResponseModel responseModel = await depositRepo.insertDeposit(amount: amount, methodCode: paymentMethod?.methodCode ?? "", currency: paymentMethod?.currency ?? "");
+    ResponseModel responseModel = await depositRepo.insertDeposit(
+        amount: amount,
+        methodCode: paymentMethod?.methodCode ?? "",
+        currency: paymentMethod?.currency ?? "");
 
     if (responseModel.statusCode == 200) {
-      DepositInsertResponseModel insertResponseModel = DepositInsertResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      DepositInsertResponseModel insertResponseModel =
+          DepositInsertResponseModel.fromJson(
+              jsonDecode(responseModel.responseJson));
 
       if (insertResponseModel.status.toString().toLowerCase() == "success") {
         showWebView(insertResponseModel.data ?? DepositInsertData());
       } else {
-        CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings!.somethingWentWrong]);
+        CustomSnackBar.error(
+            errorList: insertResponseModel.message?.error ??
+                [MyStrings!.somethingWentWrong]);
       }
     } else {
       CustomSnackBar.error(
@@ -154,7 +166,8 @@ class AddNewDepositController extends GetxController {
   }
 
   bool isShowRate() {
-    if (rate > 1 && currency.toLowerCase() != paymentMethod?.currency?.toLowerCase()) {
+    if (rate > 1 &&
+        currency.toLowerCase() != paymentMethod?.currency?.toLowerCase()) {
       return true;
     } else {
       return false;
@@ -162,6 +175,7 @@ class AddNewDepositController extends GetxController {
   }
 
   void showWebView(DepositInsertData depositInsertData) {
-    Get.offAndToNamed(RouteHelper.depositWebViewScreen, arguments: depositInsertData);
+    Get.offAndToNamed(RouteHelper.depositWebViewScreen,
+        arguments: depositInsertData);
   }
 }

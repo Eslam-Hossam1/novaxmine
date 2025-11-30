@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/controller/auth/forget_password/reset_password_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/text-field/custom_text_field.dart';
 import 'package:mine_lab/views/components/validation_widget/validation_widget.dart';
@@ -20,7 +20,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return GetBuilder<ResetPasswordController>(
       builder: (controller) => Form(
@@ -28,7 +27,12 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Visibility(visible: controller.hasPasswordFocus && controller.checkPasswordStrength, child: ValidationWidget(list: controller.passwordValidationRules, heightBottom: 15)),
+            Visibility(
+                visible: controller.hasPasswordFocus &&
+                    controller.checkPasswordStrength,
+                child: ValidationWidget(
+                    list: controller.passwordValidationRules,
+                    heightBottom: 15)),
             Focus(
               onFocusChange: (hasFocus) {
                 controller.changePasswordFocus(hasFocus);
@@ -69,7 +73,8 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
                 return;
               },
               validator: (value) {
-                if (controller.passController.text.toLowerCase() != controller.confirmPassController.text.toLowerCase()) {
+                if (controller.passController.text.toLowerCase() !=
+                    controller.confirmPassController.text.toLowerCase()) {
                   return MyStrings.kMatchPassError.tr;
                 } else {
                   return null;

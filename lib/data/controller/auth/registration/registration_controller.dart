@@ -13,7 +13,7 @@ import 'package:mine_lab/data/repo/auth/general_setting_repo.dart';
 import 'package:mine_lab/data/repo/auth/registration/registration_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class RegistrationController extends GetxController {
   final RegistrationRepo registrationRepo;
@@ -37,14 +37,14 @@ class RegistrationController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController referralCodeController = TextEditingController();
 
   bool isLoading = true;
   bool agreeTC = false;
 
   GeneralSettingResponseModel generalSettingsResponseModel =
-  GeneralSettingResponseModel();
+      GeneralSettingResponseModel();
 
   // from general setting api
   bool checkPasswordStrength = false;
@@ -106,29 +106,28 @@ class RegistrationController extends GetxController {
     final l10n = context != null ? AppLocalizations.of(context)! : null;
     final defaultSuccessMsg =
         l10n?.requestSuccess ?? 'Request completed successfully';
-    final defaultErrorMsg =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final defaultErrorMsg = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     final SignUpModel signUpModel = getUserData();
     final ResponseModel response =
-    await registrationRepo.registerUser(signUpModel);
+        await registrationRepo.registerUser(signUpModel);
 
     if (response.statusCode == 200) {
       final RegistrationResponseModel registrationModel =
-      RegistrationResponseModel.fromJson(
+          RegistrationResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
       if (registrationModel.status.toString().toLowerCase() == "success") {
         CustomSnackBar.success(
           successList:
-          registrationModel.message?.success ?? [defaultSuccessMsg],
+              registrationModel.message?.success ?? [defaultSuccessMsg],
         );
         await checkAndGotoNextStep(registrationModel);
       } else {
         CustomSnackBar.error(
           errorList:
-          registrationModel.message?.error ?? <String>[defaultErrorMsg],
+              registrationModel.message?.error ?? <String>[defaultErrorMsg],
         );
       }
     } else {
@@ -159,15 +158,15 @@ class RegistrationController extends GetxController {
   }
 
   Future<void> checkAndGotoNextStep(
-      RegistrationResponseModel responseModel, {
-        bool isSocialLogin = false,
-      }) async {
+    RegistrationResponseModel responseModel, {
+    bool isSocialLogin = false,
+  }) async {
     final bool needEmailVerification =
-    responseModel.data?.user?.ev == "1" ? false : true;
+        responseModel.data?.user?.ev == "1" ? false : true;
     final bool needSmsVerification =
-    responseModel.data?.user?.sv == "1" ? false : true;
+        responseModel.data?.user?.sv == "1" ? false : true;
     final bool isTwoFactorEnable =
-    responseModel.data?.user?.tv == '1' ? false : true;
+        responseModel.data?.user?.tv == '1' ? false : true;
 
     final SharedPreferences preferences =
         registrationRepo.apiClient.sharedPreferences;
@@ -200,7 +199,7 @@ class RegistrationController extends GetxController {
     await registrationRepo.sendUserToken();
 
     final bool isProfileCompleteEnable =
-    responseModel.data?.user?.profileComplete == '0' ? true : false;
+        responseModel.data?.user?.profileComplete == '0' ? true : false;
 
     if (isProfileCompleteEnable) {
       Get.offAndToNamed(RouteHelper.profileCompleteScreen);
@@ -221,8 +220,7 @@ class RegistrationController extends GetxController {
 
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
-    final defaultErrorMsg =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final defaultErrorMsg = l10n?.somethingWentWrong ?? 'Something went wrong';
     final registrationDisabledMsg =
         l10n?.somethingWentWrong ?? 'Registration is currently disabled';
 
@@ -230,7 +228,7 @@ class RegistrationController extends GetxController {
 
     if (response.statusCode == 200) {
       final GeneralSettingResponseModel model =
-      GeneralSettingResponseModel.fromJson(
+          GeneralSettingResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
@@ -258,17 +256,16 @@ class RegistrationController extends GetxController {
       return;
     }
 
-    needAgree = generalSettingsResponseModel
-        .data?.generalSetting?.agree
-        .toString() ==
-        '0'
-        ? false
-        : true;
+    needAgree =
+        generalSettingsResponseModel.data?.generalSetting?.agree.toString() ==
+                '0'
+            ? false
+            : true;
 
-    checkPasswordStrength =
-    generalSettingsResponseModel.data?.generalSetting?.securePassword
-        .toString() ==
-        '0'
+    checkPasswordStrength = generalSettingsResponseModel
+                .data?.generalSetting?.securePassword
+                .toString() ==
+            '0'
         ? false
         : true;
 
@@ -291,8 +288,7 @@ class RegistrationController extends GetxController {
   String? validatePassword(String value) {
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
-    final emptyMsg =
-        l10n?.pleaseEnterPassword ?? 'Please enter your password';
+    final emptyMsg = l10n?.pleaseEnterPassword ?? 'Please enter your password';
     final invalidMsg =
         l10n?.invalidPassMsg ?? 'Password does not meet requirements';
 
@@ -319,15 +315,14 @@ class RegistrationController extends GetxController {
 
   void updateValidationList(String value) {
     passwordValidationRules[0].hasError =
-    value.contains(RegExp(r'[A-Z]')) ? false : true;
+        value.contains(RegExp(r'[A-Z]')) ? false : true;
     passwordValidationRules[1].hasError =
-    value.contains(RegExp(r'[a-z]')) ? false : true;
+        value.contains(RegExp(r'[a-z]')) ? false : true;
     passwordValidationRules[2].hasError =
-    value.contains(RegExp(r'[0-9]')) ? false : true;
+        value.contains(RegExp(r'[0-9]')) ? false : true;
     passwordValidationRules[3].hasError =
-    value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ? false : true;
-    passwordValidationRules[4].hasError =
-    value.length >= 6 ? false : true;
+        value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ? false : true;
+    passwordValidationRules[4].hasError = value.length >= 6 ? false : true;
 
     update();
   }

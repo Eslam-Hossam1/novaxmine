@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/model/deposit/deposit_insert_response_model.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/route/route.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/utils/url_container.dart';
 
 class DepositWebViewScreen extends StatefulWidget {
@@ -50,8 +50,6 @@ class _DepositWebViewScreenState extends State<DepositWebViewScreen> {
   Widget build(BuildContext context) {
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
 
-
-
     return Scaffold(
       appBar: CustomAppBar(
         title: MyStrings!.payNow,
@@ -71,10 +69,12 @@ class _DepositWebViewScreenState extends State<DepositWebViewScreen> {
               if (url.toString().contains("ipn/") && Platform.isIOS == true) {
                 Get.offAndToNamed(RouteHelper.depositsScreen);
                 CustomSnackBar.success(successList: [MyStrings.requestSuccess]);
-              } else if (url.toString() == '${UrlContainer.baseUrl}user/deposit/history') {
+              } else if (url.toString() ==
+                  '${UrlContainer.baseUrl}user/deposit/history') {
                 Get.offAndToNamed(RouteHelper.depositsScreen);
                 CustomSnackBar.success(successList: [MyStrings.requestSuccess]);
-              } else if (url.toString() == '${UrlContainer.baseUrl}user/deposit') {
+              } else if (url.toString() ==
+                  '${UrlContainer.baseUrl}user/deposit') {
                 Get.back();
                 CustomSnackBar.error(errorList: [MyStrings.requestFail]);
               }
@@ -85,8 +85,17 @@ class _DepositWebViewScreenState extends State<DepositWebViewScreen> {
             shouldOverrideUrlLoading: (controller, navigationAction) async {
               var uri = navigationAction.request.url!;
 
-              if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(uri.scheme)) {
-                if (await canLaunchUrl(Uri.parse(widget.depositInsertData.redirectUrl ?? ""))) {
+              if (![
+                "http",
+                "https",
+                "file",
+                "chrome",
+                "data",
+                "javascript",
+                "about"
+              ].contains(uri.scheme)) {
+                if (await canLaunchUrl(
+                    Uri.parse(widget.depositInsertData.redirectUrl ?? ""))) {
                   await launchUrl(
                     Uri.parse(widget.depositInsertData.redirectUrl ?? ""),
                   );
@@ -102,7 +111,9 @@ class _DepositWebViewScreenState extends State<DepositWebViewScreen> {
               });
             },
           ),
-          isLoading ? const Center(child: CustomLoader(isFullScreen: true)) : const SizedBox(),
+          isLoading
+              ? const Center(child: CustomLoader(isFullScreen: true))
+              : const SizedBox(),
         ],
       ),
     );

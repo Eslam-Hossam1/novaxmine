@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/forget_password/forget_password_controller.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
@@ -36,8 +36,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return WillPopWidget(
       nextRoute: '',
@@ -62,13 +60,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Text(
                       MyStrings.forgotPassword.tr,
                       textAlign: TextAlign.center,
-                      style: interRegularExtraLarge.copyWith(fontWeight: FontWeight.w600, color: MyColor.primaryColor),
+                      style: interRegularExtraLarge.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: MyColor.primaryColor),
                     ),
                     const SizedBox(height: Dimensions.space3),
                     Text(
                       MyStrings.forgotPasswordSubtitle.tr,
                       textAlign: TextAlign.center,
-                      style: interLightDefault.copyWith(color: MyColor.bodyTextColor),
+                      style: interLightDefault.copyWith(
+                          color: MyColor.bodyTextColor),
                     ),
                     const SizedBox(height: Dimensions.space30),
                     const ForgotPasswordForm(),

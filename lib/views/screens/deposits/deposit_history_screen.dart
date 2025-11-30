@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/styles.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/components/custom_no_data_found_class.dart';
 import 'package:mine_lab/views/screens/deposits/widget/custom_deposits_card.dart';
@@ -12,7 +13,6 @@ import '../../../core/helper/date_converter.dart';
 import '../../../core/route/route.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../data/controller/deposit/deposit_history_controller.dart';
 import '../../../data/repo/deposit/deposit_repo.dart';
 import '../../../data/services/api_service.dart';
@@ -32,7 +32,8 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
   }
 
   void _scrollListener() {
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       if (Get.find<DepositController>().hasNext()) {
         fetchData();
       }
@@ -64,21 +65,28 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
       builder: (controller) => Scaffold(
         backgroundColor: MyColor.screenBgColor,
         appBar: AppBar(
-          title: Text(MyStrings!.deposit.tr, style: interRegularDefault.copyWith(color: MyColor.colorWhite)),
+          title: Text(MyStrings!.deposit.tr,
+              style: interRegularDefault.copyWith(color: MyColor.colorWhite)),
           backgroundColor: MyColor.primaryColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(Icons.arrow_back_ios, color: MyColor.colorWhite, size: 20),
+            icon: const Icon(Icons.arrow_back_ios,
+                color: MyColor.colorWhite, size: 20),
           ),
           actions: [
             GestureDetector(
               onTap: () {
                 controller.changeIsPress();
               },
-              child: Container(padding: const EdgeInsets.all(Dimensions.space7), decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle), child: Icon(controller.isSearch ? Icons.clear : Icons.search, color: MyColor.primaryColor, size: 15)),
+              child: Container(
+                  padding: const EdgeInsets.all(Dimensions.space7),
+                  decoration: const BoxDecoration(
+                      color: MyColor.colorWhite, shape: BoxShape.circle),
+                  child: Icon(controller.isSearch ? Icons.clear : Icons.search,
+                      color: MyColor.primaryColor, size: 15)),
             ),
             const SizedBox(width: Dimensions.space7),
             GestureDetector(
@@ -86,10 +94,13 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
                 Get.toNamed(RouteHelper.newDepositScreenScreen);
               },
               child: Container(
-                margin: const EdgeInsets.only(left: 7, right: 10, bottom: 7, top: 7),
+                margin: const EdgeInsets.only(
+                    left: 7, right: 10, bottom: 7, top: 7),
                 padding: const EdgeInsets.all(Dimensions.space7),
-                decoration: const BoxDecoration(color: MyColor.colorWhite, shape: BoxShape.circle),
-                child: const Icon(Icons.add, color: MyColor.primaryColor, size: 15),
+                decoration: const BoxDecoration(
+                    color: MyColor.colorWhite, shape: BoxShape.circle),
+                child: const Icon(Icons.add,
+                    color: MyColor.primaryColor, size: 15),
               ),
             ),
             const SizedBox(width: Dimensions.space10),
@@ -98,7 +109,10 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
         body: controller.isLoading
             ? const CustomLoader()
             : Padding(
-                padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space15, right: Dimensions.space15),
+                padding: const EdgeInsets.only(
+                    top: Dimensions.space20,
+                    left: Dimensions.space15,
+                    right: Dimensions.space15),
                 child: Column(
                   children: [
                     Visibility(
@@ -112,8 +126,9 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
                       ),
                     ),
                     Expanded(
-                      child: controller.depositList.isEmpty && controller.searchLoading == false
-                          ?  NoDataOrInternetScreen()
+                      child: controller.depositList.isEmpty &&
+                              controller.searchLoading == false
+                          ? NoDataOrInternetScreen()
                           : controller.searchLoading
                               ? const Center(
                                   child: CustomLoader(),
@@ -126,27 +141,43 @@ class _DepositHistoryScreenState extends State<DepositHistoryScreen> {
                                     scrollDirection: Axis.vertical,
                                     physics: const ClampingScrollPhysics(),
                                     padding: EdgeInsets.zero,
-                                    itemCount: controller.depositList.length + 1,
-                                    separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                                    itemCount:
+                                        controller.depositList.length + 1,
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(
+                                            height: Dimensions.space10),
                                     itemBuilder: (context, index) {
-                                      if (controller.depositList.length == index) {
+                                      if (controller.depositList.length ==
+                                          index) {
                                         return controller.hasNext()
                                             ? SizedBox(
                                                 height: 40,
-                                                width: MediaQuery.of(context).size.width,
-                                                child: const Center(child: CustomLoader()),
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                child: const Center(
+                                                    child: CustomLoader()),
                                               )
                                             : const SizedBox();
                                       }
                                       return CustomDepositsCard(
                                         onPressed: () {
-                                          DepositBottomSheet.depositBottomSheet(context, index);
+                                          DepositBottomSheet.depositBottomSheet(
+                                              context, index);
                                         },
-                                        trxValue: controller.depositList[index].trx ?? "",
-                                        date: DateConverter.isoToLocalDateAndTime(controller.depositList[index].createdAt ?? ""),
+                                        trxValue:
+                                            controller.depositList[index].trx ??
+                                                "",
+                                        date:
+                                            DateConverter.isoToLocalDateAndTime(
+                                                controller.depositList[index]
+                                                        .createdAt ??
+                                                    ""),
                                         status: controller.getStatus(index),
-                                        statusBgColor: controller.getStatusColor(index),
-                                        amount: "${MyConverter.formatNumber(controller.depositList[index].amount ?? " ")} ${controller.currency}",
+                                        statusBgColor:
+                                            controller.getStatusColor(index),
+                                        amount:
+                                            "${MyConverter.formatNumber(controller.depositList[index].amount ?? " ")} ${controller.currency}",
                                       );
                                     },
                                   ),

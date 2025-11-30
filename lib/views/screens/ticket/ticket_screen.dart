@@ -5,11 +5,11 @@ import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/support/support_controller.dart';
 import 'package:mine_lab/data/repo/support/support_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/column_widget/card_column.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
@@ -28,7 +28,8 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
   ScrollController scrollController = ScrollController();
 
   void scrollListener() {
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       if (Get.find<SupportController>().hasNext()) {
         Get.find<SupportController>().getSupportTicket(context);
       }
@@ -54,7 +55,8 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
     return GetBuilder<SupportController>(builder: (controller) {
       return Scaffold(
         backgroundColor: MyColor.screenBgColor,
-        appBar: CustomAppBar(bgColor: MyColor.primaryColor, title: MyStrings!.supportTicket),
+        appBar: CustomAppBar(
+            bgColor: MyColor.primaryColor, title: MyStrings!.supportTicket),
         body: RefreshIndicator(
           onRefresh: () async {
             controller.loadData(context);
@@ -64,7 +66,8 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics()),
+                  physics: const AlwaysScrollableScrollPhysics(
+                      parent: ClampingScrollPhysics()),
                   padding: Dimensions.defaultPaddingHV,
                   child: controller.isLoading
                       ? ListView.builder(
@@ -86,41 +89,74 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
                               itemCount: controller.ticketList.length + 1,
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
-                              separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: Dimensions.space10),
                               itemBuilder: (context, index) {
                                 if (controller.ticketList.length == index) {
-                                  return controller.hasNext() ? const CustomLoader(isPagination: true) : const SizedBox();
+                                  return controller.hasNext()
+                                      ? const CustomLoader(isPagination: true)
+                                      : const SizedBox();
                                 }
                                 return GestureDetector(
                                   onTap: () {
-                                    String id = controller.ticketList[index].ticket ?? '-1';
-                                    String subject = controller.ticketList[index].subject ?? '';
-                                    Get.toNamed(RouteHelper.ticketDetailsScreen, arguments: [id, subject]);
+                                    String id =
+                                        controller.ticketList[index].ticket ??
+                                            '-1';
+                                    String subject =
+                                        controller.ticketList[index].subject ??
+                                            '';
+                                    Get.toNamed(RouteHelper.ticketDetailsScreen,
+                                        arguments: [id, subject]);
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space25),
-                                    decoration: BoxDecoration(color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(Dimensions.mediumRadius), border: Border.all(color: MyColor.cardBorderColor, width: 1)),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: Dimensions.space10,
+                                        vertical: Dimensions.space25),
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context).cardColor,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.mediumRadius),
+                                        border: Border.all(
+                                            color: MyColor.cardBorderColor,
+                                            width: 1)),
                                     child: Column(
                                       children: [
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Flexible(
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional.only(end: Dimensions.space10),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .only(
+                                                        end:
+                                                            Dimensions.space10),
                                                 child: Column(
                                                   children: [
                                                     CardColumn(
-                                                      header: "[${MyStrings.ticket.tr}#${controller.ticketList[index].ticket}] ${controller.ticketList[index].subject}",
-                                                      body: "${controller.ticketList[index].lastReply}",
+                                                      header:
+                                                          "[${MyStrings.ticket.tr}#${controller.ticketList[index].ticket}] ${controller.ticketList[index].subject}",
+                                                      body:
+                                                          "${controller.ticketList[index].lastReply}",
                                                       space: 5,
-                                                      headerTextDecoration: interRegularDefault.copyWith(
-                                                        color: Theme.of(context).textTheme.titleLarge?.color,
-                                                        fontWeight: FontWeight.w700,
+                                                      headerTextDecoration:
+                                                          interRegularDefault
+                                                              .copyWith(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .titleLarge
+                                                            ?.color,
+                                                        fontWeight:
+                                                            FontWeight.w700,
                                                       ),
-                                                      bodyTextDecoration: interRegularDefault.copyWith(
-                                                        color: MyColor.ticketDetails,
+                                                      bodyTextDecoration:
+                                                          interRegularDefault
+                                                              .copyWith(
+                                                        color: MyColor
+                                                            .ticketDetails,
                                                       ),
                                                     ),
                                                   ],
@@ -128,47 +164,117 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
                                               ),
                                             ),
                                             Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space5),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          Dimensions.space10,
+                                                      vertical:
+                                                          Dimensions.space5),
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(4),
-                                                color: controller.getStatusColor(controller.ticketList[index].status ?? "0").withValues(alpha: 0.2),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: controller
+                                                    .getStatusColor(controller
+                                                            .ticketList[index]
+                                                            .status ??
+                                                        "0")
+                                                    .withValues(alpha: 0.2),
                                                 border: Border.all(
-                                                  color: controller.getStatusColor(
-                                                    controller.ticketList[index].status ?? "0",
+                                                  color:
+                                                      controller.getStatusColor(
+                                                    controller.ticketList[index]
+                                                            .status ??
+                                                        "0",
                                                   ),
                                                   width: 1,
                                                 ),
                                               ),
                                               child: Text(
-                                                controller.getStatusText(controller.ticketList[index].status ?? '0',context),
-                                                style: interRegularDefault.copyWith(
-                                                  color: controller.getStatusColor(controller.ticketList[index].status ?? "0"),
+                                                controller.getStatusText(
+                                                    controller.ticketList[index]
+                                                            .status ??
+                                                        '0',
+                                                    context),
+                                                style: interRegularDefault
+                                                    .copyWith(
+                                                  color: controller
+                                                      .getStatusColor(controller
+                                                              .ticketList[index]
+                                                              .status ??
+                                                          "0"),
                                                 ),
                                               ),
                                             )
                                           ],
                                         ),
-                                        const SizedBox(height: Dimensions.space15),
+                                        const SizedBox(
+                                            height: Dimensions.space15),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space5),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          Dimensions.space10,
+                                                      vertical:
+                                                          Dimensions.space5),
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(4),
-                                                color: controller.getStatusColor(controller.ticketList[index].priority ?? "0", isPriority: true).withValues(alpha: 0.2),
-                                                border: Border.all(color: controller.getStatusColor(controller.ticketList[index].priority ?? "0", isPriority: true), width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: controller
+                                                    .getStatusColor(
+                                                        controller
+                                                                .ticketList[
+                                                                    index]
+                                                                .priority ??
+                                                            "0",
+                                                        isPriority: true)
+                                                    .withValues(alpha: 0.2),
+                                                border: Border.all(
+                                                    color: controller
+                                                        .getStatusColor(
+                                                            controller
+                                                                    .ticketList[
+                                                                        index]
+                                                                    .priority ??
+                                                                "0",
+                                                            isPriority: true),
+                                                    width: 1),
                                               ),
                                               child: Text(
-                                                controller.getStatus(controller.ticketList[index].priority ?? '1',context, isPriority: true),
-                                                style: interRegularDefault.copyWith(
-                                                  color: controller.getStatusColor(controller.ticketList[index].priority ?? "0", isPriority: true),
+                                                controller.getStatus(
+                                                    controller.ticketList[index]
+                                                            .priority ??
+                                                        '1',
+                                                    context,
+                                                    isPriority: true),
+                                                style: interRegularDefault
+                                                    .copyWith(
+                                                  color:
+                                                      controller.getStatusColor(
+                                                          controller
+                                                                  .ticketList[
+                                                                      index]
+                                                                  .priority ??
+                                                              "0",
+                                                          isPriority: true),
                                                 ),
                                               ),
                                             ),
                                             Text(
-                                              DateConverter.getFormatedSubtractTime(controller.ticketList[index].createdAt ?? ''),
-                                              style: interRegularDefault.copyWith(fontSize: 10, color: MyColor.ticketDateColor),
+                                              DateConverter
+                                                  .getFormatedSubtractTime(
+                                                      controller
+                                                              .ticketList[index]
+                                                              .createdAt ??
+                                                          ''),
+                                              style:
+                                                  interRegularDefault.copyWith(
+                                                      fontSize: 10,
+                                                      color: MyColor
+                                                          .ticketDateColor),
                                             ),
                                           ],
                                         )
@@ -185,7 +291,8 @@ class _AllTicketScreenState extends State<AllTicketScreen> {
         ),
         floatingActionButton: FAB(
           callback: () {
-            Get.toNamed(RouteHelper.newTicketScreen)?.then((value) => {Get.find<SupportController>().getSupportTicket(context)});
+            Get.toNamed(RouteHelper.newTicketScreen)?.then((value) =>
+                {Get.find<SupportController>().getSupportTicket(context)});
           },
         ),
       );

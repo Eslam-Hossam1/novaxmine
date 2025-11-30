@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/services/push_notification_service.dart';
 import 'package:mine_lab/firebase_options.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/di_service/di_services.dart' as di_service;
 
 Future<void> _messageHandler(RemoteMessage message) async {

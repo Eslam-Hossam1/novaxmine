@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/util.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/column_widget/card_column.dart';
 import 'package:mine_lab/views/components/divider/custom_divider.dart';
 import 'package:mine_lab/views/components/status/status_widget.dart';
@@ -30,7 +30,8 @@ class CustomWithdrawCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: Dimensions.space20, horizontal: Dimensions.space15),
+          padding: const EdgeInsets.symmetric(
+              vertical: Dimensions.space20, horizontal: Dimensions.space15),
           decoration: BoxDecoration(
             color: MyColor.colorWhite,
             borderRadius: BorderRadius.circular(Dimensions.defaultRadius),

@@ -10,7 +10,7 @@ import 'package:mine_lab/data/controller/auth/social_login_repo.dart';
 import 'package:mine_lab/environment.dart';
 import 'package:mine_lab/views/components/packages/signin_with_linkdin/signin_with_linkedin.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 import '../../model/auth/login/login_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -60,7 +60,7 @@ class SocialLoginController extends GetxController {
       };
 
       final GoogleSignInClientAuthorization? authorization =
-      await user?.authorizationClient.authorizationForScopes(scopes);
+          await user?.authorizationClient.authorizationForScopes(scopes);
 
       if (user != null && authorization != null) {
         printX('User ID: ${user.id}');
@@ -170,7 +170,8 @@ class SocialLoginController extends GetxController {
           );
         } else {
           CustomSnackBar.error(
-            errorList: loginModel.message?.error ?? <String>[defaultLoginFailed],
+            errorList:
+                loginModel.message?.error ?? <String>[defaultLoginFailed],
           );
         }
       } else {
@@ -190,18 +191,10 @@ class SocialLoginController extends GetxController {
 
   bool checkSocialAuthActiveOrNot({String provider = 'all'}) {
     if (provider == 'google') {
-      return repo.apiClient
-          .getGSData()
-          .data
-          ?.generalSetting
-          ?.googleLogin ==
+      return repo.apiClient.getGSData().data?.generalSetting?.googleLogin ==
           '1';
     } else if (provider == 'linkedin') {
-      return repo.apiClient
-          .getGSData()
-          .data
-          ?.generalSetting
-          ?.linkedinLogin ==
+      return repo.apiClient.getGSData().data?.generalSetting?.linkedinLogin ==
           '1';
     } else {
       return repo.apiClient.getSocialCredentialsEnabledAll();

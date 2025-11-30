@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:mine_lab/data/repo/withdraw_repo/withdraw_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import '../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../model/withdraw/withdraw_history_response_model.dart';
 
@@ -28,7 +28,8 @@ class WithdrawHistoryController extends GetxController {
 
   Future<void> loadWithdrawData() async {
     currency = withdrawHistoryRepo.apiClient.getCurrencyOrUsername();
-    curSymbol = withdrawHistoryRepo.apiClient.getCurrencyOrUsername(isSymbol: true);
+    curSymbol =
+        withdrawHistoryRepo.apiClient.getCurrencyOrUsername(isSymbol: true);
     page = page + 1;
 
     if (page == 1) {
@@ -36,22 +37,27 @@ class WithdrawHistoryController extends GetxController {
     }
 
     String searchText = searchController.text;
-    ResponseModel responseModel = await withdrawHistoryRepo.getAllWithdrawHistory(page, searchText: searchText);
+    ResponseModel responseModel = await withdrawHistoryRepo
+        .getAllWithdrawHistory(page, searchText: searchText);
 
     if (responseModel.statusCode == 200) {
-      WithdrawHistoryResponseModel model = WithdrawHistoryResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      WithdrawHistoryResponseModel model =
+          WithdrawHistoryResponseModel.fromJson(
+              jsonDecode(responseModel.responseJson));
       nextPageUrl = model.data?.withdrawals?.nextPageUrl ?? "";
 
       if (model.status.toString().toLowerCase() == "success") {
-        List<WithdrawListModel>? tempWithdrawList = model.data?.withdrawals?.data;
+        List<WithdrawListModel>? tempWithdrawList =
+            model.data?.withdrawals?.data;
         if (tempWithdrawList != null && tempWithdrawList.isNotEmpty) {
           withdrawList.addAll(tempWithdrawList);
         }
-
       } else {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings!.somethingWentWrong]);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        CustomSnackBar.error(
+            errorList: model.message?.error ?? [MyStrings!.somethingWentWrong]);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);

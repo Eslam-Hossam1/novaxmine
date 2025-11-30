@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/referral/referral_log/referral_log_response_model.dart';
 import 'package:mine_lab/data/repo/referral/referral_log_repo.dart';
@@ -47,9 +47,11 @@ class ReferralLogController extends GetxController {
     if (page == 1) {
       referralDataList.clear();
     }
-    ResponseModel responseModel = await referralLogRepo.getReferralLogData(page);
+    ResponseModel responseModel =
+        await referralLogRepo.getReferralLogData(page);
     if (responseModel.statusCode == 200) {
-      ReferralLogResponseModel model = ReferralLogResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      ReferralLogResponseModel model = ReferralLogResponseModel.fromJson(
+          jsonDecode(responseModel.responseJson));
       nextPageUrl = model.data?.logs?.nextPageUrl ?? "";
       if (model.status.toString().toLowerCase() == "success") {
         List<ReferralData>? tempReferralData = model.data?.logs?.data;
@@ -62,17 +64,26 @@ class ReferralLogController extends GetxController {
         }
       } else {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        CustomSnackBar.showCustomSnackBar(errorList: model.message?.error ?? [MyStrings!.somethingWentWrong], msg: [], isError: true);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        CustomSnackBar.showCustomSnackBar(
+            errorList: model.message?.error ?? [MyStrings!.somethingWentWrong],
+            msg: [],
+            isError: true);
         return;
       }
     } else {
-      CustomSnackBar.showCustomSnackBar(errorList: [responseModel.message], msg: [], isError: true);
+      CustomSnackBar.showCustomSnackBar(
+          errorList: [responseModel.message], msg: [], isError: true);
       return;
     }
   }
 
   bool hasNext() {
-    return nextPageUrl.isNotEmpty && nextPageUrl.isNotEmpty && nextPageUrl != 'null' ? true : false;
+    return nextPageUrl.isNotEmpty &&
+            nextPageUrl.isNotEmpty &&
+            nextPageUrl != 'null'
+        ? true
+        : false;
   }
 }

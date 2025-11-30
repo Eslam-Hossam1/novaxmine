@@ -10,7 +10,7 @@ import 'package:mine_lab/data/model/account/profile_response_model.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/repo/account/profile_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class ProfileController extends GetxController {
   ProfileRepo profileRepo;
@@ -131,8 +131,7 @@ class ProfileController extends GetxController {
     user2faIsOne = model?.data?.user?.ts == '1';
 
     if (imageUrl.isNotEmpty && imageUrl != 'null') {
-      imageUrl =
-      '${UrlContainer.baseUrl}assets/images/user/profile/$imageUrl';
+      imageUrl = '${UrlContainer.baseUrl}assets/images/user/profile/$imageUrl';
       profileRepo.apiClient.sharedPreferences.setString(
         SharedPreferenceHelper.userImageKey,
         imageUrl,

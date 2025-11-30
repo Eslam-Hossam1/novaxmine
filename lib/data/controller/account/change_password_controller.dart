@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/data/repo/account/change_password_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class ChangePasswordController extends GetxController {
   ChangePasswordRepo changePasswordRepo;
@@ -25,14 +25,16 @@ class ChangePasswordController extends GetxController {
     String currentPass = currentPassController.text.toString();
     String password = passController.text.toString();
 
-    bool error = hasError(context: context, currentPass: currentPass, password: password);
+    bool error = hasError(
+        context: context, currentPass: currentPass, password: password);
 
     if (error) return;
 
     submitLoading = true;
     update();
 
-    bool b = await changePasswordRepo.changePassword(context,currentPass, password);
+    bool b =
+        await changePasswordRepo.changePassword(context, currentPass, password);
 
     if (b) {
       currentPassController.clear();
@@ -64,7 +66,8 @@ class ChangePasswordController extends GetxController {
     }
 
     if (error.isNotEmpty) {
-      CustomSnackBar.showCustomSnackBar(errorList: error, msg: [], isError: true);
+      CustomSnackBar.showCustomSnackBar(
+          errorList: error, msg: [], isError: true);
       return true;
     }
 

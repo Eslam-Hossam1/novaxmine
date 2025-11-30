@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/profile/user_profile_controller.dart';
 import 'package:mine_lab/data/repo/profile/user_profile_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/card/custom_card.dart';
 import 'package:mine_lab/views/screens/profile/edit_profile/widget/edit_profile_form.dart';
 
@@ -46,12 +46,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         appBar: AppBar(
             backgroundColor: MyColor.primaryColor,
             elevation: 0,
-            title: Text(MyStrings!.editProfile, style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+            title: Text(MyStrings!.editProfile,
+                style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
             leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: const Icon(Icons.arrow_back, color: MyColor.colorWhite, size: 20),
+              icon: const Icon(Icons.arrow_back,
+                  color: MyColor.colorWhite, size: 20),
             )),
         body: GetBuilder<UserProfileController>(
           builder: (controller) => controller.isLoading
@@ -66,19 +68,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          decoration: const BoxDecoration(color: MyColor.smallCircleColor, shape: BoxShape.circle),
+                          decoration: const BoxDecoration(
+                              color: MyColor.smallCircleColor,
+                              shape: BoxShape.circle),
                         ),
                       ),
                       Container(
                         height: 120,
                         width: MediaQuery.of(context).size.width,
                         color: MyColor.primaryColor,
-                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.space15,
+                            vertical: Dimensions.space10),
                       ),
                       Align(
                         alignment: Alignment.topCenter,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space10 * 1.5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Dimensions.space15,
+                              vertical: Dimensions.space10 * 1.5),
                           child: SingleChildScrollView(
                             physics: const ClampingScrollPhysics(),
                             child: CustomCard(
@@ -86,9 +94,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(controller.username, textAlign: TextAlign.center, style: interRegularExtraLarge.copyWith(fontWeight: FontWeight.w600)),
+                                  Text(controller.username,
+                                      textAlign: TextAlign.center,
+                                      style: interRegularExtraLarge.copyWith(
+                                          fontWeight: FontWeight.w600)),
                                   const SizedBox(height: Dimensions.space5),
-                                  Text(controller.emailController.text, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.primarySubTitleColor)),
+                                  Text(controller.emailController.text,
+                                      textAlign: TextAlign.center,
+                                      style: interRegularDefault.copyWith(
+                                          color: MyColor.primarySubTitleColor)),
                                   const SizedBox(height: Dimensions.space20),
                                   const EditProfileForm(),
                                 ],

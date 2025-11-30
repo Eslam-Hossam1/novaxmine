@@ -11,7 +11,8 @@ import 'package:mine_lab/data/model/home/home_response_model.dart';
 import 'package:mine_lab/data/model/user/user.dart';
 import 'package:mine_lab/data/repo/bottom_nav/home/home_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
+
 class HomeController extends GetxController {
   HomeRepo homeRepo;
 
@@ -53,13 +54,17 @@ class HomeController extends GetxController {
     transactionList.clear();
 
     if (responseModel.statusCode == 200) {
-      HomeResponseModel model = HomeResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      HomeResponseModel model =
+          HomeResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.status.toString().toLowerCase() == "success") {
         List<Transactions>? tempTransactionList = model.data?.transactions;
-        balance = "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.depositWallet ?? "")} $currency";
-        profitBalance = "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.profitWallet ?? "", precision: 4)} $currency";
+        balance =
+            "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.depositWallet ?? "")} $currency";
+        profitBalance =
+            "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.profitWallet ?? "", precision: 4)} $currency";
         referralLink = model.data?.referralLink ?? "";
-        referralBonus = "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.totalReferralCommission ?? "")} $currency";
+        referralBonus =
+            "${MyConverter.twoDecimalPlaceFixedWithoutRounding(model.data?.widget?.totalReferralCommission ?? "")} $currency";
         widgetData = model.data?.widget;
         imagePath = "${model.data?.coinImagePath ?? ""}/";
 
@@ -71,7 +76,8 @@ class HomeController extends GetxController {
         user = model.data?.user;
         isKycVerified = model.data?.user?.kv == '1';
         isKycPending = model.data?.user?.kv == '2';
-        isKycRejected = model.data?.user?.kv == '0' && (model.data?.user?.kycRejectionReason).toString() != "null";
+        isKycRejected = model.data?.user?.kv == '0' &&
+            (model.data?.user?.kycRejectionReason).toString() != "null";
         kycRejectReason = model.data?.user?.kycRejectionReason ?? '';
 
         if (tempTransactionList != null && tempTransactionList.isNotEmpty) {
@@ -85,10 +91,14 @@ class HomeController extends GetxController {
       } else {
         final context = Get.context;
         final l10n = context != null ? AppLocalizations.of(context)! : null;
-        CustomSnackBar.showCustomSnackBar(errorList: model.message?.error ?? [l10n!.somethingWentWrong], msg: [], isError: true);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: model.message?.error ?? [l10n!.somethingWentWrong],
+            msg: [],
+            isError: true);
       }
     } else {
-      CustomSnackBar.showCustomSnackBar(errorList: [responseModel.message], msg: [], isError: true);
+      CustomSnackBar.showCustomSnackBar(
+          errorList: [responseModel.message], msg: [], isError: true);
     }
 
     isLoading = false;
@@ -105,11 +115,18 @@ class HomeController extends GetxController {
       ResponseModel responseModel = await homeRepo.getUserInfoData();
 
       if (responseModel.statusCode == 200) {
-        ProfileResponseModel model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+        ProfileResponseModel model = ProfileResponseModel.fromJson(
+            jsonDecode(responseModel.responseJson));
         if (model.status == 'success') {
-          await homeRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userPhoneNumberKey, model.data?.user?.mobile ?? '');
-          await homeRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, model.data?.user?.username ?? '');
-          await homeRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, model.data?.user?.email ?? '');
+          await homeRepo.apiClient.sharedPreferences.setString(
+              SharedPreferenceHelper.userPhoneNumberKey,
+              model.data?.user?.mobile ?? '');
+          await homeRepo.apiClient.sharedPreferences.setString(
+              SharedPreferenceHelper.userNameKey,
+              model.data?.user?.username ?? '');
+          await homeRepo.apiClient.sharedPreferences.setString(
+              SharedPreferenceHelper.userEmailKey,
+              model.data?.user?.email ?? '');
           //   isKycVerified = model.data?.user?.kv ?? '1';
         } else {}
       } else {}

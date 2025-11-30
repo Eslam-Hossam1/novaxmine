@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
@@ -16,18 +16,23 @@ class KycRepo {
 
   Future<KycResponseModel> getKycData(BuildContext context) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.kycFormUrl}';
-    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    ResponseModel responseModel =
+        await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     if (responseModel.statusCode == 200) {
-      KycResponseModel model = KycResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      KycResponseModel model =
+          KycResponseModel.fromJson(jsonDecode(responseModel.responseJson));
 
       if (model.status == 'success') {
         return model;
       } else {
-
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        if (model.remark?.toLowerCase() != 'already_verified' && model.remark?.toLowerCase() != 'under_review') {
-          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings!.somethingWentWrong]);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        if (model.remark?.toLowerCase() != 'already_verified' &&
+            model.remark?.toLowerCase() != 'under_review') {
+          CustomSnackBar.error(
+              errorList:
+                  model.message?.error ?? [MyStrings!.somethingWentWrong]);
         }
 
         return model;
@@ -40,10 +45,11 @@ class KycRepo {
   List<Map<String, String>> fieldList = [];
   List<ModelDynamicValue> filesList = [];
 
-  Future<AuthorizationResponseModel> submitKycData(BuildContext context,List<GlobalFormModel> list) async {
+  Future<AuthorizationResponseModel> submitKycData(
+      BuildContext context, List<GlobalFormModel> list) async {
     apiClient.initToken();
     fieldList.clear();
-    await modelToMap(context,list);
+    await modelToMap(context, list);
     String url = '${UrlContainer.baseUrl}${UrlContainer.kycSubmitUrl}';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -54,22 +60,27 @@ class KycRepo {
       finalMap.addAll(element);
     }
 
-    request.headers.addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
+    request.headers
+        .addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
 
     for (var file in filesList) {
-      request.files.add(http.MultipartFile(file.key ?? '', file.value.readAsBytes().asStream(), file.value.lengthSync(), filename: file.value.path.split('/').last));
+      request.files.add(http.MultipartFile(file.key ?? '',
+          file.value.readAsBytes().asStream(), file.value.lengthSync(),
+          filename: file.value.path.split('/').last));
     }
 
     request.fields.addAll(finalMap);
     http.StreamedResponse response = await request.send();
 
     String jsonResponse = await response.stream.bytesToString();
-    AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+    AuthorizationResponseModel model =
+        AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
     return model;
   }
 
-  Future<dynamic> modelToMap(BuildContext context,List<GlobalFormModel> list) async {
+  Future<dynamic> modelToMap(
+      BuildContext context, List<GlobalFormModel> list) async {
     for (var e in list) {
       if (e.type == 'checkbox') {
         if (e.cbSelected != null && e.cbSelected!.isNotEmpty) {
@@ -82,9 +93,10 @@ class KycRepo {
           filesList.add(ModelDynamicValue(e.label, e.imageFile!));
         }
       } else if (e.type == 'select') {
-
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        if (e.selectedValue != null && e.selectedValue.toString() != MyStrings!.selectOne) {
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        if (e.selectedValue != null &&
+            e.selectedValue.toString() != MyStrings!.selectOne) {
           fieldList.add({e.label ?? '': e.selectedValue});
         }
       } else {

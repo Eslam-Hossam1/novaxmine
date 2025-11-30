@@ -8,7 +8,7 @@ import 'package:mine_lab/data/controller/support/support_controller.dart';
 import 'package:mine_lab/data/model/support/new_ticket_store_model.dart';
 import 'package:mine_lab/data/repo/support/support_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class NewTicketController extends GetxController {
   final SupportRepo repo;
@@ -162,7 +162,7 @@ class NewTicketController extends GetxController {
       list: attachmentList,
     );
 
-    final bool isSuccess = await repo.storeTicket(context,model);
+    final bool isSuccess = await repo.storeTicket(context, model);
 
     try {
       if (isSuccess) {

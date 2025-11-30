@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/support/support_ticket_response_model.dart';
 import 'package:mine_lab/data/repo/support/support_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class SupportController extends GetxController {
   final SupportRepo repo;
@@ -70,10 +70,12 @@ class SupportController extends GetxController {
     isLoading = true;
     update();
 
-    ResponseModel responseModel = await repo.getSupportTicketList(page.toString());
+    ResponseModel responseModel =
+        await repo.getSupportTicketList(page.toString());
     if (responseModel.statusCode == 200) {
       SupportTicketListResponseModel model =
-      SupportTicketListResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+          SupportTicketListResponseModel.fromJson(
+              jsonDecode(responseModel.responseJson));
 
       if (model.status?.toLowerCase() == 'success') {
         nextPageUrl = model.data?.tickets?.nextPageUrl;
@@ -102,19 +104,19 @@ class SupportController extends GetxController {
       output = status == '1'
           ? MyColor.pendingColor
           : status == '2'
-          ? MyColor.greenSuccessColor
-          : status == '3'
-          ? MyColor.redCancelTextColor
-          : MyColor.pendingColor;
+              ? MyColor.greenSuccessColor
+              : status == '3'
+                  ? MyColor.redCancelTextColor
+                  : MyColor.pendingColor;
     } else {
       // ألوان حالة التيكت
       output = status == '1'
           ? MyColor.textFieldDisableBorderColor
           : status == '2'
-          ? MyColor.highPriorityPurpleColor
-          : status == '3'
-          ? MyColor.redCancelTextColor
-          : MyColor.greenSuccessColor;
+              ? MyColor.highPriorityPurpleColor
+              : status == '3'
+                  ? MyColor.redCancelTextColor
+                  : MyColor.greenSuccessColor;
     }
 
     return output;
@@ -122,10 +124,10 @@ class SupportController extends GetxController {
 
   /// ترجمة حالة التيكت أو الأولوية
   String getStatus(
-      String status,
-      BuildContext context, {
-        bool isPriority = false,
-      }) {
+    String status,
+    BuildContext context, {
+    bool isPriority = false,
+  }) {
     final l10n = AppLocalizations.of(context)!;
     String output = '';
 
@@ -134,43 +136,42 @@ class SupportController extends GetxController {
       output = status == '1'
           ? l10n.low
           : status == '2'
-          ? l10n.medium
-          : status == '3'
-          ? l10n.high
-          : '';
+              ? l10n.medium
+              : status == '3'
+                  ? l10n.high
+                  : '';
     } else {
       // 0 = Open, 1 = Answered, 2 = Customer Reply, 3 = Closed
       output = status == '0'
           ? l10n.open
           : status == '1'
-          ? l10n.answered
-          : status == '2'
-          ? l10n.customerReply
-          : l10n.closed;
+              ? l10n.answered
+              : status == '2'
+                  ? l10n.customerReply
+                  : l10n.closed;
     }
     return output;
   }
 
   /// ترجمة نص حالة التيكت برقم الحالة
   String getStatusText(
-      String priority,
-      BuildContext context,
-      {
-        bool isPriority = false,
-        bool isStatus = false,
-      }) {
+    String priority,
+    BuildContext context, {
+    bool isPriority = false,
+    bool isStatus = false,
+  }) {
     final l10n = AppLocalizations.of(context)!;
 
     // 0 = Open, 1 = Answered, 2 = Replied, 3 = Closed
     String text = priority == '0'
         ? l10n.open
         : priority == '1'
-        ? l10n.answered
-        : priority == '2'
-        ? l10n.replied
-        : priority == '3'
-        ? l10n.closed
-        : '';
+            ? l10n.answered
+            : priority == '2'
+                ? l10n.replied
+                : priority == '3'
+                    ? l10n.closed
+                    : '';
     return text;
   }
 

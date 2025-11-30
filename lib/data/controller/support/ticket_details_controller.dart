@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 
 import '../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class TicketDetailsController extends GetxController {
   final SupportRepo repo;
@@ -66,7 +66,7 @@ class TicketDetailsController extends GetxController {
     update();
 
     final languageCode = repo.apiClient.sharedPreferences
-        .getString(SharedPreferenceHelper.languageCode) ??
+            .getString(SharedPreferenceHelper.languageCode) ??
         'eng';
     isRtl = languageCode == 'ar';
 
@@ -150,7 +150,7 @@ class TicketDetailsController extends GetxController {
       } else {
         CustomSnackBar.error(
           errorList:
-          model.message?.error ?? [l10n?.somethingWentWrong ?? 'Error'],
+              model.message?.error ?? [l10n?.somethingWentWrong ?? 'Error'],
         );
       }
     } else {
@@ -160,6 +160,7 @@ class TicketDetailsController extends GetxController {
     isLoading = false;
     update();
   }
+
   bool submitLoading = false;
   Future<void> uploadTicketViewReply(BuildContext context) async {
     final l10n = _l10n;
@@ -227,7 +228,7 @@ class TicketDetailsController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       AuthorizationResponseModel authModel =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -253,10 +254,10 @@ class TicketDetailsController extends GetxController {
   }
 
   String getStatusText(
-      String priority, {
-        bool isPriority = false,
-        bool isStatus = false,
-      }) {
+    String priority, {
+    bool isPriority = false,
+    bool isStatus = false,
+  }) {
     final l10n = _l10n;
     if (l10n == null) return '';
 
@@ -264,12 +265,12 @@ class TicketDetailsController extends GetxController {
     return priority == '0'
         ? l10n.open
         : priority == '1'
-        ? l10n.answered
-        : priority == '2'
-        ? l10n.replied
-        : priority == '3'
-        ? l10n.closed
-        : '';
+            ? l10n.answered
+            : priority == '2'
+                ? l10n.replied
+                : priority == '3'
+                    ? l10n.closed
+                    : '';
   }
 
   Color getStatusColor(String status, {bool isPriority = false}) {
@@ -278,18 +279,18 @@ class TicketDetailsController extends GetxController {
       output = status == '1'
           ? MyColor.pendingColor
           : status == '2'
-          ? MyColor.greenSuccessColor
-          : status == '3'
-          ? MyColor.redCancelTextColor
-          : MyColor.pendingColor;
+              ? MyColor.greenSuccessColor
+              : status == '3'
+                  ? MyColor.redCancelTextColor
+                  : MyColor.pendingColor;
     } else {
       output = status == '1'
           ? MyColor.textFieldDisableBorderColor
           : status == '2'
-          ? MyColor.highPriorityPurpleColor
-          : status == '3'
-          ? MyColor.redCancelTextColor
-          : MyColor.greenSuccessColor;
+              ? MyColor.highPriorityPurpleColor
+              : status == '3'
+                  ? MyColor.redCancelTextColor
+                  : MyColor.greenSuccessColor;
     }
 
     return output;
@@ -320,10 +321,10 @@ class TicketDetailsController extends GetxController {
   }
 
   Future<void> downloadAttachment(
-      String url,
-      int index,
-      String extension,
-      ) async {
+    String url,
+    int index,
+    String extension,
+  ) async {
     final l10n = _l10n;
 
     selectedIndex = index;
@@ -349,10 +350,10 @@ class TicketDetailsController extends GetxController {
     } else {
       try {
         AuthorizationResponseModel model =
-        AuthorizationResponseModel.fromJson(jsonDecode(response.body));
+            AuthorizationResponseModel.fromJson(jsonDecode(response.body));
         CustomSnackBar.error(
           errorList:
-          model.message?.error ?? [l10n?.somethingWentWrong ?? 'Error'],
+              model.message?.error ?? [l10n?.somethingWentWrong ?? 'Error'],
         );
       } catch (e) {
         CustomSnackBar.error(
@@ -367,10 +368,10 @@ class TicketDetailsController extends GetxController {
   }
 
   Future<void> saveAndOpenFile(
-      Uint8List bytes,
-      String fileName,
-      String extension,
-      ) async {
+    Uint8List bytes,
+    String fileName,
+    String extension,
+  ) async {
     final l10n = _l10n;
 
     final directory = await getExternalStorageDirectory();

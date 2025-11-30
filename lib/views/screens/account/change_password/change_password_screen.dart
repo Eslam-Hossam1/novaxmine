@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/account/change_password_controller.dart';
 import 'package:mine_lab/data/repo/account/change_password_repo.dart';
@@ -33,13 +33,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: MyColor.colorWhite,
-        appBar: CustomAppBar(title: MyStrings!.changePassword, isShowBackBtn: true, bgColor: MyColor.primaryColor),
+        appBar: CustomAppBar(
+            title: MyStrings!.changePassword,
+            isShowBackBtn: true,
+            bgColor: MyColor.primaryColor),
         body: GetBuilder<ChangePasswordController>(
           builder: (controller) => SingleChildScrollView(
             child: Padding(
@@ -49,12 +51,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 children: [
                   Text(
                     MyStrings.createNewPassword,
-                    style: interRegularExtraLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500),
+                    style: interRegularExtraLarge.copyWith(
+                        color: MyColor.colorBlack, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 12),
                   Padding(
-                    padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * .25),
-                    child: Text(MyStrings.createPasswordSubText, style: interRegularDefault.copyWith(color: MyColor.colorBlack.withValues(alpha: 0.5))),
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * .25),
+                    child: Text(MyStrings.createPasswordSubText,
+                        style: interRegularDefault.copyWith(
+                            color: MyColor.colorBlack.withValues(alpha: 0.5))),
                   ),
                   const SizedBox(height: Dimensions.space35),
                   const ChangePasswordForm()

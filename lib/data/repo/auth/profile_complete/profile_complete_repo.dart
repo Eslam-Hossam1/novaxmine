@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/model/account/profile_response_model.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
@@ -22,7 +22,8 @@ class ProfileCompleteRepo {
     try {
       apiClient.initToken();
 
-      String url = '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
+      String url =
+          '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
 
       var request = http.MultipartRequest('POST', Uri.parse(url));
       Map<String, String> finalMap = {
@@ -34,23 +35,33 @@ class ProfileCompleteRepo {
         'city': m.city ?? '',
       };
 
-      request.headers.addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
+      request.headers.addAll(
+          <String, String>{'Authorization': 'Bearer ${apiClient.token}'});
       if (m.image != null) {
-        request.files.add(http.MultipartFile('image', m.image!.readAsBytes().asStream(), m.image!.lengthSync(), filename: m.image!.path.split('/').last));
+        request.files.add(http.MultipartFile(
+            'image', m.image!.readAsBytes().asStream(), m.image!.lengthSync(),
+            filename: m.image!.path.split('/').last));
       }
       request.fields.addAll(finalMap);
 
       http.StreamedResponse response = await request.send();
 
       String jsonResponse = await response.stream.bytesToString();
-      AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+      AuthorizationResponseModel model =
+          AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
       final context = Get.context;
       final MyStrings = context != null ? AppLocalizations.of(context)! : null;
       if (model.status?.toLowerCase() == MyStrings!.success.toLowerCase()) {
-        CustomSnackBar.showCustomSnackBar(errorList: [], msg: model.message?.success ?? [MyStrings.success], isError: false);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: [],
+            msg: model.message?.success ?? [MyStrings.success],
+            isError: false);
         return true;
       } else {
-        CustomSnackBar.showCustomSnackBar(errorList: model.message?.error ?? ['Request Fail'], msg: [], isError: false);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: model.message?.error ?? ['Request Fail'],
+            msg: [],
+            isError: false);
         return false;
       }
     } catch (e) {
@@ -60,18 +71,22 @@ class ProfileCompleteRepo {
 
   Future<ResponseModel> completeProfile(ProfileCompletePostModel model) async {
     dynamic params = model.toMap();
-    String url = '${UrlContainer.baseUrl}${UrlContainer.profileCompleteEndPoint}';
-    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, params, passHeader: true);
+    String url =
+        '${UrlContainer.baseUrl}${UrlContainer.profileCompleteEndPoint}';
+    ResponseModel responseModel = await apiClient
+        .request(url, Method.postMethod, params, passHeader: true);
     return responseModel;
   }
 
   Future<ProfileResponseModel> loadProfileInfo() async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.getProfileEndPoint}';
 
-    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    ResponseModel responseModel =
+        await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     if (responseModel.statusCode == 200) {
-      ProfileResponseModel model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      ProfileResponseModel model =
+          ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.status == 'success') {
         return model;
       } else {

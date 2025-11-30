@@ -13,7 +13,7 @@ import 'package:mine_lab/data/model/user/user.dart';
 import 'package:mine_lab/data/repo/auth/profile_complete/profile_complete_repo.dart';
 import 'package:mine_lab/environment.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class ProfileCompleteController extends GetxController {
   final ProfileCompleteRepo profileRepo;
@@ -83,16 +83,15 @@ class ProfileCompleteController extends GetxController {
     );
 
     final ResponseModel responseModel =
-    await profileRepo.completeProfile(model);
+        await profileRepo.completeProfile(model);
 
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
-    final String defaultFailMsg =
-        l10n?.requestFail ?? 'Request failed';
+    final String defaultFailMsg = l10n?.requestFail ?? 'Request failed';
 
     if (responseModel.statusCode == 200) {
       final ProfileCompleteResponseModel resModel =
-      ProfileCompleteResponseModel.fromJson(
+          ProfileCompleteResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -163,7 +162,7 @@ class ProfileCompleteController extends GetxController {
 
     if (mainResponse.statusCode == 200) {
       final CountryModel model =
-      CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
+          CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
       final List<Countries>? tempList = model.data?.countries;
 
       if (tempList != null && tempList.isNotEmpty) {
@@ -172,8 +171,8 @@ class ProfileCompleteController extends GetxController {
       }
 
       final Countries selectDefCountry = tempList!.firstWhere(
-            (Countries country) =>
-        (country.countryCode ?? '').toLowerCase() ==
+        (Countries country) =>
+            (country.countryCode ?? '').toLowerCase() ==
             Environment.defaultCountryCode.toLowerCase(),
         orElse: () => Countries(),
       );
@@ -200,10 +199,10 @@ class ProfileCompleteController extends GetxController {
   }
 
   void setCountryNameAndCode(
-      String cName,
-      String countryCode,
-      String mobileCode,
-      ) {
+    String cName,
+    String countryCode,
+    String mobileCode,
+  ) {
     countryName = cName;
     this.countryCode = countryCode;
     this.mobileCode = mobileCode;

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/model/account/profile_post_model.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
@@ -20,7 +20,8 @@ class ProfileRepo {
     try {
       apiClient.initToken();
 
-      String url = '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
+      String url =
+          '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
 
       var request = http.MultipartRequest('POST', Uri.parse(url));
       Map<String, String> finalMap = {
@@ -32,7 +33,8 @@ class ProfileRepo {
         'city': model.city ?? '',
       };
 
-      request.headers.addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
+      request.headers.addAll(
+          <String, String>{'Authorization': 'Bearer ${apiClient.token}'});
       /*if(model.image!=null){
         request.files.add( http.MultipartFile('image', model.image!.readAsBytes().asStream(), model.image!.lengthSync(), filename: model.image!.path.split('/').last));
       }*/
@@ -41,15 +43,21 @@ class ProfileRepo {
       http.StreamedResponse response = await request.send();
 
       String jsonResponse = await response.stream.bytesToString();
-      AuthorizationResponseModel authorizationResponseModel = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+      AuthorizationResponseModel authorizationResponseModel =
+          AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
       final context = Get.context;
       final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-      if (authorizationResponseModel.status?.toLowerCase() == MyStrings!.success.toLowerCase()) {
-        CustomSnackBar.success(successList: authorizationResponseModel.message?.success ?? [MyStrings.success]);
+      if (authorizationResponseModel.status?.toLowerCase() ==
+          MyStrings!.success.toLowerCase()) {
+        CustomSnackBar.success(
+            successList: authorizationResponseModel.message?.success ??
+                [MyStrings.success]);
         return true;
       } else {
-        CustomSnackBar.error(errorList: authorizationResponseModel.message?.error ?? [MyStrings.requestFail.tr]);
+        CustomSnackBar.error(
+            errorList: authorizationResponseModel.message?.error ??
+                [MyStrings.requestFail.tr]);
         return false;
       }
     } catch (e) {
@@ -59,14 +67,17 @@ class ProfileRepo {
 
   Future<ResponseModel> completeProfile(ProfileCompletePostModel model) async {
     dynamic params = model.toMap();
-    String url = '${UrlContainer.baseUrl}${UrlContainer.profileCompleteEndPoint}';
-    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, params, passHeader: true);
+    String url =
+        '${UrlContainer.baseUrl}${UrlContainer.profileCompleteEndPoint}';
+    ResponseModel responseModel = await apiClient
+        .request(url, Method.postMethod, params, passHeader: true);
     return responseModel;
   }
 
   Future<ResponseModel> loadProfileInfo() async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.getProfileEndPoint}';
-    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    ResponseModel responseModel =
+        await apiClient.request(url, Method.getMethod, null, passHeader: true);
     return responseModel;
   }
 

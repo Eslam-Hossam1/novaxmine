@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mine_lab/data/model/account/profile_response_model.dart' as profile_model;
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/data/model/account/profile_response_model.dart'
+    as profile_model;
 import 'package:mine_lab/data/model/account/profile_response_model.dart';
 import 'package:mine_lab/data/model/profile/edit_profile/user_post_model.dart';
 import 'package:mine_lab/data/model/user/user.dart';
@@ -15,7 +16,8 @@ class UserProfileController extends GetxController {
   UserProfileRepo userProfileRepo;
   UserProfileController({required this.userProfileRepo});
 
-  profile_model.ProfileResponseModel model = profile_model.ProfileResponseModel();
+  profile_model.ProfileResponseModel model =
+      profile_model.ProfileResponseModel();
 
   String imageStaticUrl = '';
   bool isProfileComplete = false;
@@ -57,7 +59,8 @@ class UserProfileController extends GetxController {
     isLoading = shouldLoad;
     update();
     model = await userProfileRepo.loadProfileInfo();
-    if (model.data != null && model.status?.toLowerCase() == MyStrings!.success.toLowerCase()) {
+    if (model.data != null &&
+        model.status?.toLowerCase() == MyStrings!.success.toLowerCase()) {
       loadData(model);
     } else {
       isLoading = false;
@@ -79,24 +82,43 @@ class UserProfileController extends GetxController {
       isSubmit = true;
       update();
 
-      UserPostModel model = UserPostModel(firstname: firstName, lastName: lastName, mobile: user?.mobile ?? '', email: user?.email ?? '', username: user?.username ?? '', countryCode: user?.countryCode ?? '', country: user?.countryName ?? '', mobileCode: '880', image: imageFile, address: address, state: state, zip: zip, city: city);
+      UserPostModel model = UserPostModel(
+          firstname: firstName,
+          lastName: lastName,
+          mobile: user?.mobile ?? '',
+          email: user?.email ?? '',
+          username: user?.username ?? '',
+          countryCode: user?.countryCode ?? '',
+          country: user?.countryName ?? '',
+          mobileCode: '880',
+          image: imageFile,
+          address: address,
+          state: state,
+          zip: zip,
+          city: city);
 
-      bool isUpdated = await userProfileRepo.updateProfile(context,model, true);
+      bool isUpdated =
+          await userProfileRepo.updateProfile(context, model, true);
 
       if (isUpdated) {
         await loadProfileInfo(shouldLoad: false);
       }
       isSubmit = false;
       update();
-
     } else {
       final context = Get.context;
       final MyStrings = context != null ? AppLocalizations.of(context)! : null;
       if (firstName.isEmpty) {
-        CustomSnackBar.showCustomSnackBar(errorList: [MyStrings!.kFirstNameNullError.tr], msg: [], isError: true);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: [MyStrings!.kFirstNameNullError.tr],
+            msg: [],
+            isError: true);
       }
       if (lastName.isEmpty) {
-        CustomSnackBar.showCustomSnackBar(errorList: [MyStrings!.kLastNameNullError.tr], msg: [], isError: true);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: [MyStrings!.kLastNameNullError.tr],
+            msg: [],
+            isError: true);
       }
     }
   }
@@ -110,7 +132,8 @@ class UserProfileController extends GetxController {
     countryName = model?.data?.user?.countryName ?? '';
 
     firstNameController.text = model?.data?.user?.firstname ?? '';
-    userProfileRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, '${model?.data?.user?.username}');
+    userProfileRepo.apiClient.sharedPreferences.setString(
+        SharedPreferenceHelper.userNameKey, '${model?.data?.user?.username}');
     lastNameController.text = model?.data?.user?.lastname ?? '';
     emailController.text = model?.data?.user?.email ?? '';
     mobileNoController.text = model?.data?.user?.mobile ?? '';

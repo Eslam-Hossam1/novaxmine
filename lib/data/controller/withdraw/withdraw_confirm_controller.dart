@@ -10,7 +10,7 @@ import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart';
 import 'package:mine_lab/data/repo/withdraw_repo/withdraw_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 import '../../../core/helper/date_converter.dart';
 import '../../model/account/profile_response_model.dart';
@@ -90,7 +90,7 @@ class WithdrawConfirmController extends GetxController {
 
     try {
       final AuthorizationResponseModel model =
-      await repo.confirmWithdrawRequest(trxId, formList, twoFactorCode);
+          await repo.confirmWithdrawRequest(trxId, formList, twoFactorCode);
 
       if (model.status?.toLowerCase() == 'success') {
         Get.close(1);
@@ -101,8 +101,8 @@ class WithdrawConfirmController extends GetxController {
         );
       } else {
         CustomSnackBar.error(
-          errorList: model.message?.error ??
-              [l10n?.requestFail ?? 'Request failed'],
+          errorList:
+              model.message?.error ?? [l10n?.requestFail ?? 'Request failed'],
         );
       }
     } catch (e) {
@@ -158,7 +158,7 @@ class WithdrawConfirmController extends GetxController {
 
   void changeSelectedRadioBtnValue(int listIndex, int selectedIndex) {
     formList[listIndex].selectedValue =
-    formList[listIndex].options?[selectedIndex];
+        formList[listIndex].options?[selectedIndex];
     update();
   }
 
@@ -210,7 +210,7 @@ class WithdrawConfirmController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final ProfileResponseModel model =
-      ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+          ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.status == 'success') {
         isTFAEnable = (model.data?.user?.ts ?? '0') == '1';
       }
@@ -255,7 +255,7 @@ class WithdrawConfirmController extends GetxController {
         );
 
         final String formatted =
-        DateConverter.estimatedDateTime(selectedDateTime);
+            DateConverter.estimatedDateTime(selectedDateTime);
 
         formList[index].selectedValue = formatted;
         formList[index].textEditingController?.text = formatted;

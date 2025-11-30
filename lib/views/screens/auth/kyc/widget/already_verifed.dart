@@ -4,7 +4,7 @@ import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/controller/kyc_controller/kyc_controller.dart';
@@ -26,7 +26,6 @@ class AlreadyVerifiedWidget extends StatefulWidget {
 class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return GetBuilder<KycController>(builder: (controller) {
       return Container(
@@ -47,27 +46,38 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
                       itemBuilder: (context, index) {
                         return Container(
                           padding: const EdgeInsets.all(Dimensions.space8),
-                          margin: const EdgeInsets.symmetric(vertical: Dimensions.space10),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: Dimensions.space10),
                           decoration: BoxDecoration(
-                            border: Border.all(color: MyColor.borderColor, width: .5),
-                            borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                            border: Border.all(
+                                color: MyColor.borderColor, width: .5),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.defaultRadius),
                           ),
                           child: controller.pendingData[index].type == "file"
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(controller.pendingData[index].name ?? '', style: interSemiBoldDefault.copyWith(fontSize: Dimensions.fontDefault)),
+                                    Text(
+                                        controller.pendingData[index].name ??
+                                            '',
+                                        style: interSemiBoldDefault.copyWith(
+                                            fontSize: Dimensions.fontDefault)),
                                     const SizedBox(height: Dimensions.space5),
                                     GestureDetector(
                                       onTap: () {
-                                        String url = "${UrlContainer.baseUrl}${controller.path}/${controller.pendingData[index].value.toString()}";
+                                        String url =
+                                            "${UrlContainer.baseUrl}${controller.path}/${controller.pendingData[index].value.toString()}";
 
                                         showDialog(
                                           context: context,
                                           builder: (context) {
                                             return DownloadingDialog(
                                               url: url,
-                                              fileName: controller.pendingData[index].name ?? MyStrings!.appName,
+                                              fileName: controller
+                                                      .pendingData[index]
+                                                      .name ??
+                                                  MyStrings!.appName,
                                               isImage: true,
                                             );
                                           },
@@ -83,7 +93,8 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
                                           const SizedBox(width: 12),
                                           Text(
                                             MyStrings!.attachment.tr,
-                                            style: interRegularDefault.copyWith(color: MyColor.primaryColor),
+                                            style: interRegularDefault.copyWith(
+                                                color: MyColor.primaryColor),
                                           )
                                         ],
                                       ),
@@ -91,8 +102,12 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
                                   ],
                                 )
                               : CardColumn(
-                                  header: controller.pendingData[index].name ?? '',
-                                  body: MyConverter.removeQuotationAndSpecialCharacterFromString(controller.pendingData[index].value ?? ''),
+                                  header:
+                                      controller.pendingData[index].name ?? '',
+                                  body: MyConverter
+                                      .removeQuotationAndSpecialCharacterFromString(
+                                          controller.pendingData[index].value ??
+                                              ''),
                                   // headerTextStyle: heading.copyWith(fontSize: Dimensions.fontDefault),
                                   // bodyTextStyle: regularDefault.copyWith(),
                                   bodyMaxLine: 3,
@@ -116,13 +131,21 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomSvgPicture(
-                    image: widget.isPending ? MyImages.pendingIcon : MyImages.verifiedIcon,
+                    image: widget.isPending
+                        ? MyImages.pendingIcon
+                        : MyImages.verifiedIcon,
                     height: 100,
                     width: 100,
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(height: 25),
-                  Text(widget.isPending ? MyStrings!.kycUnderReviewMsg.tr : MyStrings!.kycAlreadyVerifiedMsg.tr, style: interRegularDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontExtraLarge)),
+                  Text(
+                      widget.isPending
+                          ? MyStrings!.kycUnderReviewMsg.tr
+                          : MyStrings!.kycAlreadyVerifiedMsg.tr,
+                      style: interRegularDefault.copyWith(
+                          color: MyColor.colorBlack,
+                          fontSize: Dimensions.fontExtraLarge)),
                   const SizedBox(height: 40)
                 ],
               ),

@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/user/user.dart';
 import 'package:mine_lab/data/model/withdraw/withdraw_request_response_model.dart';
 import 'package:mine_lab/data/repo/withdraw_repo/withdraw_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 import '../../../core/route/route.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -59,13 +59,13 @@ class AddNewWithdrawController extends GetxController {
 
     // أولاً نضبط حدود السحب (بدون استخدام MyStrings)
     withdrawLimit =
-    '${MyConverter.formatNumber(method?.minLimit?.toString() ?? '-1')} - '
+        '${MyConverter.formatNumber(method?.minLimit?.toString() ?? '-1')} - '
         '${MyConverter.formatNumber(method?.maxLimit?.toString() ?? '-1')} '
         '$currency';
 
     // ثمن الرسوم الأساسي (سنحسب التفصيلي في changeInfoWidgetValue)
     charge =
-    '${MyConverter.formatNumber(method?.fixedCharge?.toString() ?? '0')} + '
+        '${MyConverter.formatNumber(method?.fixedCharge?.toString() ?? '0')} + '
         '${MyConverter.formatNumber(method?.percentCharge?.toString() ?? '0')} %';
 
     update();
@@ -75,7 +75,7 @@ class AddNewWithdrawController extends GetxController {
 
     // إعادة ضبط الحدود (نفس القديم لكن بدون MyStrings)
     withdrawLimit =
-    '${MyConverter.formatNumber(method?.minLimit?.toString() ?? '-1')} - '
+        '${MyConverter.formatNumber(method?.minLimit?.toString() ?? '-1')} - '
         '${MyConverter.formatNumber(method?.maxLimit?.toString() ?? '-1')} '
         '$currency';
 
@@ -98,8 +98,7 @@ class AddNewWithdrawController extends GetxController {
     charge = '${MyConverter.formatNumber('$totalCharge')} $currency';
 
     rate = double.tryParse(withdrawMethod?.rate ?? '0') ?? 0;
-    conversionRate =
-    '1 $currency = $rate ${withdrawMethod?.currency ?? ''}';
+    conversionRate = '1 $currency = $rate ${withdrawMethod?.currency ?? ''}';
     inLocal = MyConverter.formatNumber('${payable * rate}');
 
     update();
@@ -120,13 +119,12 @@ class AddNewWithdrawController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final WithdrawMethodResponseModel model =
-      WithdrawMethodResponseModel.fromJson(
+          WithdrawMethodResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
       if (model.status?.toLowerCase() == 'success') {
-        final List<WithdrawMethod>? tempMethodList =
-            model.data?.withdrawMethod;
+        final List<WithdrawMethod>? tempMethodList = model.data?.withdrawMethod;
         if (tempMethodList != null && tempMethodList.isNotEmpty) {
           withdrawMethodList.addAll(tempMethodList);
         }
@@ -173,7 +171,7 @@ class AddNewWithdrawController extends GetxController {
 
     if (authorizationList.length > 1) {
       final String selectOneText =
-      (l10n?.selectOne ?? 'Select one').toLowerCase();
+          (l10n?.selectOne ?? 'Select one').toLowerCase();
       if ((selectedAuthorizationMode ?? '').toLowerCase() == selectOneText) {
         CustomSnackBar.error(
           errorList: [
@@ -204,7 +202,8 @@ class AddNewWithdrawController extends GetxController {
     submitLoading = true;
     update();
 
-    ResponseModel response = await repo.addWithdrawRequest(context,
+    ResponseModel response = await repo.addWithdrawRequest(
+      context,
       withdrawMethod?.id ?? -1,
       amount1,
       selectedAuthorizationMode,
@@ -212,7 +211,7 @@ class AddNewWithdrawController extends GetxController {
 
     if (response.statusCode == 200) {
       final WithdrawRequestResponseModel model =
-      WithdrawRequestResponseModel.fromJson(
+          WithdrawRequestResponseModel.fromJson(
         jsonDecode(response.responseJson),
       );
 
@@ -224,7 +223,7 @@ class AddNewWithdrawController extends GetxController {
       } else {
         CustomSnackBar.error(
           errorList:
-          model.message?.error ?? [l10n?.requestFail ?? 'Request failed'],
+              model.message?.error ?? [l10n?.requestFail ?? 'Request failed'],
         );
       }
     } else {

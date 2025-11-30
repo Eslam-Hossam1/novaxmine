@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 
 showExitDialog(BuildContext context) {
-
   final MyStrings = context != null ? AppLocalizations.of(context)! : null;
   AwesomeDialog(
     context: context,
@@ -23,7 +22,10 @@ showExitDialog(BuildContext context) {
     headerAnimationLoop: false,
     animType: AnimType.bottomSlide,
     title: MyStrings!.exitTitle,
-    titleTextStyle: interRegularDefault.copyWith(color: MyColor.colorBlack, fontSize: Dimensions.fontLarge, fontWeight: FontWeight.w500),
+    titleTextStyle: interRegularDefault.copyWith(
+        color: MyColor.colorBlack,
+        fontSize: Dimensions.fontLarge,
+        fontWeight: FontWeight.w500),
     showCloseIcon: false,
     btnCancel: RoundedButton(
         text: MyStrings.no,

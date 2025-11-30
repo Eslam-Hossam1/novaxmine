@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/transaction/transaction_response_model.dart';
 import 'package:mine_lab/data/repo/transaction/transaction_repo.dart';
@@ -16,7 +16,12 @@ class TransactionController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   List<String> transactionTypeList = ["All", "Plus", "Minus"];
-  List<String> walletTypeList = ["All", "Deposit Wallet", "Earning Wallet", "Coin Wallet"];
+  List<String> walletTypeList = [
+    "All",
+    "Deposit Wallet",
+    "Earning Wallet",
+    "Coin Wallet"
+  ];
 
   List<TransactionData> transactionList = [];
   List<Remarks> remarksList = [
@@ -72,7 +77,8 @@ class TransactionController extends GetxController {
     );
 
     if (responseModel.statusCode == 200) {
-      TransactionResponseModel model = TransactionResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      TransactionResponseModel model = TransactionResponseModel.fromJson(
+          jsonDecode(responseModel.responseJson));
 
       nextPageUrl = model.data?.transactions?.nextPageUrl;
 
@@ -84,7 +90,9 @@ class TransactionController extends GetxController {
           currencyList.insert(0, FilterCurrency(currency: "All"));
           if (tempRemarksList != null && tempRemarksList.isNotEmpty) {
             for (var element in tempRemarksList) {
-              if (element.remark != null && element.remark?.toLowerCase() != 'null' && element.remark!.isNotEmpty) {
+              if (element.remark != null &&
+                  element.remark?.toLowerCase() != 'null' &&
+                  element.remark!.isNotEmpty) {
                 remarksList.add(element);
               }
             }
@@ -95,11 +103,16 @@ class TransactionController extends GetxController {
         }
       } else {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        CustomSnackBar.showCustomSnackBar(errorList: model.message?.error ?? [MyStrings!.somethingWentWrong], msg: [], isError: true);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        CustomSnackBar.showCustomSnackBar(
+            errorList: model.message?.error ?? [MyStrings!.somethingWentWrong],
+            msg: [],
+            isError: true);
       }
     } else {
-      CustomSnackBar.showCustomSnackBar(errorList: [responseModel.message], msg: [], isError: true);
+      CustomSnackBar.showCustomSnackBar(
+          errorList: [responseModel.message], msg: [], isError: true);
     }
     update();
   }
@@ -140,7 +153,11 @@ class TransactionController extends GetxController {
   }
 
   bool hasNext() {
-    return nextPageUrl != null && nextPageUrl!.isNotEmpty && nextPageUrl != 'null' ? true : false;
+    return nextPageUrl != null &&
+            nextPageUrl!.isNotEmpty &&
+            nextPageUrl != 'null'
+        ? true
+        : false;
   }
 
   bool isSearch = false;

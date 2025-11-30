@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/util.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/wallet/wallet_response_model.dart';
@@ -34,18 +34,17 @@ class WalletController extends GetxController {
     final context = Get.context;
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     if (responseModel.statusCode == 200) {
-      WalletResponseModel model = WalletResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      WalletResponseModel model =
+          WalletResponseModel.fromJson(jsonDecode(responseModel.responseJson));
 
       if (model.status?.toLowerCase() == "success") {
         List<CoinBalances>? tempCoinBalancesList = model.data?.coinBalances;
         if (tempCoinBalancesList != null && tempCoinBalancesList.isNotEmpty) {
           walletList.addAll(tempCoinBalancesList);
         }
-
-
       } else {
-
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings!.somethingWentWrong]);
+        CustomSnackBar.error(
+            errorList: model.message?.error ?? [MyStrings!.somethingWentWrong]);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);
@@ -65,7 +64,9 @@ class WalletController extends GetxController {
       return;
     }
     if (double.parse(amount) > balance) {
-      CustomSnackBar.error(errorList: ["${MyStrings!.amountError.tr} $balance ${coin.miner?.coinCode}"]);
+      CustomSnackBar.error(errorList: [
+        "${MyStrings!.amountError.tr} $balance ${coin.miner?.coinCode}"
+      ]);
       return;
     }
 
@@ -73,21 +74,29 @@ class WalletController extends GetxController {
     update();
 
     try {
-      ResponseModel responseModel = await walletRepo.moveToProfitWallet(amount: amountController.text.toString(), minerId: coin.id.toString());
+      ResponseModel responseModel = await walletRepo.moveToProfitWallet(
+          amount: amountController.text.toString(),
+          minerId: coin.id.toString());
       if (responseModel.statusCode == 200) {
-        AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(responseModel.responseJson));
-        if (model.status.toString().toLowerCase() == MyStrings!.success.toLowerCase()) {
+        AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(
+            jsonDecode(responseModel.responseJson));
+        if (model.status.toString().toLowerCase() ==
+            MyStrings!.success.toLowerCase()) {
           await loadWalletData(shouldLoading: false);
           Get.back();
           amountController.text = '';
           receivedAmount = "00000";
 
-          CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.requestSuccess]);
+          CustomSnackBar.success(
+              successList:
+                  model.message?.success ?? [MyStrings.requestSuccess]);
         } else {
-          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.requestFail]);
+          CustomSnackBar.error(
+              errorList: model.message?.error ?? [MyStrings.requestFail]);
         }
       } else {
-        CustomSnackBar.showCustomSnackBar(errorList: [responseModel.message], msg: [], isError: true);
+        CustomSnackBar.showCustomSnackBar(
+            errorList: [responseModel.message], msg: [], isError: true);
       }
     } catch (e) {
       printX(e.toString());

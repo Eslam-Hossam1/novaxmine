@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:mine_lab/core/route/route.dart';
@@ -89,7 +89,7 @@ class _LoginFormState extends State<LoginForm> {
                           activeColor: MyColor.primaryColor,
                           value: controller.remember,
                           side: WidgetStateBorderSide.resolveWith(
-                                (states) => BorderSide(
+                            (states) => BorderSide(
                               width: 1.0,
                               color: controller.remember
                                   ? MyColor.transparentColor

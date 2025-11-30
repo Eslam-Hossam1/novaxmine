@@ -5,11 +5,11 @@ import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_icons.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/support/new_ticket_controller.dart';
 import 'package:mine_lab/data/repo/support/support_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/image/custom_svg_picture.dart';
@@ -106,12 +106,14 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                             onChanged: (String? newValue) {
                               controller.setPriority(newValue);
                             },
-                            items: controller.priorityList.map<DropdownMenuItem<String>>((String value) {
+                            items: controller.priorityList
+                                .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(
                                   value,
-                                  style: interRegularDefault.copyWith(fontSize: Dimensions.fontDefault),
+                                  style: interRegularDefault.copyWith(
+                                      fontSize: Dimensions.fontDefault),
                                 ),
                               );
                             }).toList(),
@@ -139,7 +141,8 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                         },
                         child: LabelTextField(
                           readOnly: true,
-                          contentPadding: const EdgeInsets.all(Dimensions.space10),
+                          contentPadding:
+                              const EdgeInsets.all(Dimensions.space10),
                           isAttachment: true,
                           labelText: MyStrings.attachment.tr,
                           hintText: MyStrings.enterFile.tr,
@@ -152,7 +155,9 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                               controller.pickFile();
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: Dimensions.space15,
+                                  vertical: Dimensions.space10),
                               margin: const EdgeInsets.all(Dimensions.space5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
@@ -160,14 +165,17 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                               ),
                               child: Text(
                                 MyStrings.upload,
-                                style: interRegularDefault.copyWith(color: MyColor.colorWhite),
+                                style: interRegularDefault.copyWith(
+                                    color: MyColor.colorWhite),
                               ),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(height: Dimensions.space5),
-                      Text(MyStrings.supportedFileHint, style: interRegularSmall.copyWith(color: MyColor.pendingColor)),
+                      Text(MyStrings.supportedFileHint,
+                          style: interRegularSmall.copyWith(
+                              color: MyColor.pendingColor)),
                       if (controller.attachmentList.isNotEmpty) ...[
                         const SizedBox(height: Dimensions.space10),
                         SingleChildScrollView(
@@ -180,25 +188,37 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                                   Stack(
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.all(Dimensions.space5),
+                                        margin: const EdgeInsets.all(
+                                            Dimensions.space5),
                                         decoration: const BoxDecoration(),
-                                        child: controller.isImage(controller.attachmentList[index].path)
+                                        child: controller.isImage(controller
+                                                .attachmentList[index].path)
                                             ? ClipRRect(
-                                                borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Dimensions
+                                                            .mediumRadius),
                                                 child: Image.file(
-                                                  controller.attachmentList[index],
+                                                  controller
+                                                      .attachmentList[index],
                                                   width: context.width / 5,
                                                   height: context.width / 5,
                                                   fit: BoxFit.cover,
                                                 ))
-                                            : controller.isXlsx(controller.attachmentList[index].path)
+                                            : controller.isXlsx(controller
+                                                    .attachmentList[index].path)
                                                 ? Container(
                                                     width: context.width / 5,
                                                     height: context.width / 5,
                                                     decoration: BoxDecoration(
                                                       color: MyColor.colorWhite,
-                                                      borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
-                                                      border: Border.all(color: MyColor.borderColor, width: 1),
+                                                      borderRadius: BorderRadius
+                                                          .circular(Dimensions
+                                                              .mediumRadius),
+                                                      border: Border.all(
+                                                          color: MyColor
+                                                              .borderColor,
+                                                          width: 1),
                                                     ),
                                                     child: const Center(
                                                       child: CustomSvgPicture(
@@ -208,17 +228,29 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                                                       ),
                                                     ),
                                                   )
-                                                : controller.isDoc(controller.attachmentList[index].path)
+                                                : controller.isDoc(controller
+                                                        .attachmentList[index]
+                                                        .path)
                                                     ? Container(
-                                                        width: context.width / 5,
-                                                        height: context.width / 5,
-                                                        decoration: BoxDecoration(
-                                                          color: MyColor.colorWhite,
-                                                          borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
-                                                          border: Border.all(color: MyColor.borderColor, width: 1),
+                                                        width:
+                                                            context.width / 5,
+                                                        height:
+                                                            context.width / 5,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: MyColor
+                                                              .colorWhite,
+                                                          borderRadius: BorderRadius
+                                                              .circular(Dimensions
+                                                                  .mediumRadius),
+                                                          border: Border.all(
+                                                              color: MyColor
+                                                                  .borderColor,
+                                                              width: 1),
                                                         ),
                                                         child: const Center(
-                                                          child: CustomSvgPicture(
+                                                          child:
+                                                              CustomSvgPicture(
                                                             image: MyIcons.doc,
                                                             height: 45,
                                                             width: 45,
@@ -226,16 +258,27 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                                                         ),
                                                       )
                                                     : Container(
-                                                        width: context.width / 5,
-                                                        height: context.width / 5,
-                                                        decoration: BoxDecoration(
-                                                          color: MyColor.colorWhite,
-                                                          borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
-                                                          border: Border.all(color: MyColor.borderColor, width: 1),
+                                                        width:
+                                                            context.width / 5,
+                                                        height:
+                                                            context.width / 5,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: MyColor
+                                                              .colorWhite,
+                                                          borderRadius: BorderRadius
+                                                              .circular(Dimensions
+                                                                  .mediumRadius),
+                                                          border: Border.all(
+                                                              color: MyColor
+                                                                  .borderColor,
+                                                              width: 1),
                                                         ),
                                                         child: const Center(
-                                                          child: CustomSvgPicture(
-                                                            image: MyIcons.pdfFile,
+                                                          child:
+                                                              CustomSvgPicture(
+                                                            image:
+                                                                MyIcons.pdfFile,
                                                             height: 45,
                                                             width: 45,
                                                           ),
@@ -244,7 +287,8 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
                                       ),
                                       CircleIconButton(
                                         onTap: () {
-                                          controller.removeAttachmentFromList(index);
+                                          controller
+                                              .removeAttachmentFromList(index);
                                         },
                                         height: Dimensions.space20,
                                         width: Dimensions.space20,
@@ -290,7 +334,8 @@ class _NewTicketScreenState extends State<NewTicketScreen> {
 class DropDownTextFieldContainer extends StatelessWidget {
   final Widget child;
   final Color color;
-  const DropDownTextFieldContainer({super.key, required this.child, this.color = MyColor.primaryColor});
+  const DropDownTextFieldContainer(
+      {super.key, required this.child, this.color = MyColor.primaryColor});
 
   @override
   Widget build(BuildContext context) {
@@ -299,7 +344,8 @@ class DropDownTextFieldContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(Dimensions.largeRadius),
-        border: Border.all(color: MyColor.getTextFieldDisableBorder(), width: .5),
+        border:
+            Border.all(color: MyColor.getTextFieldDisableBorder(), width: .5),
       ),
       child: child,
     );

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/profile_complete/profile_complete_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/text-field/custom_text_field.dart';
 import 'package:mine_lab/views/screens/auth/profile_complete/widget/country_text_field.dart';
@@ -42,12 +42,17 @@ class _ProfileCompleteFormState extends State<ProfileCompleteForm> {
             if (controller.countryData == '') ...[
               CountryTextField(
                 press: () {
-                  CountryBottomSheet.profileCompleteCountryBottomSheet(context, controller);
+                  CountryBottomSheet.profileCompleteCountryBottomSheet(
+                      context, controller);
                 },
-                text: controller.countryName == null ? MyStrings.selectACountry.tr : (controller.countryName)!.tr,
+                text: controller.countryName == null
+                    ? MyStrings.selectACountry.tr
+                    : (controller.countryName)!.tr,
               ),
             ],
-            controller.countryData != '' ? const SizedBox() : const SizedBox(height: Dimensions.space20),
+            controller.countryData != ''
+                ? const SizedBox()
+                : const SizedBox(height: Dimensions.space20),
             Visibility(
                 visible: controller.countryData == '',
                 child: IntrinsicHeight(
@@ -56,16 +61,23 @@ class _ProfileCompleteFormState extends State<ProfileCompleteForm> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: Dimensions.space20),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.space20),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: MyColor.colorWhite,
-                          borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
-                          border: Border.all(color: controller.countryName == null ? MyColor.colorBlack : MyColor.colorGrey, width: 0.5),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.mediumRadius),
+                          border: Border.all(
+                              color: controller.countryName == null
+                                  ? MyColor.colorBlack
+                                  : MyColor.colorGrey,
+                              width: 0.5),
                         ),
                         child: Text(
                           "+${controller.mobileCode ?? ""}",
-                          style: interRegularDefault.copyWith(color: MyColor.primaryColor),
+                          style: interRegularDefault.copyWith(
+                              color: MyColor.primaryColor),
                         ),
                       ),
                       const SizedBox(width: Dimensions.space8),

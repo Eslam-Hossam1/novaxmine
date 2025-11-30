@@ -4,13 +4,13 @@ import 'package:lottie/lottie.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_animation.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/auth/sms_verification_controler.dart';
 import 'package:mine_lab/data/repo/auth/sms_email_verification_repo.dart';
 import 'package:mine_lab/data/repo/profile/user_profile_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
@@ -45,7 +45,6 @@ class _SmsVerifyScreenState extends State<SmsVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return WillPopWidget(
       nextRoute: '',
@@ -68,29 +67,46 @@ class _SmsVerifyScreenState extends State<SmsVerifyScreen> {
                     height: 100,
                     width: 100,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(color: MyColor.primaryColor.withValues(alpha: .075), shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                        color: MyColor.primaryColor.withValues(alpha: .075),
+                        shape: BoxShape.circle),
                     child: Lottie.asset(MyAnimation.sms),
                   ),
                   const SizedBox(height: Dimensions.space50),
                   Container(
                     padding: Dimensions.screenPadding,
                     margin: EdgeInsets.all(16),
-                    decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.mediumRadius)),
+                    decoration: BoxDecoration(
+                        color: MyColor.colorWhite,
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.mediumRadius)),
                     child: controller.isLoading
-                        ? CustomLoader(isCustom: true, loaderColor: MyColor.primaryColor.withValues(alpha: 0.5))
+                        ? CustomLoader(
+                            isCustom: true,
+                            loaderColor:
+                                MyColor.primaryColor.withValues(alpha: 0.5))
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const SizedBox(height: Dimensions.space20),
-                              Text(MyStrings.smsVerificationMsg, textAlign: TextAlign.center, style: interRegularDefault.copyWith(color: MyColor.primarySubTitleColor)),
+                              Text(MyStrings.smsVerificationMsg,
+                                  textAlign: TextAlign.center,
+                                  style: interRegularDefault.copyWith(
+                                      color: MyColor.primarySubTitleColor)),
                               const SizedBox(height: Dimensions.space10),
-                              DefaultText(text: "${MyStrings.phoneNumber.tr}: ${MyUtils.maskPhoneNumber(controller.userPhone)}", textAlign: TextAlign.center, textColor: MyColor.bodyTextColor),
+                              DefaultText(
+                                  text:
+                                      "${MyStrings.phoneNumber.tr}: ${MyUtils.maskPhoneNumber(controller.userPhone)}",
+                                  textAlign: TextAlign.center,
+                                  textColor: MyColor.bodyTextColor),
                               const SizedBox(height: 30),
                               PinCodeTextField(
                                 appContext: context,
-                                pastedTextStyle: interRegularDefault.copyWith(color: MyColor.primaryColor),
+                                pastedTextStyle: interRegularDefault.copyWith(
+                                    color: MyColor.primaryColor),
                                 length: 6,
-                                textStyle: interRegularDefault.copyWith(color: MyColor.colorBlack),
+                                textStyle: interRegularDefault.copyWith(
+                                    color: MyColor.colorBlack),
                                 obscureText: false,
                                 obscuringCharacter: '*',
                                 blinkWhenObscuring: false,
@@ -109,7 +125,8 @@ class _SmsVerifyScreenState extends State<SmsVerifyScreen> {
                                   selectedColor: MyColor.primaryColor,
                                 ),
                                 cursorColor: MyColor.colorBlack,
-                                animationDuration: const Duration(milliseconds: 100),
+                                animationDuration:
+                                    const Duration(milliseconds: 100),
                                 enableActiveFill: true,
                                 keyboardType: TextInputType.number,
                                 beforeTextPaste: (text) {
@@ -126,20 +143,39 @@ class _SmsVerifyScreenState extends State<SmsVerifyScreen> {
                                 textColor: MyColor.colorWhite,
                                 color: MyColor.primaryColor,
                                 press: () {
-                                  controller.verifyYourSms(controller.currentText);
+                                  controller
+                                      .verifyYourSms(controller.currentText);
                                 },
                               ),
                               const SizedBox(height: Dimensions.space20),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(MyStrings.didNotReceiveCode.tr, style: interRegularDefault.copyWith(color: MyColor.labelTextColor)),
+                                  Text(MyStrings.didNotReceiveCode.tr,
+                                      style: interRegularDefault.copyWith(
+                                          color: MyColor.labelTextColor)),
                                   const SizedBox(width: Dimensions.space10),
                                   controller.resendLoading
-                                      ? Container(margin: const EdgeInsetsDirectional.only(start: 5, top: 5), height: 20, width: 20, child: CircularProgressIndicator(color: MyColor.primaryColor))
+                                      ? Container(
+                                          margin:
+                                              const EdgeInsetsDirectional.only(
+                                                  start: 5, top: 5),
+                                          height: 20,
+                                          width: 20,
+                                          child: CircularProgressIndicator(
+                                              color: MyColor.primaryColor))
                                       : GestureDetector(
-                                          onTap: () => controller.sendCodeAgain(context),
-                                          child: Text(MyStrings.resend.tr, style: interRegularDefault.copyWith(color: MyColor.primaryColor, decoration: TextDecoration.underline, decorationColor: MyColor.primaryColor)),
+                                          onTap: () =>
+                                              controller.sendCodeAgain(context),
+                                          child: Text(MyStrings.resend.tr,
+                                              style:
+                                                  interRegularDefault.copyWith(
+                                                      color:
+                                                          MyColor.primaryColor,
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                      decorationColor: MyColor
+                                                          .primaryColor)),
                                         )
                                 ],
                               ),

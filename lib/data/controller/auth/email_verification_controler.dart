@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/authorization/authorization_response_model.d
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/repo/auth/sms_email_verification_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class EmailVerificationController extends GetxController {
   final SmsEmailVerificationRepo repo;
@@ -27,13 +27,12 @@ class EmailVerificationController extends GetxController {
 
   Future<void> loadData() async {
     userEmail = repo.apiClient.sharedPreferences
-        .getString(SharedPreferenceHelper.userEmailKey) ??
+            .getString(SharedPreferenceHelper.userEmailKey) ??
         "";
 
     final context = Get.context;
     final l10n = context != null ? AppLocalizations.of(context)! : null;
-    final defaultErrorMsg =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final defaultErrorMsg = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     isLoading = true;
     update();
@@ -42,7 +41,7 @@ class EmailVerificationController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final AuthorizationResponseModel model =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
@@ -69,8 +68,7 @@ class EmailVerificationController extends GetxController {
         l10n?.emailVerificationSuccess ?? 'Email verified successfully';
     final verifyFailedMsg =
         l10n?.emailVerificationFailed ?? 'Email verification failed';
-    final defaultErrorMsg =
-        l10n?.somethingWentWrong ?? 'Something went wrong';
+    final defaultErrorMsg = l10n?.somethingWentWrong ?? 'Something went wrong';
 
     if (text.isEmpty) {
       CustomSnackBar.error(errorList: <String>[otpEmptyMsg]);
@@ -84,19 +82,17 @@ class EmailVerificationController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       final AuthorizationResponseModel model =
-      AuthorizationResponseModel.fromJson(
+          AuthorizationResponseModel.fromJson(
         jsonDecode(responseModel.responseJson),
       );
 
       final bool isSMSVerificationEnable =
-      model.data?.user?.sv == "0" ? true : false;
-      final bool is2FAEnable =
-      model.data?.user?.tv == "0" ? true : false;
+          model.data?.user?.sv == "0" ? true : false;
+      final bool is2FAEnable = model.data?.user?.tv == "0" ? true : false;
 
       if (model.status?.toLowerCase() == 'success') {
         CustomSnackBar.success(
-          successList:
-          model.message?.success ?? <String>[verifySuccessMsg],
+          successList: model.message?.success ?? <String>[verifySuccessMsg],
         );
 
         if (isSMSVerificationEnable) {
@@ -108,15 +104,16 @@ class EmailVerificationController extends GetxController {
         }
       } else {
         CustomSnackBar.error(
-          errorList:
-          model.message?.error ?? <String>[verifyFailedMsg],
+          errorList: model.message?.error ?? <String>[verifyFailedMsg],
         );
       }
     } else {
       CustomSnackBar.error(
-        errorList: <String>[responseModel.message.isNotEmpty
-            ? responseModel.message
-            : defaultErrorMsg],
+        errorList: <String>[
+          responseModel.message.isNotEmpty
+              ? responseModel.message
+              : defaultErrorMsg
+        ],
       );
     }
 
@@ -128,7 +125,7 @@ class EmailVerificationController extends GetxController {
     resendLoading = true;
     update();
 
-    await repo.resendVerifyCode( context:  context,isEmail: true);
+    await repo.resendVerifyCode(context: context, isEmail: true);
 
     resendLoading = false;
     update();

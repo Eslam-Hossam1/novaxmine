@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../model/support/community_group_model.dart';
 import '../../model/support/support_methods_model.dart';
@@ -26,7 +26,8 @@ class SupportTicketMethodsController extends GetxController {
       ResponseModel responseModel = await repo.getSupportMethodsList();
       if (responseModel.statusCode == 200) {
         supportMethodsList.clear();
-        SupportMethods model = supportMethodsFromJson(responseModel.responseJson);
+        SupportMethods model =
+            supportMethodsFromJson(responseModel.responseJson);
         if (model.status == MyStrings!.success) {
           methodFilePath = model.data!.methodFilePath ?? '';
           List<SupportMethod>? tempList = model.data?.methods;
@@ -60,7 +61,8 @@ class SupportTicketMethodsController extends GetxController {
       ResponseModel responseModel = await repo.getCommunityGroupListList();
       if (responseModel.statusCode == 200) {
         getCommunityGroupList.clear();
-        CommunityGroup model = communityGroupFromJson(responseModel.responseJson);
+        CommunityGroup model =
+            communityGroupFromJson(responseModel.responseJson);
         if (model.status == MyStrings!.success) {
           communityGroupImagePath = model.data!.communityGroupImagePath ?? '';
           List<CommunityGroupElement>? tempList = model.data?.communityGroups;

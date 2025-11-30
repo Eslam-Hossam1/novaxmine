@@ -4,7 +4,6 @@ import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/registration/registration_controller.dart';
 import 'package:mine_lab/data/controller/auth/social_login_controller.dart';
@@ -12,6 +11,7 @@ import 'package:mine_lab/data/controller/auth/social_login_repo.dart';
 import 'package:mine_lab/data/repo/auth/general_setting_repo.dart';
 import 'package:mine_lab/data/repo/auth/registration/registration_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/will_pop_widget.dart';
 import 'package:mine_lab/views/screens/auth/registration/widget/registration_form.dart';
@@ -31,7 +31,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     Get.put(SocialLoginRepo(apiClient: Get.find()));
     Get.put(RegistrationRepo(apiClient: Get.find()));
     Get.put(SocialLoginController(repo: Get.find()));
-    Get.put(RegistrationController(registrationRepo: Get.find(), generalSettingRepo: Get.find()));
+    Get.put(RegistrationController(
+        registrationRepo: Get.find(), generalSettingRepo: Get.find()));
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -41,7 +42,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final MyStrings = context != null ? AppLocalizations.of(context)! : null;
     return WillPopWidget(
       nextRoute: RouteHelper.loginScreen,
@@ -61,11 +61,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(MyStrings.signUp.tr.toTitleCase(), style: interRegularDefault.copyWith(fontSize: 32)),
+                          child: Text(MyStrings.signUp.tr.toTitleCase(),
+                              style:
+                                  interRegularDefault.copyWith(fontSize: 32)),
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(MyStrings.signUpMSG.tr, style: interRegularDefault.copyWith(fontSize: 16, color: MyColor.bodyTextColor.withValues(alpha: 0.6), fontWeight: FontWeight.w400)), //
+                          child: Text(MyStrings.signUpMSG.tr,
+                              style: interRegularDefault.copyWith(
+                                  fontSize: 16,
+                                  color: MyColor.bodyTextColor
+                                      .withValues(alpha: 0.6),
+                                  fontWeight: FontWeight.w400)), //
                         ),
                         SizedBox(height: Dimensions.space30),
                         const RegistrationForm(),

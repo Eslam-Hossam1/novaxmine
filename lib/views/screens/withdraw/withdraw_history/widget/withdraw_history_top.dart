@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/withdraw/withdraw_history_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/text-field/search_text_field.dart';
 
 class WithdrawHistoryTop extends StatefulWidget {
@@ -22,12 +22,19 @@ class _WithdrawHistoryTopState extends State<WithdrawHistoryTop> {
 
     return GetBuilder<WithdrawHistoryController>(
       builder: (controller) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space15),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.defaultRadius), color: MyColor.lCardColor, boxShadow: MyUtils.getShadow()),
+        padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.space15, vertical: Dimensions.space15),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+            color: MyColor.lCardColor,
+            boxShadow: MyUtils.getShadow()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(MyStrings!.transactionNo.tr, style: interRegularSmall.copyWith(color: MyColor.labelTextColor, fontWeight: FontWeight.w500)),
+            Text(MyStrings!.transactionNo.tr,
+                style: interRegularSmall.copyWith(
+                    color: MyColor.labelTextColor,
+                    fontWeight: FontWeight.w500)),
             const SizedBox(height: Dimensions.space5 + 3),
             IntrinsicHeight(
               child: Row(
@@ -59,7 +66,8 @@ class _WithdrawHistoryTopState extends State<WithdrawHistoryTop> {
                         borderRadius: BorderRadius.circular(4),
                         color: MyColor.primaryColor,
                       ),
-                      child: const Icon(Icons.search_outlined, color: MyColor.colorWhite, size: 18),
+                      child: const Icon(Icons.search_outlined,
+                          color: MyColor.colorWhite, size: 18),
                     ),
                   )
                 ],

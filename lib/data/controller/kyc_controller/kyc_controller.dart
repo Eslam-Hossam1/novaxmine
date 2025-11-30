@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/authorization/authorization_response_model.d
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart';
 import 'package:mine_lab/data/repo/kyc/kyc_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class KycController extends GetxController {
   final KycRepo repo;
@@ -121,7 +121,8 @@ class KycController extends GetxController {
     submitLoading = true;
     update();
 
-    final AuthorizationResponseModel response = await repo.submitKycData(context!,formList);
+    final AuthorizationResponseModel response =
+        await repo.submitKycData(context!, formList);
 
     final statusLower = (response.status ?? '').toLowerCase();
 
@@ -158,7 +159,8 @@ class KycController extends GetxController {
             errorList.add('${element.name} $isRequiredText');
           }
         } else {
-          if (element.selectedValue == '' || element.selectedValue == selectOne) {
+          if (element.selectedValue == '' ||
+              element.selectedValue == selectOne) {
             errorList.add('${element.name} $isRequiredText');
           }
         }
@@ -174,7 +176,8 @@ class KycController extends GetxController {
   }
 
   // NEW DATE TIME
-  Future<void> changeSelectedDateTimeValue(int index, BuildContext context) async {
+  Future<void> changeSelectedDateTimeValue(
+      int index, BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -197,7 +200,8 @@ class KycController extends GetxController {
           pickedTime.minute,
         );
 
-        final String formatted = DateConverter.estimatedDateTime(selectedDateTime);
+        final String formatted =
+            DateConverter.estimatedDateTime(selectedDateTime);
         formList[index].selectedValue = formatted;
         formList[index].textEditingController?.text = formatted;
 
@@ -210,7 +214,8 @@ class KycController extends GetxController {
     update();
   }
 
-  Future<void> changeSelectedDateOnlyValue(int index, BuildContext context) async {
+  Future<void> changeSelectedDateOnlyValue(
+      int index, BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -237,7 +242,8 @@ class KycController extends GetxController {
     update();
   }
 
-  Future<void> changeSelectedTimeOnlyValue(int index, BuildContext context) async {
+  Future<void> changeSelectedTimeOnlyValue(
+      int index, BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -267,7 +273,7 @@ class KycController extends GetxController {
   // End DATE TIME
   void changeSelectedRadioBtnValue(int listIndex, int selectedIndex) {
     formList[listIndex].selectedValue =
-    formList[listIndex].options?[selectedIndex];
+        formList[listIndex].options?[selectedIndex];
     update();
   }
 

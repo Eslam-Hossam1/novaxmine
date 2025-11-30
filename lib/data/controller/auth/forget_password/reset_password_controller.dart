@@ -9,7 +9,7 @@ import 'package:mine_lab/data/model/auth/verification/email_verification_model.d
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 
 class ResetPasswordController extends GetxController {
   final LoginRepo loginRepo;
@@ -68,11 +68,11 @@ class ResetPasswordController extends GetxController {
     update();
 
     final ResponseModel responseModel =
-    await loginRepo.resetPassword(email, password, token);
+        await loginRepo.resetPassword(email, password, token);
 
     if (responseModel.statusCode == 200) {
-      final EmailVerificationModel model =
-      EmailVerificationModel.fromJson(jsonDecode(responseModel.responseJson));
+      final EmailVerificationModel model = EmailVerificationModel.fromJson(
+          jsonDecode(responseModel.responseJson));
 
       if (model.status == 'success') {
         CustomSnackBar.success(
@@ -84,8 +84,8 @@ class ResetPasswordController extends GetxController {
         Get.offAndToNamed(RouteHelper.loginScreen);
       } else {
         CustomSnackBar.error(
-          errorList: model.message?.error ??
-              [l10n?.requestFail ?? 'Request failed'],
+          errorList:
+              model.message?.error ?? [l10n?.requestFail ?? 'Request failed'],
         );
       }
     } else {
@@ -122,13 +122,13 @@ class ResetPasswordController extends GetxController {
     }
 
     passwordValidationRules[0].hasError =
-    !value.contains(RegExp(r'[A-Z]')); // Uppercase
+        !value.contains(RegExp(r'[A-Z]')); // Uppercase
     passwordValidationRules[1].hasError =
-    !value.contains(RegExp(r'[a-z]')); // Lowercase
+        !value.contains(RegExp(r'[a-z]')); // Lowercase
     passwordValidationRules[2].hasError =
-    !value.contains(RegExp(r'[0-9]')); // Digit
-    passwordValidationRules[3].hasError = !value
-        .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')); // Special char
+        !value.contains(RegExp(r'[0-9]')); // Digit
+    passwordValidationRules[3].hasError =
+        !value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')); // Special char
     passwordValidationRules[4].hasError = value.length < 6; // Length
 
     update();

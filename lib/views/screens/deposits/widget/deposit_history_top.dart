@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/styles.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/text-field/search_text_field.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../core/utils/util.dart';
 import '../../../../data/controller/deposit/deposit_history_controller.dart';
 
@@ -22,7 +22,8 @@ class _DepositHistoryTopState extends State<DepositHistoryTop> {
     final MyStrings = AppLocalizations.of(context);
     return GetBuilder<DepositController>(
       builder: (controller) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space15),
+        padding: const EdgeInsets.symmetric(
+            horizontal: Dimensions.space15, vertical: Dimensions.space15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
           color: MyColor.getCardBgColor(),
@@ -31,7 +32,10 @@ class _DepositHistoryTopState extends State<DepositHistoryTop> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(MyStrings!.trxNo.tr, style: interRegularSmall.copyWith(color: MyColor.labelTextColor, fontWeight: FontWeight.w500)),
+            Text(MyStrings!.trxNo.tr,
+                style: interRegularSmall.copyWith(
+                    color: MyColor.labelTextColor,
+                    fontWeight: FontWeight.w500)),
             const SizedBox(height: Dimensions.space5 + 3),
             IntrinsicHeight(
               child: Row(
@@ -63,7 +67,8 @@ class _DepositHistoryTopState extends State<DepositHistoryTop> {
                         borderRadius: BorderRadius.circular(4),
                         color: MyColor.primaryColor,
                       ),
-                      child: const Icon(Icons.search_outlined, color: MyColor.colorWhite, size: 18),
+                      child: const Icon(Icons.search_outlined,
+                          color: MyColor.colorWhite, size: 18),
                     ),
                   )
                 ],

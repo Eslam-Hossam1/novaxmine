@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/transaction/transaction_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/divider/custom_divider.dart';
 
 class CustomTransactionCard extends StatelessWidget {
@@ -15,7 +15,14 @@ class CustomTransactionCard extends StatelessWidget {
   final String postBalanceData;
   final int index;
 
-  const CustomTransactionCard({super.key, required this.index, required this.trxData, required this.dateData, required this.amountData, required this.postBalanceData, required this.detailsText});
+  const CustomTransactionCard(
+      {super.key,
+      required this.index,
+      required this.trxData,
+      required this.dateData,
+      required this.amountData,
+      required this.postBalanceData,
+      required this.detailsText});
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +45,27 @@ class CustomTransactionCard extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text(MyStrings!.trx, style: interRegularExtraSmall.copyWith(color: MyColor.labelTextColor)), const SizedBox(height: 2), Text(trxData, style: interRegularDefault.copyWith(color: MyColor.colorBlack))],
+                  children: [
+                    Text(MyStrings!.trx,
+                        style: interRegularExtraSmall.copyWith(
+                            color: MyColor.labelTextColor)),
+                    const SizedBox(height: 2),
+                    Text(trxData,
+                        style: interRegularDefault.copyWith(
+                            color: MyColor.colorBlack))
+                  ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [Text(MyStrings.date, style: interRegularExtraSmall.copyWith(color: MyColor.labelTextColor)), const SizedBox(height: 2), Text(dateData, style: interRegularDefault.copyWith(color: MyColor.colorBlack))],
+                  children: [
+                    Text(MyStrings.date,
+                        style: interRegularExtraSmall.copyWith(
+                            color: MyColor.labelTextColor)),
+                    const SizedBox(height: 2),
+                    Text(dateData,
+                        style: interRegularDefault.copyWith(
+                            color: MyColor.colorBlack))
+                  ],
                 )
               ],
             ),
@@ -52,18 +75,45 @@ class CustomTransactionCard extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text(MyStrings.amount, style: interRegularExtraSmall.copyWith(color: MyColor.labelTextColor)), const SizedBox(height: 8), Text(amountData, style: interRegularDefault.copyWith(color: changeTextColor(controller.transactionList[index].trxType.toString(), controller)))],
+                  children: [
+                    Text(MyStrings.amount,
+                        style: interRegularExtraSmall.copyWith(
+                            color: MyColor.labelTextColor)),
+                    const SizedBox(height: 8),
+                    Text(amountData,
+                        style: interRegularDefault.copyWith(
+                            color: changeTextColor(
+                                controller.transactionList[index].trxType
+                                    .toString(),
+                                controller)))
+                  ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [Text(MyStrings.postBalance, style: interRegularExtraSmall.copyWith(color: MyColor.labelTextColor)), const SizedBox(height: 8), Text(postBalanceData, style: interRegularDefault.copyWith(color: MyColor.colorBlack))],
+                  children: [
+                    Text(MyStrings.postBalance,
+                        style: interRegularExtraSmall.copyWith(
+                            color: MyColor.labelTextColor)),
+                    const SizedBox(height: 8),
+                    Text(postBalanceData,
+                        style: interRegularDefault.copyWith(
+                            color: MyColor.colorBlack))
+                  ],
                 )
               ],
             ),
             const CustomDivider(space: Dimensions.space15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text(MyStrings.details, style: interRegularExtraSmall.copyWith(color: MyColor.labelTextColor)), const SizedBox(height: 8), Text(detailsText, style: interRegularDefault.copyWith(color: MyColor.colorBlack))],
+              children: [
+                Text(MyStrings.details,
+                    style: interRegularExtraSmall.copyWith(
+                        color: MyColor.labelTextColor)),
+                const SizedBox(height: 8),
+                Text(detailsText,
+                    style:
+                        interRegularDefault.copyWith(color: MyColor.colorBlack))
+              ],
             ),
           ],
         ),

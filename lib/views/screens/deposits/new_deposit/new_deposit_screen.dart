@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/core/utils/util.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/appbar/custom_appbar.dart';
 import 'package:mine_lab/views/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
@@ -12,7 +13,6 @@ import 'package:mine_lab/views/components/text/label_text.dart';
 import 'package:mine_lab/views/screens/deposits/new_deposit/widget/payment_method_list_bottom_sheet.dart';
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../data/controller/deposit/add_new_deposit_controller.dart';
 import '../../../../data/repo/deposit/deposit_repo.dart';
 import '../../../../data/services/api_service.dart';
@@ -31,7 +31,8 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DepositRepo(apiClient: Get.find()));
-    final controller = Get.put(AddNewDepositController(depositRepo: Get.find()));
+    final controller =
+        Get.put(AddNewDepositController(depositRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getDepositMethod();
@@ -76,7 +77,8 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                         decoration: BoxDecoration(
                           color: MyColor.colorWhite,
                           boxShadow: MyUtils.getShadow2(blurRadius: 10),
-                          borderRadius: BorderRadius.circular(Dimensions.mediumRadius),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.mediumRadius),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,35 +87,45 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                             const SizedBox(height: Dimensions.space10),
                             GestureDetector(
                               onTap: () {
-                                CustomBottomSheet(child: PaymentMethodListBottomSheet()).customBottomSheet(context);
+                                CustomBottomSheet(
+                                        child: PaymentMethodListBottomSheet())
+                                    .customBottomSheet(context);
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: MyColor.colorWhite,
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: MyColor.borderColor, width: .5),
+                                  border: Border.all(
+                                      color: MyColor.borderColor, width: .5),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
                                         MyImageWidget(
-                                          imageUrl: "${UrlContainer.baseUrl}/${controller.imagePath}/${controller.paymentMethod?.method?.image}",
+                                          imageUrl:
+                                              "${UrlContainer.baseUrl}/${controller.imagePath}/${controller.paymentMethod?.method?.image}",
                                           width: 30,
                                           height: 30,
                                           boxFit: BoxFit.fitWidth,
                                           radius: 4,
                                         ),
-                                        const SizedBox(width: Dimensions.space10),
+                                        const SizedBox(
+                                            width: Dimensions.space10),
                                         Text(
-                                          (controller.paymentMethod?.method?.name ?? '').tr,
+                                          (controller.paymentMethod?.method
+                                                      ?.name ??
+                                                  '')
+                                              .tr,
                                           style: interRegularDefault,
                                         ),
                                       ],
                                     ),
-                                    const Icon(Icons.arrow_drop_down, color: MyColor.colorGrey),
+                                    const Icon(Icons.arrow_drop_down,
+                                        color: MyColor.colorGrey),
                                   ],
                                 ),
                               ),
@@ -129,7 +141,8 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                                 if (value.toString().isEmpty) {
                                   controller.changeInfoWidgetValue(0);
                                 } else {
-                                  double amount = double.tryParse(value.toString()) ?? 0;
+                                  double amount =
+                                      double.tryParse(value.toString()) ?? 0;
                                   controller.changeInfoWidgetValue(amount);
                                 }
                                 return;
@@ -139,7 +152,9 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                           ],
                         ),
                       ),
-                      if (controller.paymentMethod?.name != MyStrings.selectOne && controller.mainAmount > 0) ...[InfoWidget()],
+                      if (controller.paymentMethod?.name !=
+                              MyStrings.selectOne &&
+                          controller.mainAmount > 0) ...[InfoWidget()],
                       const SizedBox(height: 35),
                       RoundedButton(
                         isLoading: controller.submitLoading,

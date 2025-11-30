@@ -4,12 +4,12 @@ import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/referral/my_referral_controller.dart';
 import 'package:mine_lab/data/repo/referral/my_referral_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/components/general_components/no_data_found.dart';
 import 'package:mine_lab/views/components/text/default_text.dart';
@@ -27,7 +27,8 @@ class _MyReferralScreenState extends State<MyReferralScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(MyReferralRepo(apiClient: Get.find()));
-    final controller = Get.put(MyReferralController(myReferralRepo: Get.find()));
+    final controller =
+        Get.put(MyReferralController(myReferralRepo: Get.find()));
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -50,10 +51,12 @@ class _MyReferralScreenState extends State<MyReferralScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: MyColor.primaryColor,
-        title: Text(MyStrings!.myReferredUsers, style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
+        title: Text(MyStrings!.myReferredUsers,
+            style: interRegularLarge.copyWith(color: MyColor.colorWhite)),
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: const Icon(Icons.arrow_back, color: MyColor.colorWhite, size: 20),
+          icon:
+              const Icon(Icons.arrow_back, color: MyColor.colorWhite, size: 20),
         ),
       ),
       body: GetBuilder<MyReferralController>(
@@ -68,11 +71,17 @@ class _MyReferralScreenState extends State<MyReferralScreen> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: controller.myReferralsList.length,
-                      separatorBuilder: (context, index) => const SizedBox(height: Dimensions.space10),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: Dimensions.space10),
                       itemBuilder: (context, index) => Container(
                         width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space20),
-                        decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: Dimensions.space15,
+                            vertical: Dimensions.space20),
+                        decoration: BoxDecoration(
+                            color: MyColor.colorWhite,
+                            borderRadius: BorderRadius.circular(
+                                Dimensions.defaultRadius)),
                         child: Row(
                           children: [
                             const CircleAvatar(
@@ -86,22 +95,35 @@ class _MyReferralScreenState extends State<MyReferralScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children:  [
-                                      SmallText(text: MyStrings.user, textColor: MyColor.colorGrey),
-                                      SmallText(text: MyStrings.level, textColor: MyColor.colorGrey),
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SmallText(
+                                          text: MyStrings.user,
+                                          textColor: MyColor.colorGrey),
+                                      SmallText(
+                                          text: MyStrings.level,
+                                          textColor: MyColor.colorGrey),
                                     ],
                                   ),
                                   const SizedBox(height: Dimensions.space5),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       DefaultText(
-                                        text: controller.myReferralsList[index].username ?? "",
+                                        text: controller.myReferralsList[index]
+                                                .username ??
+                                            "",
                                       ),
                                       const SizedBox(width: Dimensions.space5),
                                       DefaultText(
-                                        text: MyConverter.getTrailingExtension(int.tryParse(controller.myReferralsList[index].level ?? '0') ?? 0),
+                                        text: MyConverter.getTrailingExtension(
+                                            int.tryParse(controller
+                                                        .myReferralsList[index]
+                                                        .level ??
+                                                    '0') ??
+                                                0),
                                       )
                                     ],
                                   )

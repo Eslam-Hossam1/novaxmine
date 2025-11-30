@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/model/general_setting/general_settings_response_model.dart';
@@ -13,7 +13,6 @@ import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient extends GetxService {
-
   SharedPreferences sharedPreferences;
   ApiClient({required this.sharedPreferences});
 
@@ -32,16 +31,23 @@ class ApiClient extends GetxService {
       if (method == Method.postMethod) {
         if (passHeader) {
           if (isOnlyAcceptType) {
-            response = await http.post(url, body: params, headers: {"Accept": "application/json"});
+            response = await http.post(url,
+                body: params, headers: {"Accept": "application/json"});
           } else {
-            response = await http.post(url, body: params, headers: {"Accept": "application/json", "Authorization": "$tokenType $token"});
+            response = await http.post(url, body: params, headers: {
+              "Accept": "application/json",
+              "Authorization": "$tokenType $token"
+            });
           }
         } else {
           response = await http.post(url, body: params);
         }
       } else if (method == Method.postMethod) {
         if (passHeader) {
-          response = await http.post(url, body: params, headers: {"Accept": "application/json", "Authorization": "$tokenType $token"});
+          response = await http.post(url, body: params, headers: {
+            "Accept": "application/json",
+            "Authorization": "$tokenType $token"
+          });
         } else {
           response = await http.post(url, body: params);
         }
@@ -51,7 +57,10 @@ class ApiClient extends GetxService {
         response = await http.patch(url);
       } else {
         if (passHeader) {
-          response = await http.get(url, headers: {"Accept": "application/json", "Authorization": "$tokenType $token"});
+          response = await http.get(url, headers: {
+            "Accept": "application/json",
+            "Authorization": "$tokenType $token"
+          });
         } else {
           response = await http.get(url);
         }
@@ -65,13 +74,15 @@ class ApiClient extends GetxService {
 
       if (response.statusCode == 200) {
         try {
-          AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(response.body));
+          AuthorizationResponseModel model =
+              AuthorizationResponseModel.fromJson(jsonDecode(response.body));
           if (model.remark == 'profile_incomplete') {
             Get.toNamed(RouteHelper.profileCompleteScreen);
           } else if (model.remark == 'kyc_verification') {
             Get.offAndToNamed(RouteHelper.kycScreen);
           } else if (model.remark == 'unauthenticated') {
-            sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
+            sharedPreferences.setBool(
+                SharedPreferenceHelper.rememberMeKey, false);
             sharedPreferences.remove(SharedPreferenceHelper.token);
             Get.offAllNamed(RouteHelper.loginScreen);
           } else if (model.remark == "unverified") {
@@ -82,23 +93,26 @@ class ApiClient extends GetxService {
         }
 
         return ResponseModel(true, 'Success', 200, response.body);
-
-
       } else if (response.statusCode == 401) {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
         sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
         Get.offAllNamed(RouteHelper.loginScreen);
-        return ResponseModel(false, MyStrings!.unAuthorized.tr, 401, response.body);
-
+        return ResponseModel(
+            false, MyStrings!.unAuthorized.tr, 401, response.body);
       } else if (response.statusCode == 500) {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        return ResponseModel(false, MyStrings!.serverError.tr, 500, response.body);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        return ResponseModel(
+            false, MyStrings!.serverError.tr, 500, response.body);
       } else {
         final context = Get.context;
-        final MyStrings = context != null ? AppLocalizations.of(context)! : null;
-        return ResponseModel(false, MyStrings!.somethingWentWrong.tr, 499, response.body);
+        final MyStrings =
+            context != null ? AppLocalizations.of(context)! : null;
+        return ResponseModel(
+            false, MyStrings!.somethingWentWrong.tr, 499, response.body);
       }
     } on SocketException {
       final context = Get.context;
@@ -120,8 +134,10 @@ class ApiClient extends GetxService {
 
   initToken() {
     if (sharedPreferences.containsKey(SharedPreferenceHelper.accessTokenKey)) {
-      String? t = sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
-      String? tType = sharedPreferences.getString(SharedPreferenceHelper.accessTokenType);
+      String? t =
+          sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
+      String? tType =
+          sharedPreferences.getString(SharedPreferenceHelper.accessTokenType);
       token = t ?? '';
       tokenType = tType ?? 'Bearer';
     } else {
@@ -137,38 +153,58 @@ class ApiClient extends GetxService {
   }
 
   GeneralSettingResponseModel getGSData() {
-    String pre = sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ?? '';
-    GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+    String pre =
+        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
+            '';
+    GeneralSettingResponseModel model =
+        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
     return model;
   }
 
-  String getCurrencyOrUsername({bool isCurrency = true, bool isSymbol = false}) {
+  String getCurrencyOrUsername(
+      {bool isCurrency = true, bool isSymbol = false}) {
     if (isCurrency) {
-      String pre = sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ?? '';
-      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(pre));
-      String currency = isSymbol ? model.data?.generalSetting?.curSym ?? '' : model.data?.generalSetting?.curText ?? '';
+      String pre = sharedPreferences
+              .getString(SharedPreferenceHelper.generalSettingKey) ??
+          '';
+      GeneralSettingResponseModel model =
+          GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+      String currency = isSymbol
+          ? model.data?.generalSetting?.curSym ?? ''
+          : model.data?.generalSetting?.curText ?? '';
       return currency;
     } else {
-      String username = sharedPreferences.getString(SharedPreferenceHelper.userNameKey) ?? '';
+      String username =
+          sharedPreferences.getString(SharedPreferenceHelper.userNameKey) ?? '';
       return username;
     }
   }
 
   String getUserEmail() {
-    String email = sharedPreferences.getString(SharedPreferenceHelper.userEmailKey) ?? '';
+    String email =
+        sharedPreferences.getString(SharedPreferenceHelper.userEmailKey) ?? '';
     return email;
   }
 
   bool getPasswordStrengthStatus() {
-    String pre = sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ?? '';
-    GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(pre));
-    bool checkPasswordStrength = model.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
+    String pre =
+        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
+            '';
+    GeneralSettingResponseModel model =
+        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+    bool checkPasswordStrength =
+        model.data?.generalSetting?.securePassword.toString() == '0'
+            ? false
+            : true;
     return checkPasswordStrength;
   }
 
   String getTemplateName() {
-    String pre = sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ?? '';
-    GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+    String pre =
+        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
+            '';
+    GeneralSettingResponseModel model =
+        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
     String templateName = model.data?.generalSetting?.activeTemplate ?? '';
     return templateName;
   }
@@ -210,7 +246,8 @@ class ApiClient extends GetxService {
   }
 
   bool getSocialCredentialsEnabledAll() {
-    return getGSData().data?.generalSetting?.googleLogin == '1' || getGSData().data?.generalSetting?.linkedinLogin == '1';
+    return getGSData().data?.generalSetting?.googleLogin == '1' ||
+        getGSData().data?.generalSetting?.linkedinLogin == '1';
   }
 
   String getSocialCredentialsRedirectUrl() {
@@ -224,16 +261,21 @@ class ApiClient extends GetxService {
   }
 
   bool getFirstTimeAppOpeningStatus() {
-    bool status = sharedPreferences.getBool(SharedPreferenceHelper.appOpeningStatus) ?? false;
+    bool status =
+        sharedPreferences.getBool(SharedPreferenceHelper.appOpeningStatus) ??
+            false;
     return status;
   }
 
   void checkAndGotoNextStep(AuthorizationResponseModel responseModel) async {
-    bool needEmailVerification = responseModel.data?.user?.ev == "1" ? false : true;
-    bool needSmsVerification = responseModel.data?.user?.sv == '1' ? false : true;
+    bool needEmailVerification =
+        responseModel.data?.user?.ev == "1" ? false : true;
+    bool needSmsVerification =
+        responseModel.data?.user?.sv == '1' ? false : true;
     bool isTwoFactorEnable = responseModel.data?.user?.tv == '1' ? false : true;
 
-    bool isProfileCompleteEnable = responseModel.data?.user?.profileComplete == '0' ? true : false;
+    bool isProfileCompleteEnable =
+        responseModel.data?.user?.profileComplete == '0' ? true : false;
 
     if (isProfileCompleteEnable) {
       Get.offAndToNamed(RouteHelper.profileCompleteScreen);
