@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -8,7 +8,7 @@ import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/views/components/buttons/custom_round_border_shape.dart';
 import 'package:mine_lab/views/components/image/custom_svg_picture.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class NoDataOrInternetScreen extends StatefulWidget {
   final String message; // رسالة العنوان (لو فاضية هنستخدم الترجمة الافتراضية)
@@ -143,3 +143,4 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
     );
   }
 }
+

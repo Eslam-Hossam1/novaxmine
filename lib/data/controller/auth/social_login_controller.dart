@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:mine_lab/data/controller/auth/social_login_repo.dart';
 import 'package:mine_lab/environment.dart';
 import 'package:mine_lab/views/components/packages/signin_with_linkdin/signin_with_linkedin.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 import '../../model/auth/login/login_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -201,3 +201,4 @@ class SocialLoginController extends GetxController {
     }
   }
 }
+

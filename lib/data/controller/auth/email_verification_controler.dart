@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/authorization/authorization_response_model.d
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/repo/auth/sms_email_verification_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class EmailVerificationController extends GetxController {
   final SmsEmailVerificationRepo repo;
@@ -131,3 +131,4 @@ class EmailVerificationController extends GetxController {
     update();
   }
 }
+

@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/authorization/authorization_response_model.d
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart';
 import 'package:mine_lab/data/repo/kyc/kyc_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class KycController extends GetxController {
   final KycRepo repo;
@@ -330,3 +330,4 @@ class KycController extends GetxController {
     update();
   }
 }
+

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:mine_lab/core/route/route.dart';
@@ -8,6 +7,7 @@ import 'package:mine_lab/core/utils/my_color.dart';
 
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/login/login_controller.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/buttons/rounded_button.dart';
 import 'package:mine_lab/views/components/text-field/custom_text_field.dart';
 import 'package:mine_lab/views/screens/auth/login/widget/social_login_section.dart';

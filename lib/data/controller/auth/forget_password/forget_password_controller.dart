@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class ForgetPasswordController extends GetxController {
   final LoginRepo loginRepo;
@@ -48,3 +48,4 @@ class ForgetPasswordController extends GetxController {
     }
   }
 }
+

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/auth/social_login_controller.dart';
 import 'package:mine_lab/data/controller/auth/social_login_repo.dart';
-
+import 'package:mine_lab/l10n/app_localizations.dart';
 import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/my_images.dart';
 
@@ -38,7 +37,7 @@ class _SocialLoginSectionState extends State<SocialLoginSection> {
             const SizedBox(height: Dimensions.space15),
             Center(
               child: Text(
-                l10n.or, // بدل MyStrings.or.tr
+                l10n.or,
                 style: interRegularDefault.copyWith(),
               ),
             ),

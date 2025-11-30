@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 
 import '../../../core/utils/my_color.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class TicketDetailsController extends GetxController {
   final SupportRepo repo;
@@ -425,3 +425,4 @@ class TicketDetailsController extends GetxController {
     }
   }
 }
+

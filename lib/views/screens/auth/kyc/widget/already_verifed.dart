@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/controller/kyc_controller/kyc_controller.dart';
@@ -153,3 +153,4 @@ class _AlreadyVerifiedWidgetState extends State<AlreadyVerifiedWidget> {
     });
   }
 }
+

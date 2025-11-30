@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/data/repo/account/change_password_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class ChangePasswordController extends GetxController {
   ChangePasswordRepo changePasswordRepo;
@@ -81,3 +81,4 @@ class ChangePasswordController extends GetxController {
     confirmPassController.text = '';
   }
 }
+

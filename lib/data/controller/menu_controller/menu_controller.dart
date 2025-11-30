@@ -1,8 +1,8 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:mine_lab/core/route/route.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/repo/menu_repo/menu_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
@@ -57,3 +57,4 @@ class MyMenuController extends GetxController {
     update();
   }
 }
+

@@ -1,11 +1,11 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/model/general_setting/general_settings_response_model.dart';
@@ -290,3 +290,4 @@ class ApiClient extends GetxService {
     }
   }
 }
+

@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ import 'package:mine_lab/data/repo/auth/general_setting_repo.dart';
 import 'package:mine_lab/data/repo/auth/registration/registration_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class RegistrationController extends GetxController {
   final RegistrationRepo registrationRepo;
@@ -327,3 +327,4 @@ class RegistrationController extends GetxController {
     update();
   }
 }
+

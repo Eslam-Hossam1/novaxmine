@@ -1,9 +1,9 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/share_preference_helper.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/account/profile_response_model.dart'
     as profile_model;
 import 'package:mine_lab/data/model/account/profile_response_model.dart';
@@ -147,3 +147,4 @@ class UserProfileController extends GetxController {
     update();
   }
 }
+

@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import 'package:mine_lab/data/model/user/user.dart';
 import 'package:mine_lab/data/repo/auth/profile_complete/profile_complete_repo.dart';
 import 'package:mine_lab/environment.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class ProfileCompleteController extends GetxController {
   final ProfileCompleteRepo profileRepo;
@@ -216,3 +216,4 @@ class ProfileCompleteController extends GetxController {
     update();
   }
 }
+

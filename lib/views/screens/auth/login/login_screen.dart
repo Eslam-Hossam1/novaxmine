@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // مهم
 
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // لم نعد نحتاجه هنا
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/data/controller/auth/login/login_controller.dart';
 import 'package:mine_lab/data/repo/auth/login/login_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/will_pop_widget.dart';
 import 'package:mine_lab/views/screens/auth/login/widget/login_form.dart';
 
@@ -40,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // بدل MyStrings + .tr
     final l10n = AppLocalizations.of(context)!;
 
     return WillPopWidget(

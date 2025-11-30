@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/data/controller/kyc_controller/kyc_controller.dart';
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart';
 import 'package:mine_lab/views/screens/auth/kyc/widget/widget/choose_file_list_item.dart';
@@ -29,3 +29,4 @@ class _ConfirmKycFileItemState extends State<ConfirmKycFileItem> {
     });
   }
 }
+

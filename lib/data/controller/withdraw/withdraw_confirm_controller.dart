@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/kyc/kyc_response_model.dart';
 import 'package:mine_lab/data/repo/withdraw_repo/withdraw_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 import '../../../core/helper/date_converter.dart';
 import '../../model/account/profile_response_model.dart';
@@ -320,3 +320,4 @@ class WithdrawConfirmController extends GetxController {
     update();
   }
 }
+

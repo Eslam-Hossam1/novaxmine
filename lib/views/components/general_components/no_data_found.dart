@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/views/components/text/default_text.dart';
 
@@ -29,3 +29,4 @@ class NoDataFound extends StatelessWidget {
     );
   }
 }
+

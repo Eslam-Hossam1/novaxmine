@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
@@ -8,7 +8,7 @@ import 'package:mine_lab/data/model/plan/plan_payment_insert_response_model.dart
 import 'package:mine_lab/data/model/plan/plan_payment_method/plan_payment_method_response_model.dart';
 import 'package:mine_lab/data/repo/plan/purchased_plan/purchased_plan_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class PlanPaymentMethodController extends GetxController {
   final PurchasedPlanRepo purchasedPlanRepo;
@@ -200,3 +200,4 @@ class PlanPaymentMethodController extends GetxController {
     );
   }
 }
+

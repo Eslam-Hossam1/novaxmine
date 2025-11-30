@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../model/support/community_group_model.dart';
 import '../../model/support/support_methods_model.dart';
@@ -84,3 +84,4 @@ class SupportTicketMethodsController extends GetxController {
     }
   }
 }
+

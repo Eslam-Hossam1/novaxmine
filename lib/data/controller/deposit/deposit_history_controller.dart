@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ import '../../../core/utils/url_container.dart';
 import '../../model/deposit/deposit_history_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../repo/deposit/deposit_repo.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 
 class DepositController extends GetxController {
   final DepositRepo depositRepo;
@@ -254,3 +254,4 @@ class DepositController extends GetxController {
     }
   }
 }
+

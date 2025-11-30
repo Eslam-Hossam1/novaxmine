@@ -1,11 +1,11 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/data/repo/withdraw_repo/withdraw_repo.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import '../../../core/utils/my_color.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../model/withdraw/withdraw_history_response_model.dart';
 
@@ -152,3 +152,4 @@ class WithdrawHistoryController extends GetxController {
     // }
   }
 }
+

@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +11,7 @@ import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 class DownloadingDialog extends StatefulWidget {
@@ -135,3 +135,4 @@ class DownloadingDialogState extends State<DownloadingDialog> {
     );
   }
 }
+

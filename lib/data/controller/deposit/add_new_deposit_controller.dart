@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mine_lab/core/helper/string_format_helper.dart';
@@ -7,7 +7,7 @@ import 'package:mine_lab/core/utils/util.dart';
 import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 
 import '../../../core/route/route.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import '../../model/deposit/deposit_insert_response_model.dart';
 import '../../model/deposit/deposit_method_response_model.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -179,3 +179,4 @@ class AddNewDepositController extends GetxController {
         arguments: depositInsertData);
   }
 }
+

@@ -1,7 +1,7 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/referral/my_referral/my_referral_response_model.dart';
 import 'package:mine_lab/data/repo/referral/my_referral_repo.dart';
@@ -47,3 +47,4 @@ class MyReferralController extends GetxController {
     update();
   }
 }
+

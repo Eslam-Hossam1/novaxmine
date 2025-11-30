@@ -1,7 +1,7 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
 import 'package:mine_lab/data/model/transaction/transaction_response_model.dart';
 import 'package:mine_lab/data/repo/transaction/transaction_repo.dart';
@@ -169,3 +169,4 @@ class TransactionController extends GetxController {
     }
   }
 }
+

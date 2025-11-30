@@ -1,7 +1,7 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:mine_lab/core/utils/method.dart';
-import 'package:mine_lab/gen_l10n/app_localizations.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/core/utils/url_container.dart';
 import 'package:mine_lab/data/model/authorization/authorization_response_model.dart';
 import 'package:mine_lab/data/model/global/response_model/response_model.dart';
@@ -55,3 +55,4 @@ class ChangePasswordRepo {
     return map2;
   }
 }
+
