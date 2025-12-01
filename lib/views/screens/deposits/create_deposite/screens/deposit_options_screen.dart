@@ -10,14 +10,15 @@ import 'package:mine_lab/l10n/app_localizations.dart';
 import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/deposite_crypto_item.dart';
 
-class CreateDepositeScreen extends StatefulWidget {
-  const CreateDepositeScreen({super.key});
+class DepositOptionsScreen extends StatefulWidget {
+  const 
+  DepositOptionsScreen({super.key});
 
   @override
-  State<CreateDepositeScreen> createState() => _CreateDepositeScreenState();
+  State<DepositOptionsScreen> createState() => _DepositOptionsScreenState();
 }
 
-class _CreateDepositeScreenState extends State<CreateDepositeScreen> {
+class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
   late final CoinWalletController _controller;
 
   @override

@@ -25,7 +25,7 @@ import 'package:mine_lab/views/screens/bottom_nav_screens/mine/mining_track/mini
 import 'package:mine_lab/views/screens/bottom_nav_screens/mine/plan_payment_method/plan_payment_method_screen.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/mine/start_mining_screen/mining_plan_screen.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/wallet/wallet_screen.dart';
-import 'package:mine_lab/views/screens/deposits/create_deposite/screens/create_deposite_screen.dart';
+import 'package:mine_lab/views/screens/deposits/create_deposite/screens/deposit_options_screen.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/screens/confirm_deposit_screen.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/screens/deposite_instructions_screen.dart';
 import 'package:mine_lab/views/screens/deposits/deposit_webview/deposit_webview_screen.dart';
@@ -96,7 +96,7 @@ class RouteHelper {
   static const String depositsScreen = "/deposits";
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
-  static const String createDepositScreen = "/create_deposit_screen";
+  static const String depositOptionsScreen = "/deposit_options_screen";
   static const String depositeInstructionsScreen =
       "/deposite_instructions_screen";
   static const String confirmDepositScreen = "/confirm_deposit_screen";
@@ -187,7 +187,7 @@ class RouteHelper {
     GetPage(name: depositsScreen, page: () => const DepositHistoryScreen()),
     GetPage(name: newDepositScreenScreen, page: () => const NewDepositScreen()),
     GetPage(
-        name: createDepositScreen, page: () => const CreateDepositeScreen()),
+        name: depositOptionsScreen, page: () => const DepositOptionsScreen()),
     GetPage(
         name: depositeInstructionsScreen,
         page: () => const DepositeInstructionsScreen()),

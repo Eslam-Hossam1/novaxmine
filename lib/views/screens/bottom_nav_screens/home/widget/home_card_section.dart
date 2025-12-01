@@ -33,7 +33,7 @@ class _HomeCardSectionState extends State<HomeCardSection> {
                   data: controller.balance,
                   bottomTitle: MyStrings.deposit,
                   onTap: () {
-                    Get.toNamed(RouteHelper.createDepositScreen);
+                    Get.toNamed(RouteHelper.depositOptionsScreen);
                   },
                 ),
               ),
@@ -45,7 +45,7 @@ class _HomeCardSectionState extends State<HomeCardSection> {
                   data: controller.profitBalance,
                   bottomTitle: MyStrings.withdraw,
                   onTap: () {
-                    Get.toNamed(RouteHelper.createDepositScreen);
+                    Get.toNamed(RouteHelper.depositOptionsScreen);
                   },
                 ),
               ),
