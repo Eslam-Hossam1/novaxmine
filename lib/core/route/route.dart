@@ -26,6 +26,7 @@ import 'package:mine_lab/views/screens/bottom_nav_screens/mine/plan_payment_meth
 import 'package:mine_lab/views/screens/bottom_nav_screens/mine/start_mining_screen/mining_plan_screen.dart';
 import 'package:mine_lab/views/screens/bottom_nav_screens/wallet/wallet_screen.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/screens/create_deposite_screen.dart';
+import 'package:mine_lab/views/screens/deposits/create_deposite/screens/confirm_deposit_screen.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/screens/deposite_instructions_screen.dart';
 import 'package:mine_lab/views/screens/deposits/deposit_webview/deposit_webview_screen.dart';
 import 'package:mine_lab/views/screens/deposits/deposit_history_screen.dart';
@@ -96,7 +97,9 @@ class RouteHelper {
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
   static const String createDepositScreen = "/create_deposit_screen";
-  static const String depositeInstructionsScreen = "/deposite_instructions_screen";
+  static const String depositeInstructionsScreen =
+      "/deposite_instructions_screen";
+  static const String confirmDepositScreen = "/confirm_deposit_screen";
   static const String depositWebViewScreen = '/deposit_webView';
   static const String depositHistoryScreen = '/deposit_history_screen';
 
@@ -119,11 +122,14 @@ class RouteHelper {
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: registrationScreen, page: () => const RegistrationScreen()),
-    GetPage(name: forgotPasswordScreen, page: () => const ForgotPasswordScreen()),
+    GetPage(
+        name: forgotPasswordScreen, page: () => const ForgotPasswordScreen()),
     GetPage(name: resetPasswordScreen, page: () => const ResetPasswordScreen()),
     GetPage(name: passVerifyScreen, page: () => const VerifyForgetPassScreen()),
-    GetPage(name: changePasswordScreen, page: () => const ChangePasswordScreen()),
-    GetPage(name: previewImageScreen, page: () => PreviewImage(url: Get.arguments)),
+    GetPage(
+        name: changePasswordScreen, page: () => const ChangePasswordScreen()),
+    GetPage(
+        name: previewImageScreen, page: () => PreviewImage(url: Get.arguments)),
     GetPage(name: bottomNav, page: () => const BottomNavBarScreen()),
     GetPage(name: homeScreen, page: () => const HomeScreen()),
     GetPage(name: faqScreen, page: () => const FaqScreen()),
@@ -131,42 +137,71 @@ class RouteHelper {
     GetPage(name: profileScreen, page: () => const ProfileScreen()),
 
     GetPage(name: addWithdrawScreen, page: () => const AddWithdrawScreen()),
-    GetPage(name: withdrawConfirmScreenScreen, page: () => const WithdrawConfirmScreen()),
-    GetPage(name: withdrawHistoryScreen, page: () => const WithdrawHistoryScreen()),
+    GetPage(
+        name: withdrawConfirmScreenScreen,
+        page: () => const WithdrawConfirmScreen()),
+    GetPage(
+        name: withdrawHistoryScreen, page: () => const WithdrawHistoryScreen()),
     // GetPage(name: withdrawMoneyScreen, page: () => const WithdrawMoneyScreen()),
 
     GetPage(name: miningTrackScreen, page: () => const MiningTracksScreen()),
     GetPage(name: miningPlanScreen, page: () => const MiningPlanScreen()),
-    GetPage(name: referralBonusLogScreen, page: () => const ReferralBonusLogsScreen()),
+    GetPage(
+        name: referralBonusLogScreen,
+        page: () => const ReferralBonusLogsScreen()),
     GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
     GetPage(name: editProfileScreen, page: () => const EditProfileScreen()),
-    GetPage(name: profileCompleteScreen, page: () => const ProfileCompleteScreen()),
+    GetPage(
+        name: profileCompleteScreen, page: () => const ProfileCompleteScreen()),
     GetPage(name: emailVerifyScreen, page: () => const EmailVerifyScreen()),
     GetPage(name: smsVerifyScreen, page: () => const SmsVerifyScreen()),
     GetPage(name: transactionScreen, page: () => const TransactionScreen()),
     GetPage(name: myReferralScreen, page: () => const MyReferralScreen()),
     GetPage(name: menuScreen, page: () => const MenuScreen()),
-    GetPage(name: depositWebScreen, page: () => WithdrawWebviewScreen(redirectUrl: Get.arguments)),
-    GetPage(name: planPaymentMethodScreen, page: () => PlanPaymentMethodScreen(title: Get.arguments[0], amount: Get.arguments[1], orderId: Get.arguments[2])),
+    GetPage(
+        name: depositWebScreen,
+        page: () => WithdrawWebviewScreen(redirectUrl: Get.arguments)),
+    GetPage(
+        name: planPaymentMethodScreen,
+        page: () => PlanPaymentMethodScreen(
+            title: Get.arguments[0],
+            amount: Get.arguments[1],
+            orderId: Get.arguments[2])),
     GetPage(name: twoFactorScreen, page: () => const TwoFactorSetupScreen()),
-    GetPage(name: twoFactorVerifyScreen, page: () => const TwoFactorVerificationScreen()),
+    GetPage(
+        name: twoFactorVerifyScreen,
+        page: () => const TwoFactorVerificationScreen()),
     GetPage(name: kycScreen, page: () => const KycScreen()),
-    GetPage(name: supportTicketMethodsList, page: () => const SupportTicketMethodsList()),
+    GetPage(
+        name: supportTicketMethodsList,
+        page: () => const SupportTicketMethodsList()),
     GetPage(name: allTicketScreen, page: () => const AllTicketScreen()),
     GetPage(name: ticketDetailsScreen, page: () => const TicketDetailsScreen()),
     GetPage(name: newTicketScreen, page: () => const NewTicketScreen()),
     GetPage(name: achievementsScreen, page: () => const AchievementScreen()),
 
-    GetPage(name: depositWebViewScreen, page: () => DepositWebViewScreen(depositInsertData: Get.arguments as DepositInsertData)),
+    GetPage(
+        name: depositWebViewScreen,
+        page: () => DepositWebViewScreen(
+            depositInsertData: Get.arguments as DepositInsertData)),
     GetPage(name: depositsScreen, page: () => const DepositHistoryScreen()),
     GetPage(name: newDepositScreenScreen, page: () => const NewDepositScreen()),
-    GetPage(name: createDepositScreen, page: () => const CreateDepositeScreen()),
-    GetPage(name: depositeInstructionsScreen, page: () => const DepositeInstructionsScreen()),
-    GetPage(name: depositHistoryScreen, page: () => const DepositHistoryScreen()),
+    GetPage(
+        name: createDepositScreen, page: () => const CreateDepositeScreen()),
+    GetPage(
+        name: depositeInstructionsScreen,
+        page: () => const DepositeInstructionsScreen()),
+    GetPage(
+        name: confirmDepositScreen, page: () => const ConfirmDepositScreen()),
+    GetPage(
+        name: depositHistoryScreen, page: () => const DepositHistoryScreen()),
     GetPage(name: orderHistoryScreen, page: () => OrderHistoryScreen()),
   ];
 
-  static Future<void> checkUserStatusAndGoToNextStep(GlobalUser? user, {bool isRemember = false, String accessToken = "", String tokenType = ""}) async {
+  static Future<void> checkUserStatusAndGoToNextStep(GlobalUser? user,
+      {bool isRemember = false,
+      String accessToken = "",
+      String tokenType = ""}) async {
     bool needEmailVerification = user?.ev == "1" ? false : true;
     bool needSmsVerification = user?.sv == '1' ? false : true;
     bool isTwoFactorEnable = user?.tv == '1' ? false : true;
@@ -174,20 +209,29 @@ class RouteHelper {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     if (isRemember) {
-      await sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
+      await sharedPreferences.setBool(
+          SharedPreferenceHelper.rememberMeKey, true);
     } else {
-      await sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
+      await sharedPreferences.setBool(
+          SharedPreferenceHelper.rememberMeKey, false);
     }
 
-    await sharedPreferences.setString(SharedPreferenceHelper.userIdKey, user?.id.toString() ?? '-1');
-    await sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, user?.email ?? '');
-    await sharedPreferences.setString(SharedPreferenceHelper.userPhoneNumberKey, user?.mobile ?? '');
-    await sharedPreferences.setString(SharedPreferenceHelper.userNameKey, user?.username ?? '');
-    await sharedPreferences.setString(SharedPreferenceHelper.userImageKey, '${UrlContainer.baseUrl}assets/images/user/profile/${user?.image}');
+    await sharedPreferences.setString(
+        SharedPreferenceHelper.userIdKey, user?.id.toString() ?? '-1');
+    await sharedPreferences.setString(
+        SharedPreferenceHelper.userEmailKey, user?.email ?? '');
+    await sharedPreferences.setString(
+        SharedPreferenceHelper.userPhoneNumberKey, user?.mobile ?? '');
+    await sharedPreferences.setString(
+        SharedPreferenceHelper.userNameKey, user?.username ?? '');
+    await sharedPreferences.setString(SharedPreferenceHelper.userImageKey,
+        '${UrlContainer.baseUrl}assets/images/user/profile/${user?.image}');
 
     if (accessToken.isNotEmpty) {
-      await sharedPreferences.setString(SharedPreferenceHelper.accessTokenKey, accessToken);
-      await sharedPreferences.setString(SharedPreferenceHelper.accessTokenType, tokenType);
+      await sharedPreferences.setString(
+          SharedPreferenceHelper.accessTokenKey, accessToken);
+      await sharedPreferences.setString(
+          SharedPreferenceHelper.accessTokenType, tokenType);
     }
 
     bool isProfileCompleteEnable = user?.profileComplete == '0' ? true : false;
