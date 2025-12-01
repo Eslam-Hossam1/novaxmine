@@ -59,6 +59,7 @@ class UrlContainer {
   static const String depositHistoryEndPoint = 'api/deposit/history';
   static const String depositMethodEndPoint = 'api/deposit/methods';
   static const String depositInsertEndPoint = 'api/deposit/insert';
+  static const String coinWalletsEndPoint = 'api/coin-wallets';
 
   static const String authorizationCodeEndPoint = 'api/authorization';
   static const String generalSettingEndPoint = 'api/general-setting';
@@ -85,8 +86,10 @@ class UrlContainer {
   static const String kycFormUrl = 'api/kyc-form';
   static const String kycSubmitUrl = 'api/kyc-submit';
 
-  static const String countryFlagImageLink = 'https://flagpedia.net/data/flags/h24/{countryCode}.webp';
+  static const String countryFlagImageLink =
+      'https://flagpedia.net/data/flags/h24/{countryCode}.webp';
   static const String supportImagePath = '${baseUrl}assets/support/';
   static const String mineWalletImagePath = '${baseUrl}assets/images/miner/';
-  static const String withDrawImagePath = '${baseUrl}assets/images/withdraw_method/';
+  static const String withDrawImagePath =
+      '${baseUrl}assets/images/withdraw_method/';
 }

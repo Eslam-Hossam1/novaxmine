@@ -3,79 +3,138 @@ import 'package:get/get.dart';
 import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/styles.dart';
+import 'package:mine_lab/data/controller/deposit/coin_wallet_controller.dart';
+import 'package:mine_lab/data/repo/deposit/deposit_repo.dart';
+import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/l10n/app_localizations.dart';
+import 'package:mine_lab/views/components/custom_loader.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/deposite_crypto_item.dart';
 
-class CreateDepositeScreen extends StatelessWidget {
+class CreateDepositeScreen extends StatefulWidget {
   const CreateDepositeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final depositOptions = [
-      {
-        'title': 'BSC',
-        'subtitle': 'BEP20',
-        'address': '0xd4fd873d88b20155064ab799027baeb16e1a3f',
-      },
-      {
-        'title': 'ETH',
-        'subtitle': 'ERC20',
-        'address': '0x8612ab0f8239c10fb2aa9d67dd7d34545671e4bd',
-      },
-      {
-        'title': 'TRX',
-        'subtitle': 'TRC20',
-        'address': 'TPt81b1f3fd31234b1b8c29aa6e61e96e76',
-      },
-    ];
+  State<CreateDepositeScreen> createState() => _CreateDepositeScreenState();
+}
 
-    return Scaffold(
-      backgroundColor: MyColor.screenBgColor,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+class _CreateDepositeScreenState extends State<CreateDepositeScreen> {
+  late final CoinWalletController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initDependencies();
+    _controller = Get.put(CoinWalletController(depositRepo: Get.find()));
+  }
+
+  void _initDependencies() {
+    if (!Get.isRegistered<ApiClient>()) {
+      Get.put(ApiClient(sharedPreferences: Get.find()));
+    }
+    if (!Get.isRegistered<DepositRepo>()) {
+      Get.put(DepositRepo(apiClient: Get.find()));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final MyStrings = AppLocalizations.of(context);
+
+    return GetBuilder<CoinWalletController>(
+      init: _controller,
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: MyColor.screenBgColor,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () => Get.back(),
+            ),
+            surfaceTintColor: Colors.transparent,
+            elevation: 0,
+            backgroundColor: const Color(0xff212121),
+            title: Text(
+              MyStrings?.deposit ?? 'Deposit via Crypto Coins',
+              style: interBoldMediumLarge.copyWith(
+                color: MyColor.colorWhite,
+              ),
+            ),
           ),
-          onPressed: () => Get.back(),
-        ),
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-        backgroundColor: Color(0xff212121),
-        title: Text(
-          'Deposit via Crypto Coins',
-          style: interBoldMediumLarge.copyWith(
-            color: MyColor.colorWhite,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: _buildBody(controller, MyStrings),
+            ),
           ),
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(
+      CoinWalletController controller, AppLocalizations? MyStrings) {
+    if (controller.isLoading) {
+      return const Center(child: CustomLoader());
+    }
+
+    if (controller.errorMessage != null) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              controller.errorMessage ??
+                  (MyStrings?.somethingWentWrong ?? 'Something went wrong'),
+              textAlign: TextAlign.center,
+              style: interMediumDefault,
+            ),
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: controller.fetchCoinWallets,
+              child: Text(MyStrings?.retry ?? 'Retry'),
+            ),
+          ],
         ),
-      ),
-      body: SafeArea(
-          child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        itemCount: depositOptions.length,
-        itemBuilder: (context, index) {
-          final option = depositOptions[index];
-          return DepositeCryptoItem(
-            coinTitle: option['title']!,
-            coinSubtitle: option['subtitle']!,
-            withdrawAddress: option['address']!,
-            onDepositPressed: () {
-              Get.toNamed(
-                RouteHelper.depositeInstructionsScreen,
-                arguments: {
-                  'coinTitle': option['title'],
-                  'coinSubtitle': option['subtitle'],
-                  'withdrawAddress': option['address'],
-                },
-              );
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 20,
-          );
-        },
-      )),
+      );
+    }
+
+    if (controller.wallets.isEmpty) {
+      return Center(
+        child: Text(
+          MyStrings?.noDataToShow ?? 'No coin wallets found.',
+          style: interMediumDefault,
+        ),
+      );
+    }
+
+    return ListView.separated(
+      itemCount: controller.wallets.length,
+      itemBuilder: (context, index) {
+        final wallet = controller.wallets[index];
+        final title = wallet.network ?? 'N/A';
+        final subtitle = wallet.standard ?? '';
+        final address = wallet.walletAddress ?? '';
+
+        return DepositeCryptoItem(
+          coinTitle: title,
+          coinSubtitle: subtitle.isEmpty ? '—' : subtitle,
+          withdrawAddress: address,
+          onDepositPressed: () {
+            Get.toNamed(
+              RouteHelper.depositeInstructionsScreen,
+              arguments: {
+                'coinTitle': title,
+                'coinSubtitle': subtitle,
+                'withdrawAddress': address,
+              },
+            );
+          },
+        );
+      },
+      separatorBuilder: (_, __) => const SizedBox(height: 20),
     );
   }
 }
