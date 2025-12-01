@@ -61,7 +61,7 @@ class CopyWalletAddressButton extends StatelessWidget {
                       'Copied',
                       'Wallet Address copied to clipboard',
                       snackPosition: SnackPosition.BOTTOM,
-                      duration: const Duration(seconds: 3),
+                      duration: const Duration(seconds: 2),
                       margin: EdgeInsets.only(
                         bottom: 24,
                         left: 12,

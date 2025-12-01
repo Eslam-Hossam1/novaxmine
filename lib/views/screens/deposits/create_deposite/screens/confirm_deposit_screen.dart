@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/deposit/confirm_coin_wallet_controller.dart';
 import 'package:mine_lab/data/repo/deposit/deposit_repo.dart';
 import 'package:mine_lab/data/services/api_service.dart';
+import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/confirm_deposit_field.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/deposite_cancel_button.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/deposite_confirm_button.dart';
 import 'package:mine_lab/views/screens/deposits/create_deposite/widgets/sliver_sticky_footer.dart';
-import 'package:mine_lab/views/components/snackbar/show_custom_snackbar.dart';
 
 class ConfirmDepositScreen extends StatefulWidget {
   final String network;
@@ -32,7 +31,7 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
   final TextEditingController _amountController = TextEditingController();
   late final ConfirmCoinWalletController _confirmController;
   int? _walletId;
-
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   void initState() {
     super.initState();
@@ -59,6 +58,9 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
 
   Future<void> _submitConfirmation() async {
     if (!(_formKey.currentState?.validate() ?? false)) {
+      setState(() {
+        autovalidateMode = AutovalidateMode.always;
+      });
       return;
     }
 
@@ -116,6 +118,7 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
                   SliverToBoxAdapter(
                     child: Form(
                       key: _formKey,
+                      autovalidateMode: autovalidateMode,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -163,10 +166,13 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
                               return null;
                             },
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 20),
                           Text(
                             'Enter the amount in the same coin / network you transferred.',
-                            style: interMediumDefault.copyWith(fontSize: 15),
+                            style: interMediumDefault.copyWith(
+                              fontSize: 15,
+                              color: Colors.grey[600],
+                            ),
                           ),
                         ],
                       ),

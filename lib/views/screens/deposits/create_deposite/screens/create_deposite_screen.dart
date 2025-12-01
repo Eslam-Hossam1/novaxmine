@@ -66,7 +66,7 @@ class _CreateDepositeScreenState extends State<CreateDepositeScreen> {
           ),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
               child: _buildBody(controller, MyStrings),
             ),
           ),
