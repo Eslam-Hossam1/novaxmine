@@ -13,7 +13,7 @@ class CreateDepositeScreen extends StatelessWidget {
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        backgroundColor: MyColor.primaryColor,
+        backgroundColor: Color(0xff212121),
         title: Text(
           'Deposit via Crypto Coins',
           style: interBoldMediumLarge.copyWith(
