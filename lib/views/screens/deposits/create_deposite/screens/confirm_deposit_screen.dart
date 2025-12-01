@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mine_lab/core/route/route.dart';
 import 'package:mine_lab/core/utils/styles.dart';
 import 'package:mine_lab/data/controller/deposit/confirm_coin_wallet_controller.dart';
 import 'package:mine_lab/data/repo/deposit/deposit_repo.dart';
@@ -81,7 +82,7 @@ class _ConfirmDepositScreenState extends State<ConfirmDepositScreen> {
     );
 
     if (success) {
-      Get.back();
+      Get.offAllNamed(RouteHelper.depositHistoryScreen);
     }
   }
 
