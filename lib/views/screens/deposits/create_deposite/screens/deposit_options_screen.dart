@@ -93,12 +93,17 @@ class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
               controller.errorMessage ??
                   (MyStrings?.somethingWentWrong ?? 'Something went wrong'),
               textAlign: TextAlign.center,
-              style: interMediumDefault,
+              style: interMediumDefault.copyWith(
+                  fontSize: 16, color: context.depositPrimaryTextColor),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: controller.fetchCoinWallets,
-              child: Text(MyStrings?.retry ?? 'Retry'),
+              child: Text(
+                MyStrings?.retry ?? 'Retry',
+                style: interBoldLarge.copyWith(
+                    fontSize: 16, color: context.depositColorScheme.primary),
+              ),
             ),
           ],
         ),
@@ -109,7 +114,9 @@ class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
       return Center(
         child: Text(
           MyStrings?.noDataToShow ?? 'No coin wallets found.',
-          style: interMediumDefault,
+          style: interMediumDefault.copyWith(
+            color: context.depositPrimaryTextColor,
+          ),
         ),
       );
     }
