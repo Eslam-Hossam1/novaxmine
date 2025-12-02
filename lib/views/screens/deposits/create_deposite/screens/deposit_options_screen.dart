@@ -66,7 +66,10 @@ class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
           ),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+              padding: const EdgeInsets.only(
+                right: 20,
+                left: 20,
+              ),
               child: _buildBody(controller, MyStrings),
             ),
           ),
@@ -112,6 +115,7 @@ class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
     }
 
     return ListView.separated(
+      padding: EdgeInsets.only(top: 20),
       itemCount: controller.wallets.length,
       itemBuilder: (context, index) {
         final wallet = controller.wallets[index];
