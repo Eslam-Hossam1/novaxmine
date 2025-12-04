@@ -45,7 +45,7 @@ class _HomeCardSectionState extends State<HomeCardSection> {
                   data: controller.profitBalance,
                   bottomTitle: MyStrings.withdraw,
                   onTap: () {
-                    Get.toNamed(RouteHelper.depositOptionsScreen);
+                    Get.toNamed(RouteHelper.addWithdrawScreen);
                   },
                 ),
               ),
