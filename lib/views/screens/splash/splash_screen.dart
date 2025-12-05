@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mine_lab/core/utils/dimensions.dart';
 import 'package:mine_lab/core/utils/my_color.dart';
 import 'package:mine_lab/core/utils/my_images.dart';
 import 'package:mine_lab/core/utils/util.dart';
@@ -44,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SizedBox.expand(
         // يأخذ عرض وارتفاع الشاشة
         child: Image.asset(
-          MyImages.splash,
+          MyImages.newSplash,
           fit: BoxFit.cover, // يملأ الشاشة مع الحفاظ على النِّسَب
         ),
       ),

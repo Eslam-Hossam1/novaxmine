@@ -16,6 +16,7 @@ class MyImages {
   static const String profile = "assets/images/profile.png";
   static const String home = "assets/images/home.png";
   static const String splash = "assets/images/splash.png";
+  static const String newSplash = "assets/images/new_splash.png";
   static const String loginImage = "assets/images/login_image.png";
   static const String searchIconSvg = "assets/images/search.svg";
   static const String language = "assets/images/language.png";
