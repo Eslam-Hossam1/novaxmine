@@ -2449,6 +2449,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your deposit request has been submitted and is pending admin'**
   String get submitDepositSuccessMessage;
+
+  /// No description provided for @faqQuestion1.
+  ///
+  /// In en, this message translates to:
+  /// **'What is Cryptocurrency?'**
+  String get faqQuestion1;
+
+  /// No description provided for @faqAnswer1.
+  ///
+  /// In en, this message translates to:
+  /// **'Cryptocurrency is decentralized digital money, based on blockchain technology. You may be familiar with the most popular versions, Bitcoin and Ethereum, but there are more than 5,000 different cryptocurrencies in circulation.'**
+  String get faqAnswer1;
+
+  /// No description provided for @faqQuestion2.
+  ///
+  /// In en, this message translates to:
+  /// **'What is crypto currency mining?'**
+  String get faqQuestion2;
+
+  /// No description provided for @faqAnswer2.
+  ///
+  /// In en, this message translates to:
+  /// **'In a nutshell, cryptocurrency mining is a term that refers to the process of gathering cryptocurrency as a reward for work that you complete.'**
+  String get faqAnswer2;
+
+  /// No description provided for @faqQuestion3.
+  ///
+  /// In en, this message translates to:
+  /// **'How does cryptocurrency work?'**
+  String get faqQuestion3;
+
+  /// No description provided for @faqAnswer3.
+  ///
+  /// In en, this message translates to:
+  /// **'Cryptocurrencies run on a distributed public ledger called blockchain, a record of all transactions updated and held by currency holders.'**
+  String get faqAnswer3;
+
+  /// No description provided for @faqQuestion4.
+  ///
+  /// In en, this message translates to:
+  /// **'Is cryptocurrency safe?'**
+  String get faqQuestion4;
+
+  /// No description provided for @faqAnswer4.
+  ///
+  /// In en, this message translates to:
+  /// **'Cryptocurrencies are usually built using blockchain technology. Blockchain describes the way transactions are recorded into blocks and time stamped. It\'s fairly complex, but the result is a digital ledger that is difficult to tamper with.'**
+  String get faqAnswer4;
+
+  /// No description provided for @faqQuestion5.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I buy cryptocurrency?'**
+  String get faqQuestion5;
+
+  /// No description provided for @faqAnswer5.
+  ///
+  /// In en, this message translates to:
+  /// **'You can buy cryptocurrency through exchanges, brokers, or peer-to-peer platforms. Make sure to use reputable platforms and secure your digital wallet.'**
+  String get faqAnswer5;
 }
 
 class _AppLocalizationsDelegate

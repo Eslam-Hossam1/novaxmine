@@ -1210,4 +1210,39 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get submitDepositSuccessMessage =>
       'Your deposit request has been submitted and is pending admin';
+
+  @override
+  String get faqQuestion1 => 'What is Cryptocurrency?';
+
+  @override
+  String get faqAnswer1 =>
+      'Cryptocurrency is decentralized digital money, based on blockchain technology. You may be familiar with the most popular versions, Bitcoin and Ethereum, but there are more than 5,000 different cryptocurrencies in circulation.';
+
+  @override
+  String get faqQuestion2 => 'What is crypto currency mining?';
+
+  @override
+  String get faqAnswer2 =>
+      'In a nutshell, cryptocurrency mining is a term that refers to the process of gathering cryptocurrency as a reward for work that you complete.';
+
+  @override
+  String get faqQuestion3 => 'How does cryptocurrency work?';
+
+  @override
+  String get faqAnswer3 =>
+      'Cryptocurrencies run on a distributed public ledger called blockchain, a record of all transactions updated and held by currency holders.';
+
+  @override
+  String get faqQuestion4 => 'Is cryptocurrency safe?';
+
+  @override
+  String get faqAnswer4 =>
+      'Cryptocurrencies are usually built using blockchain technology. Blockchain describes the way transactions are recorded into blocks and time stamped. It\'s fairly complex, but the result is a digital ledger that is difficult to tamper with.';
+
+  @override
+  String get faqQuestion5 => 'How can I buy cryptocurrency?';
+
+  @override
+  String get faqAnswer5 =>
+      'You can buy cryptocurrency through exchanges, brokers, or peer-to-peer platforms. Make sure to use reputable platforms and secure your digital wallet.';
 }
