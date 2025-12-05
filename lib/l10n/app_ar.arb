@@ -397,5 +397,6 @@
   "miningHistory": "سجل التعدين",
   "orderHistory": "سجل الطلبات",
   "running": "قيد التشغيل",
-  "maintenanceCost": "تكلفة الصيانة"
+  "maintenanceCost": "تكلفة الصيانة",
+  "submitDepositSuccessMessage": "لقد تم تقديم طلب الإيداع الخاص بك وهو قيد الانتظار من قبل الادارة"
 }

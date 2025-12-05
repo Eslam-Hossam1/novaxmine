@@ -397,5 +397,6 @@
   "miningHistory": "Mining History",
   "orderHistory": "Order History",
   "running": "Running",
-  "maintenanceCost": "Maintenance Cost"
+  "maintenanceCost": "Maintenance Cost",
+  "submitDepositSuccessMessage": "Your deposit request has been submitted and is pending admin"
 }

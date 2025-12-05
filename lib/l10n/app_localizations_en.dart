@@ -1206,4 +1206,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get maintenanceCost => 'Maintenance Cost';
+
+  @override
+  String get submitDepositSuccessMessage =>
+      'Your deposit request has been submitted and is pending admin';
 }

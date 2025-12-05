@@ -90,8 +90,7 @@ class _DepositOptionsScreenState extends State<DepositOptionsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              controller.errorMessage ??
-                  (MyStrings?.somethingWentWrong ?? 'Something went wrong'),
+              (MyStrings?.somethingWentWrong ?? 'Something went wrong'),
               textAlign: TextAlign.center,
               style: interMediumDefault.copyWith(
                   fontSize: 16, color: context.depositPrimaryTextColor),

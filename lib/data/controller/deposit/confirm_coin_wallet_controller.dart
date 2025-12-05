@@ -46,8 +46,9 @@ class ConfirmCoinWalletController extends GetxController {
           log(status);
           if (status == 'success') {
             CustomSnackBar.success(
-              successList:
-                  model.message == null ? [successMessage] : [model.message!],
+              successList: l10n?.submitDepositSuccessMessage != null
+                  ? [l10n!.submitDepositSuccessMessage]
+                  : [model.message!],
             );
             return true;
           } else {

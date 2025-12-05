@@ -1203,4 +1203,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get maintenanceCost => 'تكلفة الصيانة';
+
+  @override
+  String get submitDepositSuccessMessage =>
+      'لقد تم تقديم طلب الإيداع الخاص بك وهو قيد الانتظار من قبل الادارة';
 }

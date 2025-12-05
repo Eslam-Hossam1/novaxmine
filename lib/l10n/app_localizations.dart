@@ -2443,6 +2443,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maintenance Cost'**
   String get maintenanceCost;
+
+  /// No description provided for @submitDepositSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your deposit request has been submitted and is pending admin'**
+  String get submitDepositSuccessMessage;
 }
 
 class _AppLocalizationsDelegate
